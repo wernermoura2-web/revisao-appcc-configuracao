@@ -19,12 +19,25 @@
 .print-doc-list .print-doc p{line-height:1.17}
 }
 
-/* Referências técnicas: consulta separada, sem interferir na impressão. */
+/* Links de referências: não participam do PDF gerado. */
 .reference-main-btn{display:block;text-align:center;background:#e3f1f8;color:#0e4d72;border:1px solid #9fc2d3;border-radius:8px;padding:12px 10px;font-size:13px;font-weight:750;text-decoration:none;line-height:1.5}
 .reference-main-btn:hover{background:#d2e9f4}
 .reference-inline{display:inline-block;color:#0d5e86;background:#edf7fb;border:1px solid #acd1e2;border-radius:7px;text-decoration:none;font-size:11px;font-weight:750;padding:5px 8px;margin:0 0 6px}
 .reference-inline:hover{background:#daeff8}
 @media print{.references-panel,.reference-inline{display:none!important}}
+
+/* Conclusão automática apresentada no próprio passo da árvore de decisão. */
+.stage-result{display:grid;gap:4px;margin:12px 0 0;border:1px solid #abc9dc;border-left:5px solid #17658b;background:#edf7fc;border-radius:8px;padding:12px;color:#164d6b}
+.stage-result strong{font-size:15px}
+.stage-result span{font-size:12px;line-height:1.45}
+.stage-result[data-estado="confirmado"],.stage-result[data-estado="proposta"]{background:#e7f4eb;border-color:#acd5ba;border-left-color:#23784c;color:#155a36}
+.stage-result[data-estado="candidato"],.stage-result[data-estado="nao_validado"]{background:#fff5e8;border-color:#e5c38e;border-left-color:#b37624;color:#7c4b14}
+.stage-result[data-estado="pendente"],.stage-result[data-estado="aguardando"]{background:#fff9f0;border-color:#e8d9b6;border-left-color:#b58a43;color:#644c28}
+.stage-result[data-estado="nao_aplicavel"]{background:#f1f5f7;border-color:#d5e0e5;border-left-color:#8ba2af;color:#576b78}
+.stage-route{border-radius:8px;background:#eaf4fb;border:1px solid #c5dbe7;color:#164b6c;font-size:13px;font-weight:650;padding:10px 12px;margin:12px 0}
+.stage-route[data-estado="off"]{color:#617684;background:#f0f3f5}
+.print-stage-result{font-size:7.2pt;line-height:1.18;padding:1mm 1.4mm;background:#e7f2f8;border-left:2px solid #187598;margin:1mm 0;white-space:normal}
+@media print{.stage-result,.stage-route{display:none!important}.print-stage-result{display:block!important}}
 </style>
 <script>window.INITIAL_DATA = {
   "projeto": "Guia Estadual de Avaliação do Risco Sanitário - configuração Rev6/V82.55",
@@ -3675,9 +3688,9 @@
 <section class="summary" aria-label="Classificação APPCC"><div class="summary-head"><div><span class="kicker" id="processTag">Captação</span><h2 id="phraseTitle">Item 4.1.1 · Frase 1</h2></div><span class="status-pill" id="decisionPill">Decisão pendente</span></div><p id="phraseDesc"></p><div class="metric-grid"><div><small>APPCC inicial</small><strong id="initialClass">—</strong></div><div><small>APPCC proposto</small><strong id="suggestedClass">—</strong></div><div><small>Severidade do perigo (S)</small><strong id="severityMetric">—</strong></div><div><small>Criticidade referência (NC)</small><strong id="criticalMetric">—</strong></div><div><small>Probabilidade P24</small><strong id="probMetric">—</strong></div><div><small>NC × P24 (referência)</small><strong id="scoreMetric">—</strong></div></div><div class="decision-summary"><strong id="computedClass">Classificação calculada: pendente</strong><span id="decisionReason"></span><p class="hint">O resultado calculado pelas respostas é independente da proposta anterior. PCC e PPRO dependem da verificação do Passo 3 e aprovação técnica.</p></div></section>
 <div class="tabbar" role="tablist" aria-label="Módulos da revisão"><button class="tab active" data-tab="analysis" role="tab" aria-selected="true">Revisar APPCC · 3 tabelas</button><button class="tab" data-tab="config" role="tab" aria-selected="false">Revisar configuração · 4 colunas</button></div>
 <div id="analysisView" class="view">
-<section class="step panel"><div class="step-head"><span class="step-number">1</span><div><a class="reference-inline" href="./referencias.html#tabela1" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 1 ↗</a><h2>Tabela 1 — O controle pode ser um PCC?</h2><p>Identifique perigo, significância, medida e barreiras. Responda apenas às questões do caminho aplicável.</p></div></div><div class="fields-two"><div class="field-box"><label>Perigo identificado</label><textarea data-field="perigo" class="fit-field" rows="2"></textarea></div><div class="field-box"><label>Medida preventiva / de controle</label><textarea data-field="medida" class="fit-field" rows="2"></textarea></div></div><div id="questions1" class="questions"></div><p class="small-note">Uma resposta desconhecida mantém a decisão pendente. A=Significância; B=Medida; C=Etapa especialmente desenvolvida; D=Nível inaceitável; E=Barreira posterior eficaz.</p></section>
-<section class="step panel"><div class="step-head"><span class="step-number">2</span><div><a class="reference-inline" href="./referencias.html#tabela2" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 2 ↗</a><h2>Tabela 2 — Diferenciar PPRO, PPHO, PPR e PC</h2><p>Aplique este passo quando a Tabela 1 não caracterizar PCC candidato.</p></div></div><div id="questions2" class="questions"></div><p class="small-note">PPRO não é sinônimo de PC. A indicação calculada será provisória enquanto não houver aprovação técnica.</p></section>
-<section class="step panel"><div class="step-head"><span class="step-number">3</span><div><a class="reference-inline" href="./referencias.html#tabela3" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 3 ↗</a><h2>Tabela 3 — Confirmar PCC / PPRO</h2><p>Verifique a efetividade, limites/critérios, monitoramento, tratamento de desvios e registros.</p></div></div><div id="criteria3" class="criteria-grid"></div><div class="approval-row"><label class="checkbox-line"><input type="checkbox" id="technicalApproval"> Aprovação técnica da classificação após verificar todas as evidências</label><input id="approvalNote" placeholder="Identificação/justificativa da aprovação, se aplicável"></div></section>
+<section class="step panel"><div class="step-head"><span class="step-number">1</span><div><a class="reference-inline" href="./referencias.html#tabela1" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 1 ↗</a><h2>Tabela 1 — O controle pode ser um PCC?</h2><p>Identifique perigo, significância, medida e barreiras. Responda apenas às questões do caminho aplicável.</p></div></div><div class="fields-two"><div class="field-box"><label>Perigo identificado</label><textarea data-field="perigo" class="fit-field" rows="2"></textarea></div><div class="field-box"><label>Medida preventiva / de controle</label><textarea data-field="medida" class="fit-field" rows="2"></textarea></div></div><div id="questions1" class="questions"></div><div class="stage-result" id="table1Result" role="status" aria-live="polite"></div><p class="small-note">Uma resposta desconhecida mantém a decisão pendente. A=Significância; B=Medida; C=Etapa especialmente desenvolvida; D=Nível inaceitável; E=Barreira posterior eficaz.</p></section>
+<section class="step panel"><div class="step-head"><span class="step-number">2</span><div><a class="reference-inline" href="./referencias.html#tabela2" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 2 ↗</a><h2>Tabela 2 — Diferenciar PPRO, PPHO, PPR e PC</h2><p>Aplique este passo quando a Tabela 1 não caracterizar PCC candidato.</p></div></div><div id="questions2" class="questions"></div><div class="stage-result" id="table2Result" role="status" aria-live="polite"></div><p class="small-note">PPRO não é sinônimo de PC. A indicação calculada será provisória enquanto não houver aprovação técnica.</p></section>
+<section class="step panel"><div class="step-head"><span class="step-number">3</span><div><a class="reference-inline" href="./referencias.html#tabela3" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 3 ↗</a><h2>Tabela 3 — Confirmar PCC / PPRO</h2><p>Verifique a efetividade, limites/critérios, monitoramento, tratamento de desvios e registros.</p></div></div><div class="stage-route" id="table3Route" role="status"></div><div id="criteria3" class="criteria-grid"></div><div class="stage-result" id="table3Result" role="status" aria-live="polite"></div><div class="approval-row"><label class="checkbox-line"><input type="checkbox" id="technicalApproval"> Aprovação técnica da classificação após verificar todas as evidências</label><input id="approvalNote" placeholder="Identificação/justificativa da aprovação, se aplicável"></div></section>
 <section class="panel evidence"><h2>Evidências de inspeções e fundamentação</h2><textarea data-field="evidencias" class="fit-field" rows="4"></textarea><label>Observações adicionais sobre a classificação</label><textarea data-field="justificativa_revisao" class="fit-field" rows="3" placeholder="Registre por que manteve ou alterou a classificação APPCC."></textarea></section>
 </div>
 <div id="configView" class="view" hidden><div class="config-intro"><h2>Segunda página — Configuração para o Guia Rev.6</h2><p>Quatro colunas por frase. Os campos se expandem na tela e ajustam a fonte automaticamente. Na impressão, mantêm a disposição em quatro colunas.</p></div><div class="config-grid">
@@ -3714,7 +3727,7 @@
   };
   const CRITERIA3={
     eficacia:'Eficácia validada da medida de controle',
-    limite:'Limite crítico (PCC) ou critério de ação (PPRO) fundamentado',
+    limite:'Limite crítico validado (PCC) ou critério de ação fundamentado (PPRO)',
     monitoramento:'Monitoramento capaz de detectar desvios a tempo',
     correcao:'Correção e ação corretiva definidas',
     produto:'Destino do produto potencialmente inseguro',
@@ -3750,51 +3763,127 @@
   function sign(v){return validYN(v)==='S'?'Sim':validYN(v)==='N'?'Não':'—';}
   function diagnostic(idx){
     const q=getQuestions(idx),c=getCriteria(idx),ed=getEdit(idx);
-    const result=(classe,estado,reason,route)=>({classe,estado,reason,route});
-    let target='';let reason='';let route='';
-    if(!validYN(q.A))return result('','pendente','Avalie a significância do perigo (A).','1');
-    if(q.A==='N'){route='2';reason='A = Não: classificação de controle de base ou apoio no Passo 2.'}
-    else{
-      if(!validYN(q.B))return result('','pendente','Responda se existe uma medida preventiva (B).','1');
-      if(q.B==='N')return result('','pendente','B = Não: implantar ou redefinir a medida de controle antes de classificar.','1');
-      if(!validYN(q.C))return result('','pendente','Verifique se a etapa foi especialmente desenvolvida para controlar o perigo (C).','1');
-      if(q.C==='S'){target='PCC';route='3';reason='C = Sim: a etapa é PCC candidata.'}
-      else {
-        if(!validYN(q.D))return result('','pendente','Responda se o perigo pode atingir nível inaceitável (D).','1');
-        if(q.D==='N'){route='2';reason='D = Não: avalie controles de base no Passo 2.'}
-        else{
-          if(!validYN(q.E))return result('','pendente','Responda se existe barreira posterior eficaz (E).','1');
-          if(q.E==='N'){target='PCC';route='3';reason='D = Sim e E = Não: PCC candidato sem etapa posterior eficaz.'}
-          else{route='2';reason='E = Sim: avalie as medidas da etapa posterior e classifique esta etapa no Passo 2.'}
+    const etapa=(classe,estado,texto)=>({classe,estado,texto});
+    let t1=etapa('','pendente','Responder A: o perigo é significativo?');
+    let t2=etapa('','aguardando','Aguarda conclusão da Tabela 1.');
+    let t3=etapa('','nao_aplicavel','Somente para PCC ou PPRO candidatos.');
+    let route='1',target='';
+    const output=(classe,estado,reason)=>({classe,estado,reason,route,t1,t2,t3});
+    if(!validYN(q.A))return output('','pendente',t1.texto);
+    if(q.A==='N'){
+      t1=etapa('','encaminhar','A = Não: não foi identificado perigo significativo por este caminho. Avaliar controle de base na Tabela 2.');
+      route='2';
+    } else {
+      if(!validYN(q.B)){
+        t1=etapa('','pendente','A = Sim. Responder B: existe medida de controle?');return output('','pendente',t1.texto);
+      }
+      if(q.B==='N'){
+        t1=etapa('','pendente','Perigo significativo sem medida preventiva. Implantar controle ou modificar o processo antes de classificar.');
+        return output('','pendente',t1.texto);
+      }
+      if(!validYN(q.C)){
+        t1=etapa('','pendente','A e B = Sim. Responder C: a etapa foi especialmente desenvolvida para controlar o perigo?');
+        return output('','pendente',t1.texto);
+      }
+      if(q.C==='S'){
+        target='PCC';route='3';
+        t1=etapa('PCC','candidato','C = Sim: PCC candidato. Confirmar os critérios da Tabela 3.');
+        t2=etapa('','nao_aplicavel','Tabela 2 não aplicável: encaminhamento direto de PCC candidato.');
+      } else {
+        if(!validYN(q.D)){
+          t1=etapa('','pendente','C = Não. Responder D: o perigo pode atingir nível inaceitável?');return output('','pendente',t1.texto);
+        }
+        if(q.D==='N'){
+          t1=etapa('','encaminhar','D = Não: a etapa não é PCC neste caminho. Classificar a medida na Tabela 2.');route='2';
+        } else {
+          if(!validYN(q.E)){
+            t1=etapa('','pendente','D = Sim. Responder E: existe barreira posterior comprovadamente eficaz?');return output('','pendente',t1.texto);
+          }
+          if(q.E==='N'){
+            target='PCC';route='3';
+            t1=etapa('PCC','candidato','D = Sim e E = Não: PCC candidato sem barreira posterior eficaz.');
+            t2=etapa('','nao_aplicavel','Tabela 2 não aplicável: analisar a validação do PCC na Tabela 3.');
+          }else{
+            t1=etapa('','encaminhar','E = Sim: há barreira posterior indicada. Avaliar a medida desta etapa pela Tabela 2; verificar a eficácia da barreira.');route='2';
+          }
         }
       }
     }
     if(route==='2'){
-      if(!validYN(q.F))return result('','pendente',reason+' Falta responder F.','2');
-      if(q.F==='S'){target='PPRO';reason+=' F = Sim: PPRO candidato.';route='3'}
-      else{
-        if(!validYN(q.G))return result('','pendente',reason+' Falta responder G.','2');
-        if(q.G==='S')return result('PPHO','proposta','G = Sim: rotina direta de higiene, conforme categoria local do Guia.','2');
-        if(!validYN(q.H))return result('','pendente','F e G = Não. Falta responder H (pré-requisito).','2');
-        if(q.H==='S')return result('PPR','proposta','H = Sim: pré-requisito de infraestrutura ou suporte.','2');
-        if(!validYN(q.I))return result('','pendente','F, G e H = Não. Falta responder I.','2');
-        if(q.I==='S')return result('PC','proposta','I = Sim: controle de apoio definido no Guia Estadual (categoria local).','2');
-        return result('','pendente','Nenhum caminho aplicável foi identificado no Passo 2; revisar a medida.','2');
+      t2=etapa('','pendente','Responder F: esta é uma medida operacional para perigo significativo?');
+      if(!validYN(q.F))return output('','pendente',t2.texto);
+      if(q.F==='S'){
+        if(q.A==='N'){
+          t2=etapa('','pendente','Inconsistência: A = Não (perigo não significativo) e F = Sim (controle de perigo significativo). Reavaliar A ou F.');
+          return output('','pendente',t2.texto);
+        }
+        target='PPRO';route='3';
+        t2=etapa('PPRO','candidato','F = Sim: PPRO candidato. Confirmar critérios de ação, eficácia e monitoramento na Tabela 3.');
+      }else{
+        if(!validYN(q.G)){
+          t2=etapa('','pendente','F = Não. Responder G: é rotina direta de limpeza/desinfecção?');return output('','pendente',t2.texto);
+        }
+        if(q.G==='S'){
+          t2=etapa('PPHO','proposta','G = Sim: procedimento de higiene operacional (PPHO) na classificação local do Guia.');
+          return output('PPHO','proposta',t2.texto);
+        }
+        if(!validYN(q.H)){
+          t2=etapa('','pendente','F e G = Não. Responder H: condição básica ou suporte?');return output('','pendente',t2.texto);
+        }
+        if(q.H==='S'){
+          t2=etapa('PPR','proposta','H = Sim: programa de pré-requisitos (PPR) de infraestrutura, pessoal ou gestão.');
+          return output('PPR','proposta',t2.texto);
+        }
+        if(!validYN(q.I)){
+          t2=etapa('','pendente','F, G e H = Não. Responder I: controle específico de apoio?');return output('','pendente',t2.texto);
+        }
+        if(q.I==='S'){
+          t2=etapa('PC','proposta','I = Sim: ponto de controle de apoio (PC), categoria local do Guia.');
+          return output('PC','proposta',t2.texto);
+        }
+        t2=etapa('','pendente','F, G, H e I = Não. A medida não foi classificada: rever o perigo e a função do controle.');
+        return output('','pendente',t2.texto);
       }
     }
-    const notYes=Object.keys(CRITERIA3).filter(k=>c[k]!=='S');
-    if(notYes.length)return result(target,'candidato',`${reason} Passo 3 pendente: ${notYes.length} critérios ainda não demonstrados como satisfatórios.`,`3`);
-    if(!ed.aprovacao)return result(target,'candidato',`${reason} Critérios documentados; aguardando aprovação técnica da equipe.`,`3`);
-    return result(target,'confirmado',`${reason} Seis critérios de confirmação assinalados e aprovação técnica registrada.`,`3`);
+    // Tabela 3 valida exclusivamente a categoria candidata definida na árvore anterior.
+    const requisitos=Object.keys(CRITERIA3);
+    const nao=requisitos.filter(k=>c[k]==='N');
+    const vazios=requisitos.filter(k=>!validYN(c[k]));
+    const nomeLimite=target==='PCC'?'limite crítico':'critério de ação';
+    const rota=target==='PCC'?'Tabela 1':'Tabela 2';
+    if(nao.length){
+      t3=etapa(target,'nao_validado',`${target} candidato (${rota}), não validado: ${nao.length} requisito(s) marcado(s) Não. Revisar medidas, ${nomeLimite} e evidências. Não rebaixar PCC para PPRO automaticamente.`);
+      return output(target,'nao_validado',t3.texto);
+    }
+    if(vazios.length){
+      t3=etapa(target,'candidato',`${target} candidato (${rota}). Faltam ${vazios.length} resposta(s) da Tabela 3, inclusive a confirmação de ${nomeLimite} quando aplicável.`);
+      return output(target,'candidato',t3.texto);
+    }
+    if(!ed.aprovacao){
+      t3=etapa(target,'candidato',`${target} candidato (${rota}). Seis requisitos assinalados Sim; falta aprovação técnica da equipe.`);
+      return output(target,'candidato',t3.texto);
+    }
+    t3=etapa(target,'confirmado',`${target} confirmado pela revisão: seis requisitos assinalados Sim e aprovação técnica registrada. Verificar os documentos comprobatórios.`);
+    return output(target,'confirmado',t3.texto);
   }
-  function statusString(d){if(!d.classe)return 'Classificação pendente';return d.classe+(d.estado==='confirmado'?' CONFIRMADO':d.estado==='candidato'?' CANDIDATO':' — PROPOSTO');}
+  function statusString(d){if(!d.classe)return 'Classificação pendente';return d.classe+(d.estado==='confirmado'?' CONFIRMADO':d.estado==='candidato'?' CANDIDATO':d.estado==='nao_validado'?' CANDIDATO — NÃO VALIDADO':' — PROPOSTO');}
   function classReference(idx){const f=getPhrase(idx);const d=diagnostic(idx);return d.classe&&d.estado==='confirmado'?d.classe:(f.appcc_proposto||f.appcc_inicial||'');}
   function validApplicable(idx){
     const q=getQuestions(idx),d=diagnostic(idx);
     const active={A:true,B:q.A==='S',C:q.A==='S'&&q.B==='S',D:q.A==='S'&&q.B==='S'&&q.C==='N',E:q.A==='S'&&q.B==='S'&&q.C==='N'&&q.D==='S'};
-    const t2 = d.route==='2'||q.A==='N'||(q.A==='S'&&q.B==='S'&&q.C==='N'&&(q.D==='N'||q.E==='S'));
+    const t2 = d.route==='2';
     active.F=t2;active.G=t2&&q.F==='N';active.H=t2&&q.F==='N'&&q.G==='N';active.I=t2&&q.F==='N'&&q.G==='N'&&q.H==='N';
     return active;
+  }
+  function stageStatus(s){if(!s.classe)return s.estado==='encaminhar'?'Encaminhar à Tabela 2':s.estado==='nao_aplicavel'?'Não aplicável':s.estado==='aguardando'?'Aguardando Tabela 1':'Decisão pendente';return s.classe+(s.estado==='confirmado'?' confirmado':s.estado==='candidato'?' candidato':s.estado==='nao_validado'?' candidato — não validado':' — proposto');}
+  function renderStageResults(d){
+    for(const [id,stage] of [['table1Result',d.t1],['table2Result',d.t2],['table3Result',d.t3]]){
+      const node=el(id);if(!node)continue;
+      node.innerHTML=`<strong>${esc(stageStatus(stage))}</strong><span>${esc(stage.texto)}</span>`;
+      node.dataset.estado=stage.estado;
+    }
+    const r=el('table3Route');
+    if(r){r.textContent=d.route==='3'?`Rota de confirmação: ${d.classe} candidato (${d.classe==='PCC'?'Tabela 1':'Tabela 2'}). ${d.classe==='PCC'?'Avaliar limite crítico.':'Avaliar critério de ação.'}`:'Tabela 3: não aplicável até existir PCC/PPRO candidato.';r.dataset.estado=d.route==='3'?'active':'off';}
   }
   function labelName(f){return `${f.item} · frase ${f.indice}`;}
   function updateHeader(){
@@ -3813,6 +3902,7 @@
     el('decisionPill').classList.toggle('success',d.estado==='confirmado');
     el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;
     el('decisionReason').textContent=d.reason;
+    renderStageResults(d);
     document.querySelectorAll('#analysisView [data-field], #configView [data-field]').forEach(control=>{const field=control.dataset.field;control.value=safe(f[field]);fitTextarea(control)});
     el('sourceText').textContent=`Fonte de revisão: ${f.fonte_rev6||'Rev.6/V82.55'} · Textos sujeitos à conferência final.`;
   }
@@ -3821,19 +3911,25 @@
     for(const [id,src] of [['questions1',QUESTIONS1],['questions2',QUESTIONS2]]){
       let html='';for(const [k,title] of Object.entries(src))html+=`<div class="question ${active[k]?'':'disabled'}"><strong>${k}</strong><label class="question-title">${esc(title)}</label>${yesNo(k,q[k]||'',f.n)}</div>`;
       el(id).innerHTML=html;
-      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};markDirty();renderQuestions();updateDecision();}));
-      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};markDirty();renderQuestions();updateDecision()}));
+      el(id).querySelectorAll('.question.disabled input[type="radio"],.question.disabled [data-clear]').forEach(t=>t.disabled=true);
+      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const previousClass=diagnostic(index).classe;ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};const changed=diagnostic(index);if(previousClass&&changed.classe!==previousClass)ensureEdit(index).criteria={...getCriteria(index),limite:''};ensureEdit(index).aprovacao=false;markDirty();renderQuestions();renderCriteria();updateDecision();}));
+      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const previousClass=diagnostic(index).classe;ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};const changed=diagnostic(index);if(previousClass&&changed.classe!==previousClass)ensureEdit(index).criteria={...getCriteria(index),limite:''};ensureEdit(index).aprovacao=false;markDirty();renderQuestions();renderCriteria();updateDecision()}));
     }
   }
-  function renderCriteria(){const f=getPhrase(index),ed=getEdit(index),c=getCriteria(index),ct=ed.criteriaText||{},defaults=f.passo3_textos||{};
-    el('criteria3').innerHTML=Object.entries(CRITERIA3).map(([key,label],n)=>`<div class="criterion"><label>${esc(label)}</label><textarea class="fit-field" data-criterion-text="${key}" placeholder="Descrever a evidência, limite ou condição...">${esc(ct[key]??defaults[n]??'')}</textarea>${yesNo(key,c[key]||'',`passo3_${f.n}`)}</div>`).join('');
+  function renderCriteria(){const f=getPhrase(index),ed=getEdit(index),c=getCriteria(index),ct=ed.criteriaText||{},defaults=f.passo3_textos||{},d=diagnostic(index);
+    const active=d.route==='3';
+    const criterionLabel=(key,label)=>key==='limite'?(d.classe==='PCC'?'Limite crítico validado (PCC)':d.classe==='PPRO'?'Critério de ação fundamentado (PPRO)':label):label;
+    el('criteria3').innerHTML=Object.entries(CRITERIA3).map(([key,label],n)=>`<div class="criterion"><label>${esc(criterionLabel(key,label))}</label><textarea class="fit-field" data-criterion-text="${key}" placeholder="Descrever a evidência, limite ou condição..." ${active?'':'disabled'}>${esc(ct[key]??defaults[n]??'')}</textarea>${yesNo(key,c[key]||'',`passo3_${f.n}`)}</div>`).join('');
+    el('criteria3').querySelectorAll('input[type="radio"],button[data-clear]').forEach(t=>{t.disabled=!active});
     el('criteria3').querySelectorAll('[data-criterion-text]').forEach(t=>{fitTextarea(t);t.addEventListener('input',()=>{ensureEdit(index).criteriaText={...(ensureEdit(index).criteriaText||{}),[t.dataset.criterionText]:t.value};markDirty();fitTextarea(t);})});
     el('criteria3').querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const key=r.name.split('_').slice(-1)[0];ensureEdit(index).criteria={...getCriteria(index),[key]:r.value};markDirty();updateDecision();}));
     el('criteria3').querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{ensureEdit(index).criteria={...getCriteria(index),[b.dataset.clear]:''};markDirty();renderCriteria();updateDecision()}));
     el('technicalApproval').checked=!!ed.aprovacao;
+    el('technicalApproval').disabled=!active;
     el('approvalNote').value=ed.notaAprovacao||'';
+    el('approvalNote').disabled=!active;
   }
-  function updateDecision(){const d=diagnostic(index);el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;el('decisionReason').textContent=d.reason;el('decisionPill').textContent=statusString(d);el('decisionPill').classList.toggle('success',d.estado==='confirmado');}
+  function updateDecision(){const d=diagnostic(index);el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;el('decisionReason').textContent=d.reason;el('decisionPill').textContent=statusString(d);el('decisionPill').classList.toggle('success',d.estado==='confirmado');renderStageResults(d);}
   function renderDocs(){const docs=getDocs(index);el('documentList').innerHTML=docs.map((d,k)=>`<article class="doc-card" data-doc="${k}"><h4>Documento ${k+1}</h4><small class="doc-source">${esc(d.source||'Adicionado na revisão')}</small><label>Nome do documento</label><textarea data-doc-field="name" class="fit-field" rows="2">${esc(d.name||'')}</textarea><div class="doc-controls"><label>Manter / remover</label><select data-doc-field="decision"><option value="A decidir" ${(!d.decision||d.decision==='A decidir')?'selected':''}>A decidir</option><option value="Manter" ${d.decision==='Manter'?'selected':''}>Manter</option><option value="Remover" ${d.decision==='Remover'?'selected':''}>Remover</option></select></div><label>Exemplo de observação do documento</label><textarea data-doc-field="example" class="fit-field" rows="3">${esc(d.example||'')}</textarea><label>Orientação para avaliar Sim / Não / NA</label><textarea data-doc-field="orientation" class="fit-field" rows="3">${esc(d.orientation||'')}</textarea><label>Observação registrada na avaliação</label><textarea data-doc-field="observacao" class="fit-field" rows="3">${esc(d.observacao||'')}</textarea><label class="checkbox-line"><input data-doc-field="avaliado" type="checkbox" ${d.avaliado?'checked':''}> Documento avaliado</label></article>`).join('');
     for(const card of el('documentList').querySelectorAll('.doc-card'))for(const control of card.querySelectorAll('[data-doc-field]')){
       fitTextarea(control);
@@ -3865,9 +3961,9 @@
   function printHead(f,part){return `<div class="print-head"><strong>GUIA ESTADUAL APPCC | ${esc(part==='analysis'?'TRÊS TABELAS CONSECUTIVAS':'CONFIGURAÇÃO DO GUIA — REV.6')}</strong><div><small>ITEM ${esc(f.item)} • FRASE ${f.indice} • ${esc(f.processo)}</small><br><small>Revisor: ${esc(state.reviewer)} · ${esc(displayDate(state.date))}</small></div></div>`}
   function pageHeader(idx,part){const f=getPhrase(idx);return `<header class="print-header">${printHead(f,part)}</header>`}
   function statsHTML(idx){const f=getPhrase(idx),nc=grade(idx),p=f.probabilidade_24,d=diagnostic(idx);const fields=[['APPCC inicial',`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`],['APPCC proposto',`${f.appcc_proposto||'—'} (${WEIGHTS[f.appcc_proposto]??'?'})`],['Severidade (S)',f.severidade!=null?`${f.severidade}/5 · preliminar`:'A validar'],['Criticidade NC',nc?`${nc}/5`:'Pendente'],['Probabilidade P24',p!=null?`${p}/5`:'—'],['NC × P24',nc&&p!=null?nc*p:'—']];return `<div class="print-stats">${fields.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('')}</div><p class="print-p3" style="margin:1mm 0"><b>APPCC pelas respostas:</b> ${esc(statusString(d))}. ${esc(d.reason)}</p>`}
-  function printAnalysis(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{};const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${sign(q[k])})</b> ${esc(v)}</div>`).join('')}</div>`;
-    const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');
-    return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3><div class="print-criteria">${cr}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
+  function printAnalysis(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{};const applicable=validApplicable(idx);const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${applicable[k]?sign(q[k]):'N/A'})</b> ${esc(v)}</div>`).join('')}</div>`;
+    const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(key==='limite'?(diagnostic(idx).classe==='PCC'?'Limite crítico (PCC)':'Critério de ação (PPRO)'):label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');const dd=diagnostic(idx);const printStage=st=>`<p class="print-stage-result"><b>${esc(stageStatus(st))}</b> · ${esc(st.texto)}</p>`;
+    return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}${printStage(dd.t1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}${printStage(dd.t2)}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3>${printStage(dd.t3)}<div class="print-criteria">${dd.route==='3'?cr:'Não aplicável para a classificação obtida nas Tabelas 1 e 2.'}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
   function printVal(label,v,cls=''){return `<div class="print-val-wrap"><b>${esc(label)}</b><div class="print-val ${cls}">${esc(v||'—')}</div></div>`}
   function printConfig(idx){
     const f=getPhrase(idx), docs=getDocs(idx), consider=previewTexts(idx).cons;
@@ -3933,7 +4029,7 @@
     el('modeAppcc').onclick=()=>openMode('analysis');el('modeConfig').onclick=()=>openMode('config');
     for(const t of document.querySelectorAll('.workspace [data-field]')){t.addEventListener('input',()=>{updateField(t.dataset.field,t.value);fitTextarea(t)});t.addEventListener('dblclick',()=>editExpanded(t));}
     el('technicalApproval').onchange=()=>{ensureEdit(index).aprovacao=el('technicalApproval').checked;markDirty();updateDecision()};
-    el('approvalNote').oninput=()=>{ensureEdit(index).notaAprovacao=el('approvalNote').value;markDirty()};
+    el('approvalNote').oninput=()=>{ensureEdit(index).notaAprovacao=el('approvalNote').value;markDirty();updateDecision()};
     el('regenConsiderando').onclick=()=>{const f=getPhrase(index),d=diagnostic(index),cls=d.classe&&d.estado==='confirmado'?d.classe:f.appcc_proposto;if(!['PCC','PPRO'].includes(cls)){toast('O considerando é gerado somente para PCC/PPRO.');return}const msg=`Considerando que a frase ${f.indice}, do item ${f.item}, do processo ${f.processo}, classificada como ${cls}, apresentou resultado INSATISFATÓRIO: ${f.foco||f.frase}`;updateField('considerando',msg);document.querySelector('#configView [data-field="considerando"]').value=msg;toast('Considerando atualizado para conferência.');};
     el('addDocument').onclick=()=>{const arr=clone(getDocs(index));arr.push({uid:`novo_${Date.now()}`,name:'',source:'Novo documento — proposta',linked:false,orientation:'',example:'',decision:'A decidir',observacao:'',avaliado:false});ensureEdit(index).documentos=arr;markDirty();renderDocs();el('documentList').lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'})};
     el('saveBtn').onclick=()=>save();el('exportBtn').onclick=exportJSON;el('importBtn').onclick=()=>el('importFile').click();el('importFile').onchange=e=>{importJSON(e.target.files?.[0]);e.target.value=''};

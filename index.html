@@ -12,6 +12,12 @@
 .mode-switch{display:grid;grid-template-columns:1fr;gap:8px}.mode-choice{background:#e8f2f7;color:#184f70;border:2px solid #c2d7e3;line-height:1.2;text-align:left;min-height:48px}.mode-choice.active{background:#0c638b;color:white;border-color:#0c638b;box-shadow:0 2px 8px #0f456022}.clear-answer{background:transparent;color:#315e76;border:1px solid #c7d9e2;border-radius:5px;font-weight:500;font-size:10px;padding:4px 6px}.question.disabled .clear-answer{opacity:.65}.config-column textarea.fit-field{width:100%;min-width:0;min-height:120px}.config-column textarea:focus{background:#fafdff}.config-column textarea.grow{height:auto;max-height:none}.doc-card textarea{min-height:85px}.doc-card label.checkbox-line{font-weight:600}.print-overflow::after{content:'Texto muito extenso: consulte a versão editável ou a exportação JSON';font-size:6.3pt;color:#a44b15;background:#fff6e1;display:block}
 @media(max-width:560px){.mode-switch{grid-template-columns:1fr 1fr}.mode-choice{font-size:12px;padding:9px}.tabbar .tab{font-size:11px}}
 @media print {.mode-switch,.mode-panel{display:none!important}.print-val-wrap{min-height:0;display:flex;flex:1;flex-direction:column}.print-val-wrap .print-val{flex:1}.print-col .print-doc-list{overflow-wrap:anywhere}.print-col.print-overflow{background:#fffdf5}.print-page .print-head{display:flex}.print-config-grid{height:163mm}.print-page{height:190mm}.print-page *{box-sizing:border-box}}
+@media print{
+.print-cont-content{flex:1;max-height:146mm;overflow:hidden;font-size:8pt;line-height:1.27;white-space:pre-wrap}
+.continuation-col h3{min-height:14mm;max-height:22mm;overflow-wrap:anywhere;font-size:8pt;line-height:1.15;overflow:hidden}
+.print-cont-content{font-size:7.8pt}
+.print-doc-list .print-doc p{line-height:1.17}
+}
 </style>
 <script>window.INITIAL_DATA = {
   "projeto": "Guia Estadual de Avaliação do Risco Sanitário - configuração Rev6/V82.55",
@@ -3855,8 +3861,45 @@
     const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');
     return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3><div class="print-criteria">${cr}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
   function printVal(label,v,cls=''){return `<div class="print-val-wrap"><b>${esc(label)}</b><div class="print-val ${cls}">${esc(v||'—')}</div></div>`}
-  function printConfig(idx){const f=getPhrase(idx),docs=getDocs(idx),consider=previewTexts(idx).cons;
-    return `<article class="print-page" data-part="config">${printHead(f,'config')}<div class="print-phrase"><b>${esc(f.item)} · Frase ${f.indice}:</b> ${esc(f.frase)}</div><div class="print-config-grid"><section class="print-col"><h3>1 · FOCO APPCC E CONSIDERANDO</h3>${printVal('Foco da frase',f.foco,'grow')}${printVal('Considerando — PCC/PPRO',consider||f.considerando,'grow')}</section><section class="print-col"><h3>2 · EXEMPLO E ORIENTAÇÃO DA FRASE</h3>${printVal('Exemplo de observação',f.exemplo_frase,'grow')}${printVal('Avaliar Sim / Não / NA',f.orientacao_frase,'grow')}</section><section class="print-col"><h3>3 · TEXTOS DO ITEM E FRASE</h3>${printVal('Texto do item',f.texto_item,'grow')}${printVal('Texto da frase',f.frase,'grow')}<small>Fonte: ${esc(f.fonte_rev6)}</small></section><section class="print-col"><h3>4 · DOCUMENTOS DA FRASE</h3><div class="print-doc-list">${docs.map((d,i)=>`<div class="print-doc"><b>${i+1}. ${esc(d.name)}</b><p><b>Situação:</b> ${esc(d.decision||'A decidir')} • ${d.avaliado?'Avaliado':'A conferir'}</p><p><b>Exemplo:</b> ${esc(d.example)}</p><p><b>Orientação:</b> ${esc(d.orientation)}</p><p><b>Observação:</b> ${esc(d.observacao||'—')}</p></div>`).join('')}</div></section></div><div class="print-foot">Textos de revisão Rev.6 e vínculos documentais recuperados • não altera o Supabase</div></article>`}
+  function printConfig(idx){
+    const f=getPhrase(idx), docs=getDocs(idx), consider=previewTexts(idx).cons;
+    const extras=[];
+    function splitSafe(value, maxChars=570){
+      const str=safe(value);if(str.length<=maxChars)return [str];
+      const segments=[];let rest=str;
+      while(rest.length>maxChars){let pos=rest.lastIndexOf(' ',maxChars);if(pos<maxChars*.58)pos=maxChars;segments.push(rest.slice(0,pos));rest=rest.slice(pos).trimStart();}
+      if(rest)segments.push(rest);return segments;
+    }
+    function primaryValue(label,txt,limit=590,cls='grow'){
+      const sections=splitSafe(txt,limit);
+      if(sections.length>1){for(let n=1;n<sections.length;n++)extras.push({title:`${label} — continuação ${n}/${sections.length-1}`,text:sections[n]});}
+      return printVal(label,sections[0]+(sections.length>1?'\n[Continuação na página complementar]':''),cls);
+    }
+    function docContent(d){return `Situação: ${d.decision||'A decidir'} · ${d.avaliado?'Avaliado':'A conferir'}\nExemplo: ${d.example||'—'}\nOrientação: ${d.orientation||'—'}\nObservação: ${d.observacao||'—'}`;}
+    const docPrint=(d,i)=>`<div class="print-doc"><b>${i+1}. ${esc(d.name)}</b><p><b>Situação:</b> ${esc(d.decision||'A decidir')} • ${d.avaliado?'Avaliado':'A conferir'}</p><p><b>Exemplo:</b> ${esc(d.example)}</p><p><b>Orientação:</b> ${esc(d.orientation)}</p><p><b>Observação:</b> ${esc(d.observacao||'—')}</p></div>`;
+    let showDocs=docs.length?1:0;
+    if(docs.length>=2 && docContent(docs[0]).length+docContent(docs[1]).length<540)showDocs=2;
+    let mainDocHTML='';
+    docs.slice(0,showDocs).forEach((d,i)=>{
+      const total=docContent(d);
+      if(total.length<680)mainDocHTML+=docPrint(d,i);
+      else {
+        const seg=splitSafe(total,520);
+        mainDocHTML+=`<div class="print-doc"><b>${i+1}. ${esc(d.name)}</b><p>${esc(seg[0])}</p><p><i>Informação continua na página complementar.</i></p></div>`;
+        seg.slice(1).forEach((text,j)=>extras.push({title:`Documento ${i+1}: ${d.name} — continuação ${j+1}`,text}));
+      }
+    });
+    docs.slice(showDocs).forEach((d,j)=>{
+      const n=j+showDocs+1, chunks=splitSafe(docContent(d),560);
+      for(let k=0;k<chunks.length;k++)extras.push({title:`Documento ${n}: ${d.name}${chunks.length>1?` — parte ${k+1}/${chunks.length}`:''}`,text:chunks[k]});
+    });
+    const main=`<article class="print-page" data-part="config">${printHead(f,'config')}<div class="print-phrase"><b>${esc(f.item)} · Frase ${f.indice}:</b> ${esc(f.frase)}</div><div class="print-config-grid"><section class="print-col"><h3>1 · FOCO APPCC E CONSIDERANDO</h3>${primaryValue('Foco da frase',f.foco,610)}${primaryValue('Considerando — PCC/PPRO',consider||f.considerando,660)}</section><section class="print-col"><h3>2 · EXEMPLO E ORIENTAÇÃO DA FRASE</h3>${primaryValue('Exemplo de observação',f.exemplo_frase,660)}${primaryValue('Avaliar Sim / Não / NA',f.orientacao_frase,620)}</section><section class="print-col"><h3>3 · TEXTOS DO ITEM E FRASE</h3>${primaryValue('Texto do item',f.texto_item,650)}${primaryValue('Texto da frase',f.frase,650)}<small>Fonte: ${esc(f.fonte_rev6)}</small></section><section class="print-col"><h3>4 · DOCUMENTOS DA FRASE</h3><div class="print-doc-list">${mainDocHTML}${docs.length>showDocs?`<div class="print-doc"><b>+ ${docs.length-showDocs} documento(s) na(s) página(s) complementar(es)</b></div>`:''}</div></section></div><div class="print-foot">Textos de revisão Rev.6 e vínculos documentais recuperados • não altera o Supabase</div></article>`;
+    if(!extras.length)return main;
+    let more='';for(let pos=0;pos<extras.length;pos+=4){const cards=extras.slice(pos,pos+4);const cols=Array.from({length:4},(_,i)=>{
+      const c=cards[i];return `<section class="print-col continuation-col"><h3>${c?esc(c.title):'Continuação — documentos e orientações'}</h3>${c?`<div class="print-val print-cont-content">${esc(c.text)}</div>`:''}</section>`;
+    }).join('');more+=`<article class="print-page" data-part="config-cont">${printHead(f,'config')}<div class="print-phrase"><b>COMPLEMENTO DA CONFIGURAÇÃO — ${esc(f.item)}, FRASE ${f.indice} · Parte ${1+Math.floor(pos/4)}</b> · Transcrição integral de campos e documentos extensos</div><div class="print-config-grid">${cols}</div><div class="print-foot">Continuação automática para evitar corte de textos na impressão • revisor: ${esc(state.reviewer)}</div></article>`;}
+    return main+more;
+  }
   function fitPrintLayout(){
     // Redução progressiva da fonte e controle de excesso; conserva o layout de quatro colunas.
     document.querySelectorAll('#printArea .print-page').forEach(page=>{

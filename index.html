@@ -114,6 +114,14 @@
 .install-panel details summary{cursor:pointer;font-size:12px;font-weight:700;color:#175574}
 .install-panel details p{font-size:11px;line-height:1.55;color:#38566b;margin:9px 0 3px}
 @media print{.install-panel{display:none!important}}
+.table2-check{margin:10px 0 5px;padding:12px;background:#edf7fa;border:1px solid #9fc4d5;border-radius:9px}
+.table2-check[hidden]{display:none!important}
+.table2-check h3{color:#135a7c;font-size:13px;margin:0 0 5px}
+.table2-check .checkbox-line{margin-top:9px}
+.table2-check textarea{min-height:65px}
+.table2-check p{color:#466878;font-size:12px;margin:5px 0}
+.table2-check .table2-meta{font-size:11px;color:#37627b;margin-top:5px}
+@media print{.table2-check{display:none!important}}
 </style>
 <script>window.INITIAL_DATA = {
   "projeto": "Guia Estadual de Avaliação do Risco Sanitário - configuração Rev6/V82.55",
@@ -3767,7 +3775,17 @@
 <div class="tabbar" role="tablist" aria-label="Módulos da revisão"><button class="tab active" data-tab="analysis" role="tab" aria-selected="true">Revisar APPCC · 3 tabelas</button><button class="tab" data-tab="config" role="tab" aria-selected="false">Revisar configuração · 4 colunas</button></div>
 <div id="analysisView" class="view">
 <section class="step panel"><div class="step-head"><span class="step-number">1</span><div><a class="reference-inline" href="./referencias.html#tabela1" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 1 ↗</a><h2>Tabela 1 — O controle pode ser um PCC?</h2><p>Identifique perigo, significância, medida e barreiras. Responda apenas às questões do caminho aplicável.</p></div></div><div class="fields-two"><div class="field-box"><label>Perigo identificado</label><textarea data-field="perigo" class="fit-field" rows="2"></textarea></div><div class="field-box"><label>Medida preventiva / de controle</label><textarea data-field="medida" class="fit-field" rows="2"></textarea></div></div><div id="questions1" class="questions"></div><div class="stage-result" id="table1Result" role="status" aria-live="polite"></div><p class="small-note">Uma resposta desconhecida mantém a decisão pendente. A=Significância; B=Medida; C=Etapa especialmente desenvolvida; D=Nível inaceitável; E=Barreira posterior eficaz.</p></section>
-<section class="step panel"><div class="step-head"><span class="step-number">2</span><div><a class="reference-inline" href="./referencias.html#tabela2" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 2 ↗</a><h2>Tabela 2 — Diferenciar PPRO, PPHO, PPR e PC</h2><p>Aplique este passo quando a Tabela 1 não caracterizar PCC candidato.</p></div></div><div id="questions2" class="questions"></div><div class="stage-result" id="table2Result" role="status" aria-live="polite"></div><p class="small-note">PPRO não é sinônimo de PC. A indicação calculada será provisória enquanto não houver aprovação técnica.</p></section>
+<section class="step panel"><div class="step-head"><span class="step-number">2</span><div><a class="reference-inline" href="./referencias.html#tabela2" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 2 ↗</a><h2>Tabela 2 — Diferenciar PPRO, PPHO, PPR e PC</h2><p>Aplique este passo quando a Tabela 1 não caracterizar PCC candidato.</p></div></div><div id="questions2" class="questions"></div><div class="stage-result" id="table2Result" role="status" aria-live="polite"></div>
+<div class="table2-check" id="table2Check" hidden>
+  <h3>Conclusão da Tabela 2 — PPHO, PPR ou PC</h3>
+  <p><strong id="table2CompletedClass">Classificação automática</strong>: o resultado fica concluído assim que as respostas aplicáveis forem preenchidas. <b>A Tabela 3 não é exigida para PPHO, PPR ou PC.</b></p>
+  <label class="checkbox-line"><input type="checkbox" id="table2Approval"> Registrar conferência do revisor (opcional; não impede a classificação)</label>
+  <label for="table2Note">Justificativa da conferência (opcional)</label>
+  <textarea id="table2Note" class="fit-field" rows="2" placeholder="Registre a fundamentação da classificação, se desejar."></textarea>
+  <p class="table2-meta" id="table2Meta">Classificado pelas respostas da Tabela 2.</p>
+  <p class="hint">A conferência deste formulário é diferente da homologação posterior do Guia Estadual.</p>
+</div>
+<p class="small-note">PPRO não é sinônimo de PC. PPHO, PPR e PC são classificados neste passo; somente o PPRO candidato segue para a Tabela 3.</p></section>
 <section class="step panel"><div class="step-head"><span class="step-number">3</span><div><a class="reference-inline" href="./referencias.html#tabela3" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 3 ↗</a><h2>Tabela 3 — Confirmar PCC / PPRO</h2><p>Verifique a efetividade, limites/critérios, monitoramento, tratamento de desvios e registros.</p></div></div><div class="stage-route" id="table3Route" role="status"></div>
 <section class="tree3-block" aria-label="Árvore de decisão complementar Q1 a Q4">
   <div class="tree3-heading"><div><h3>Árvore complementar Q1–Q4 · Eurest P-R-001_F, versão 6</h3><p>Responda na sequência da árvore de 01/08/2023. Este resultado será confrontado com o PCC/PPRO candidato das Tabelas 1 e 2.</p></div><a class="reference-inline" href="./referencias.html#tabela3" target="_blank" rel="noopener noreferrer">Fonte e referências ↗</a></div>
@@ -3834,7 +3852,7 @@
   const processCode=f=>f.item.split('.').slice(0,2).join('.');
   const processes=[...new Map(DATA.map(f=>[processCode(f),f.processo])).entries()];
   const validYN=v=>v==='S'||v==='N'?v:'';
-  const baseEdit={questions:{},eurestQuestions:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',justificativa_revisao:''};
+  const baseEdit={questions:{},eurestQuestions:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
   let saved={}; try { saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch{}
   let state={version:1,reviewer:safe(saved.reviewer||''),date:safe(saved.date||''),edits:saved.edits&&typeof saved.edits==='object'?saved.edits:{},backupInterval:[0,1,5,10,30,60].includes(+saved.backupInterval)?+saved.backupInterval:5,updatedAt:saved.updatedAt||null};
   let index=0, mode='analysis',dirty=false,autosaveTimer=null,backupTimer=null,activeEditor=null,zoom=false;
@@ -3851,7 +3869,7 @@
   function toast(t){const b=el('toast');b.textContent=t;b.style.display='block';clearTimeout(toast.timeout);toast.timeout=setTimeout(()=>{b.style.display='none'},3000)}
   function save(notify=true){state.updatedAt=new Date().toISOString();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));dirty=false;el('saveState').textContent='Salvo neste navegador';if(notify)toast('Revisão salva no navegador.');return true;}catch(err){el('saveState').textContent='Erro ao salvar: exporte JSON';toast('Sem espaço no navegador. Exporte JSON.');return false;}}
   function updateField(key,val){ensureEdit(index)[key]=val;markDirty();if(['foco','considerando','exemplo_frase','orientacao_frase','texto_item','frase'].includes(key))renderPreview();}
-  function grade(idx){const f=getPhrase(idx);const cls=(f.appcc_proposto||f.appcc_inicial||'').toUpperCase();return WEIGHTS[cls]??null;}
+  function grade(idx){const f=getPhrase(idx);const cls=classReference(idx).toUpperCase();return WEIGHTS[cls]??null;}
   function sign(v){return validYN(v)==='S'?'Sim':validYN(v)==='N'?'Não':'—';}
   function eurDecision(q){
     const valid=k=>validYN(q[k]);
@@ -3877,6 +3895,14 @@
     let t3=etapa('','nao_aplicavel','Somente para PCC ou PPRO candidatos.');
     let route='1',target='';
     const output=(classe,estado,reason)=>({classe,estado,reason,route,t1,t2,t3,eur});
+    const baseControl=(cls,msg)=>{
+      const conferido=!!ed.t2Aprovacao && ed.t2Classe===cls && !!ed.t2Revisor && !!ed.t2Data;
+      t2=etapa(cls,conferido?'conferido':'classificado',
+        msg+(conferido?' Conferência registrada por '+ed.t2Revisor+' em '+ed.t2Data+'.':
+          ' Classificação concluída pelas respostas. Não é necessária a validação da Tabela 3.'));
+      t3=etapa('','nao_aplicavel',cls+' já classificado pela Tabela 2. Os critérios de validação da Tabela 3 são exclusivos de PCC e PPRO.');
+      return output(cls,conferido?'conferido':'classificado',t2.texto);
+    };
     if(!validYN(q.A))return output('','pendente',t1.texto);
     if(q.A==='N'){
       t1=etapa('','encaminhar','A = Não: não foi identificado perigo significativo por este caminho. Avaliar controle de base na Tabela 2.');
@@ -3932,22 +3958,19 @@
           t2=etapa('','pendente','F = Não. Responder G: é rotina direta de limpeza/desinfecção?');return output('','pendente',t2.texto);
         }
         if(q.G==='S'){
-          t2=etapa('PPHO','proposta','G = Sim: procedimento de higiene operacional (PPHO) na classificação local do Guia.');
-          return output('PPHO','proposta',t2.texto);
+          return baseControl('PPHO','G = Sim: procedimento de higiene operacional (PPHO) na classificação local do Guia.');
         }
         if(!validYN(q.H)){
           t2=etapa('','pendente','F e G = Não. Responder H: condição básica ou suporte?');return output('','pendente',t2.texto);
         }
         if(q.H==='S'){
-          t2=etapa('PPR','proposta','H = Sim: programa de pré-requisitos (PPR) de infraestrutura, pessoal ou gestão.');
-          return output('PPR','proposta',t2.texto);
+          return baseControl('PPR','H = Sim: programa de pré-requisitos (PPR) de infraestrutura, pessoal ou gestão.');
         }
         if(!validYN(q.I)){
           t2=etapa('','pendente','F, G e H = Não. Responder I: controle específico de apoio?');return output('','pendente',t2.texto);
         }
         if(q.I==='S'){
-          t2=etapa('PC','proposta','I = Sim: ponto de controle de apoio (PC), categoria local do Guia.');
-          return output('PC','proposta',t2.texto);
+          return baseControl('PC','I = Sim: ponto de controle de apoio (PC), categoria local do Guia.');
         }
         t2=etapa('','pendente','F, G, H e I = Não. A medida não foi classificada: rever o perigo e a função do controle.');
         return output('','pendente',t2.texto);
@@ -3988,8 +4011,8 @@
     t3=etapa(target,'confirmado',`${target} confirmado pela revisão: seis requisitos assinalados Sim e aprovação técnica registrada. Verificar os documentos comprobatórios.`);
     return output(target,'confirmado',t3.texto);
   }
-  function statusString(d){if(!d.classe)return 'Classificação pendente';return d.classe+(d.estado==='confirmado'?' CONFIRMADO':d.estado==='candidato'?' CANDIDATO':d.estado==='nao_validado'?' CANDIDATO — NÃO VALIDADO':d.estado==='divergencia'?' CANDIDATO — DIVERGÊNCIA':' — PROPOSTO');}
-  function classReference(idx){const f=getPhrase(idx);const d=diagnostic(idx);return d.classe&&d.estado==='confirmado'?d.classe:(f.appcc_proposto||f.appcc_inicial||'');}
+  function statusString(d){if(!d.classe)return 'Classificação pendente';return d.classe+(d.estado==='confirmado'?' CONFIRMADO':d.estado==='conferido'?' — CONFERIDO NA TABELA 2':d.estado==='classificado'?' — CLASSIFICADO PELA TABELA 2':d.estado==='candidato'?' CANDIDATO':d.estado==='nao_validado'?' CANDIDATO — NÃO VALIDADO':d.estado==='divergencia'?' CANDIDATO — DIVERGÊNCIA':' — EM REVISÃO');}
+  function classReference(idx){const f=getPhrase(idx);const d=diagnostic(idx);return d.classe&&['confirmado','classificado','conferido'].includes(d.estado)?d.classe:(f.appcc_proposto||f.appcc_inicial||'');}
   function validApplicable(idx){
     const q=getQuestions(idx),d=diagnostic(idx);
     const active={A:true,B:q.A==='S',C:q.A==='S'&&q.B==='S',D:q.A==='S'&&q.B==='S'&&q.C==='N',E:q.A==='S'&&q.B==='S'&&q.C==='N'&&q.D==='S'};
@@ -3997,7 +4020,21 @@
     active.F=t2;active.G=t2&&q.F==='N';active.H=t2&&q.F==='N'&&q.G==='N';active.I=t2&&q.F==='N'&&q.G==='N'&&q.H==='N';
     return active;
   }
-  function stageStatus(s){if(!s.classe)return s.estado==='encaminhar'?'Encaminhar à Tabela 2':s.estado==='nao_aplicavel'?'Não aplicável':s.estado==='aguardando'?'Aguardando Tabela 1':'Decisão pendente';return s.classe+(s.estado==='confirmado'?' confirmado':s.estado==='candidato'?' candidato':s.estado==='nao_validado'?' candidato — não validado':s.estado==='divergencia'?' candidato — divergência':' — proposto');}
+  function stageStatus(s){if(!s.classe)return s.estado==='encaminhar'?'Encaminhar à Tabela 2':s.estado==='nao_aplicavel'?'Não aplicável':s.estado==='aguardando'?'Aguardando Tabela 1':'Decisão pendente';return s.classe+(s.estado==='confirmado'?' confirmado':s.estado==='candidato'?' candidato':s.estado==='nao_validado'?' candidato — não validado':s.estado==='divergencia'?' candidato — divergência':s.estado==='classificado'?' classificado pela Tabela 2':s.estado==='conferido'?' conferido pelo revisor':' — em revisão');}
+  function renderTable2Check(d){
+    const base=d.route==='2'&&['PPHO','PPR','PC'].includes(d.classe)&&['classificado','conferido'].includes(d.estado);
+    const panel=el('table2Check');
+    panel.hidden=!base;
+    if(!base)return;
+    const ed=getEdit(index);
+    const checked=!!ed.t2Aprovacao&&ed.t2Classe===d.classe&&!!ed.t2Revisor&&!!ed.t2Data;
+    el('table2CompletedClass').textContent=d.classe+' — '+(checked?'conferido pelo revisor':'classificado pelas respostas');
+    el('table2Approval').checked=checked;
+    el('table2Note').value=ed.t2Nota||'';
+    el('table2Meta').textContent=checked
+      ?'Conferência registrada por '+ed.t2Revisor+' em '+displayDate(ed.t2Data)+'. O Guia oficial continua sujeito à homologação.'
+      :'Conclusão automática da Tabela 2; conferência opcional. Revisor atual: '+(state.reviewer||'não informado')+' · '+(displayDate(state.date)||'data não informada')+'.';
+  }
   function renderStageResults(d){
     for(const [id,stage] of [['table1Result',d.t1],['table2Result',d.t2],['table3Result',d.t3]]){
       const node=el(id);if(!node)continue;
@@ -4007,7 +4044,7 @@
     const euro=el('tree3Decision');
     if(euro){
       if(d.route!=='3'){
-        euro.innerHTML='<strong>Não aplicável</strong><span>Concluir primeiro a Tabela 1 ou a Tabela 2.</span>';
+        euro.innerHTML='<strong>Não aplicável</strong><span>'+(['PPHO','PPR','PC'].includes(d.classe)?'A Tabela 2 já classificou '+d.classe+'; não é necessário responder Q1–Q4.':'Concluir primeiro a Tabela 1 ou a Tabela 2.')+'</span>';
         euro.dataset.estado='nao_aplicavel';
       }else{
         const same=d.eur.classe&&d.eur.classe===d.classe;
@@ -4017,7 +4054,8 @@
       }
     }
     const r=el('table3Route');
-    if(r){r.textContent=d.route==='3'?`Rota de confirmação: ${d.classe} candidato (${d.classe==='PCC'?'Tabela 1':'Tabela 2'}). ${d.classe==='PCC'?'Avaliar limite crítico.':'Avaliar critério de ação.'}`:'Tabela 3: não aplicável até existir PCC/PPRO candidato.';r.dataset.estado=d.route==='3'?'active':'off';}
+    if(r){r.textContent=d.route==='3'?`Rota de confirmação: ${d.classe} candidato (${d.classe==='PCC'?'Tabela 1':'Tabela 2'}). ${d.classe==='PCC'?'Avaliar limite crítico.':'Avaliar critério de ação.'}`:['PPHO','PPR','PC'].includes(d.classe)?`Tabela 3 não exigida: ${d.classe} foi classificado pela Tabela 2.`:'Tabela 3: não aplicável até existir PCC/PPRO candidato.';r.dataset.estado=d.route==='3'?'active':'off';}
+    renderTable2Check(d);
   }
   function labelName(f){return `${f.item} · frase ${f.indice}`;}
   function updateHeader(){
@@ -4045,6 +4083,7 @@
   // Preservamos os textos de evidência para evitar perda de trabalho do revisor.
   function invalidatePreviousValidation(before,after){
     const edit=ensureEdit(index);
+    edit.t2Aprovacao=false;edit.t2Classe='';edit.t2Revisor='';edit.t2Data='';
     const oldCandidate=before.route==='3'&&(before.classe==='PCC'||before.classe==='PPRO');
     const newCandidate=after.route==='3'&&(after.classe==='PCC'||after.classe==='PPRO');
     const changed=(oldCandidate||newCandidate)&&(before.route!==after.route||before.classe!==after.classe);
@@ -4118,7 +4157,7 @@
   function makeBackup(manual=false){save(false);let backups=[];try{backups=JSON.parse(localStorage.getItem(BACKUP_KEY)||'[]')}catch{}const item={date:new Date().toISOString(),reviewer:state.reviewer,changes:clone(state.edits),reviewDate:state.date};backups.unshift(item);backups=backups.slice(0,12);try{localStorage.setItem(BACKUP_KEY,JSON.stringify(backups));if(manual){download(JSON.stringify({format:'APPCC-REV6-24EN-76F',...state,backupAt:item.date},null,2),`backup-appcc-${new Date().toISOString().slice(0,16).replaceAll(':','-')}.json`);toast('Backup criado e arquivo baixado.')}}catch(e){if(manual)toast('Backup local sem espaço; exporte o JSON.')}renderBackups()}
   function renderBackups(){let list=[];try{list=JSON.parse(localStorage.getItem(BACKUP_KEY)||'[]')}catch{}el('backupList').innerHTML=list.map((b,i)=>`<button type="button" data-restore="${i}" title="Restaurar backup">${new Date(b.date).toLocaleString('pt-BR')} · ${Object.keys(b.changes||{}).length} frases</button>`).join('');el('backupList').querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>{let v=list[+b.dataset.restore];if(!confirm('Restaurar esta cópia e substituir alterações atuais?'))return;state.edits=clone(v.changes||{});state.reviewer=v.reviewer||'';state.date=v.reviewDate||'';el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;save();render();toast('Cópia restaurada.');});}
   function resetBackupClock(){if(backupTimer)clearInterval(backupTimer);if(state.backupInterval>0)backupTimer=setInterval(()=>makeBackup(false),state.backupInterval*60000)}
-  function configExport(){if(nameError()){toast('Informe revisor e data.');return}const itens={};DATA.forEach((f,idx)=>{const v=getPhrase(idx),p=previewTexts(idx);if(!itens[v.item])itens[v.item]={processo:v.processo,texto_item:v.texto_item,frases:[]};itens[v.item].frases.push({indice:v.indice,texto:v.frase,foco:v.foco,exemplo:v.exemplo_frase,orientacao:v.orientacao_frase,considerando:p.cons,appcc_proposto:v.appcc_proposto,appcc_pelas_respostas:diagnostic(idx),documentos:getDocs(idx).filter(d=>d.decision!=='Remover').map(d=>({nome:d.name,decisao:d.decision,orientacao:d.orientation,exemplo:d.example,observacao:d.observacao||'',avaliado:!!d.avaliado,fonte:d.source}))});});download(JSON.stringify({format:'CONFIG_GUIA_REV6_PARA_HOMOLOGACAO',revisor:state.reviewer,data:state.date,gerado:new Date().toISOString(),nota:'Arquivo de revisão; não altera Supabase nem Guia original.',itens},null,2),`configuracao-guia-${state.date}.json`);toast('Configuração para análise técnica exportada.')}
+  function configExport(){if(nameError()){toast('Informe revisor e data.');return}const itens={};DATA.forEach((f,idx)=>{const v=getPhrase(idx),p=previewTexts(idx);if(!itens[v.item])itens[v.item]={processo:v.processo,texto_item:v.texto_item,frases:[]};itens[v.item].frases.push({indice:v.indice,texto:v.frase,foco:v.foco,exemplo:v.exemplo_frase,orientacao:v.orientacao_frase,considerando:p.cons,appcc_proposto:v.appcc_proposto,appcc_depois_apurado:classReference(idx),appcc_pelas_respostas:diagnostic(idx),conferencia_tabela2:{confirmada:diagnostic(idx).estado==='conferido',revisor:getEdit(idx).t2Revisor||null,data:getEdit(idx).t2Data||null,justificativa:getEdit(idx).t2Nota||''},documentos:getDocs(idx).filter(d=>d.decision!=='Remover').map(d=>({nome:d.name,decisao:d.decision,orientacao:d.orientation,exemplo:d.example,observacao:d.observacao||'',avaliado:!!d.avaliado,fonte:d.source}))});});download(JSON.stringify({format:'CONFIG_GUIA_REV6_PARA_HOMOLOGACAO',revisor:state.reviewer,data:state.date,gerado:new Date().toISOString(),nota:'Arquivo de revisão; não altera Supabase nem Guia original.',itens},null,2),`configuracao-guia-${state.date}.json`);toast('Configuração para análise técnica exportada.')}
   function obsText(proc){let s=[];for(let i=0;i<DATA.length;i++){let v=getPhrase(i);if(proc&&processCode(v)!==proc)continue;let ds=getDocs(i).filter(d=>d.avaliado&&d.decision!=='Remover'&&(d.observacao||'').trim());for(const d of ds)s.push(`${v.item} — Frase ${v.indice} — ${d.name}: ${d.observacao}`);}return s.join('\n\n')||'Nenhum documento com observação avaliada neste processo.';}
   function buildPrintSelection(){const scope=el('printScope').value;let selected=DATA.map((f,i)=>({f,i}));if(scope==='phrase')return [index];if(scope==='item')return selected.filter(x=>x.f.item===DATA[index].item).map(x=>x.i);if(scope==='process')return selected.filter(x=>processCode(x.f)===processCode(DATA[index])).map(x=>x.i);return selected.map(x=>x.i)}
   // Apêndice C: recupera os dados da revisão editada e separa propostas de classificações validadas.
@@ -4131,18 +4170,19 @@
     return selected.map(x=>x.i);
   }
   function appendixStatus(idx){
-    const f=getPhrase(idx), d=diagnostic(idx), prior=f.appcc_inicial||'', proposal=f.appcc_proposto||'';
-    // Não substitui a proposta por um candidato não homologado nem por perguntas parcialmente preenchidas.
-    const confirmed=!!d.classe&&d.estado==='confirmado';
-    const after=confirmed?d.classe:proposal;
-    const note=confirmed?'Validado nesta revisão':d.classe&&d.estado==='proposta'?'Tabelas 1/2: proposta preenchida':
-      (d.estado==='divergencia'?'Divergência entre árvores — validar':
+    const f=getPhrase(idx),d=diagnostic(idx),prior=f.appcc_inicial||'',proposal=f.appcc_proposto||'';
+    const finalReview=['confirmado','classificado','conferido'].includes(d.estado)&&!!d.classe;
+    const after=finalReview?d.classe:proposal;
+    const note=d.estado==='confirmado'?'PCC/PPRO confirmado nesta revisão':
+      d.estado==='conferido'?'Classificação da Tabela 2 conferida pelo revisor':
+      d.estado==='classificado'?'Classificação automática pela Tabela 2':
+      d.estado==='divergencia'?'Divergência entre árvores — validar':
       d.estado==='nao_validado'?'Não validado — conferir requisitos':
       d.estado==='candidato'?'PCC/PPRO candidato — validar':
-      'Proposta não homologada');
-    return {before:prior,after,calculated:d.classe||'',note,approved:confirmed,changed:prior!==after};
+      'Proposta ainda não concluída';
+    return {before:prior,after,calculated:d.classe||'',note,approved:d.estado==='confirmado',reviewed:d.estado==='conferido',changed:prior!==after};
   }
-  function appendixPrintPages(){
+    function appendixPrintPages(){
     const selection=appendixRows();
     if(!selection.length)return [];
     const pages=[]; let batch=[],capacity=0,group='';
@@ -4179,7 +4219,7 @@
   function statsHTML(idx){const f=getPhrase(idx),nc=grade(idx),p=f.probabilidade_24,d=diagnostic(idx);const fields=[['APPCC inicial',`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`],['APPCC proposto',`${f.appcc_proposto||'—'} (${WEIGHTS[f.appcc_proposto]??'?'})`],['Severidade (S)',f.severidade!=null?`${f.severidade}/5 · preliminar`:'A validar'],['Criticidade NC',nc?`${nc}/5`:'Pendente'],['Probabilidade P24',p!=null?`${p}/5`:'—'],['NC × P24',nc&&p!=null?nc*p:'—']];return `<div class="print-stats">${fields.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('')}</div><p class="print-p3" style="margin:1mm 0"><b>APPCC pelas respostas:</b> ${esc(statusString(d))}. ${esc(d.reason)}</p>`}
   function printAnalysis(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{},eurQ=getEurestQuestions(idx);const applicable=validApplicable(idx);const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${applicable[k]?sign(q[k]):'N/A'})</b> ${esc(v)}</div>`).join('')}</div>`;
     const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(key==='limite'?(diagnostic(idx).classe==='PCC'?'Limite crítico (PCC)':'Critério de ação (PPRO)'):label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');const dd=diagnostic(idx);const printStage=st=>`<p class="print-stage-result"><b>${esc(stageStatus(st))}</b> · ${esc(st.texto)}</p>`;
-    return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}${printStage(dd.t1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}${printStage(dd.t2)}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3><div class="print-eurest"><strong>Árvore de decisão Q1–Q4 (P-R-001_F v6 — 01/08/2023):</strong><div class="print-questions">${Object.entries(EUREST_Q).map(([k,t])=>`<div class="print-q"><b>${esc(k)} (${dd.route==='3'&&dd.eur.active[k]?sign(eurQ[k]):'N/A'})</b> ${esc(t)}</div>`).join('')}</div><div class="print-eurest-result"><b>Resultado da árvore:</b> ${esc(dd.route==='3'?dd.eur.caminho+' — '+dd.eur.texto:'Não aplicável')}</div></div>${printStage(dd.t3)}<div class="print-criteria">${dd.route==='3'?cr:'Não aplicável para a classificação obtida nas Tabelas 1 e 2.'}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
+    return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}${printStage(dd.t1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}${printStage(dd.t2)}${['PPHO','PPR','PC'].includes(dd.classe)?`<p class="print-stage-result"><b>Conferência (opcional):</b> ${dd.estado==='conferido'?esc((getEdit(idx).t2Revisor||state.reviewer)+' · '+displayDate(getEdit(idx).t2Data||state.date)):'não registrada'}${getEdit(idx).t2Nota?' · '+esc(getEdit(idx).t2Nota):''}. Sem necessidade de validação da Tabela 3.</p>`:''}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3><div class="print-eurest"><strong>Árvore de decisão Q1–Q4 (P-R-001_F v6 — 01/08/2023):</strong><div class="print-questions">${Object.entries(EUREST_Q).map(([k,t])=>`<div class="print-q"><b>${esc(k)} (${dd.route==='3'&&dd.eur.active[k]?sign(eurQ[k]):'N/A'})</b> ${esc(t)}</div>`).join('')}</div><div class="print-eurest-result"><b>Resultado da árvore:</b> ${esc(dd.route==='3'?dd.eur.caminho+' — '+dd.eur.texto:'Não aplicável')}</div></div>${printStage(dd.t3)}<div class="print-criteria">${dd.route==='3'?cr:'Não aplicável para a classificação obtida nas Tabelas 1 e 2.'}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
   function printVal(label,v,cls=''){return `<div class="print-val-wrap"><b>${esc(label)}</b><div class="print-val ${cls}">${esc(v||'—')}</div></div>`}
   function printConfig(idx){
     const f=getPhrase(idx), docs=getDocs(idx), consider=previewTexts(idx).cons;
@@ -4244,6 +4284,21 @@
     for(const tab of document.querySelectorAll('[data-tab]'))tab.onclick=()=>openMode(tab.dataset.tab);
     el('modeAppcc').onclick=()=>openMode('analysis');el('modeConfig').onclick=()=>openMode('config');
     for(const t of document.querySelectorAll('.workspace [data-field]')){t.addEventListener('input',()=>{updateField(t.dataset.field,t.value);fitTextarea(t)});t.addEventListener('dblclick',()=>editExpanded(t));}
+    el('table2Approval').onchange=()=>{
+      const d=diagnostic(index),control=el('table2Approval'),ed=ensureEdit(index);
+      if(!['PPHO','PPR','PC'].includes(d.classe)||d.route!=='2'){
+        control.checked=false;return;
+      }
+      if(control.checked&&nameError()){
+        control.checked=false;toast('Informe o revisor e a data para registrar a conferência. A classificação já está concluída.');return;
+      }
+      ed.t2Aprovacao=control.checked;
+      ed.t2Classe=control.checked?d.classe:'';
+      ed.t2Revisor=control.checked?state.reviewer:'';
+      ed.t2Data=control.checked?state.date:'';
+      markDirty();updateDecision();
+    };
+    el('table2Note').oninput=()=>{ensureEdit(index).t2Nota=el('table2Note').value;markDirty();};
     el('technicalApproval').onchange=()=>{ensureEdit(index).aprovacao=el('technicalApproval').checked;markDirty();updateDecision()};
     el('approvalNote').oninput=()=>{ensureEdit(index).notaAprovacao=el('approvalNote').value;markDirty();updateDecision()};
     el('regenConsiderando').onclick=()=>{const f=getPhrase(index),d=diagnostic(index),cls=d.classe&&d.estado==='confirmado'?d.classe:f.appcc_proposto;if(!['PCC','PPRO'].includes(cls)){toast('O considerando é gerado somente para PCC/PPRO.');return}const msg=`Considerando que a frase ${f.indice}, do item ${f.item}, do processo ${f.processo}, classificada como ${cls}, apresentou resultado INSATISFATÓRIO: ${f.foco||f.frase}`;updateField('considerando',msg);document.querySelector('#configView [data-field="considerando"]').value=msg;toast('Considerando atualizado para conferência.');};

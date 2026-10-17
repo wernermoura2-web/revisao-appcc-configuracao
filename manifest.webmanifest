@@ -1,0 +1,27 @@
+{
+  "id": "/revisao-appcc-configuracao/revisao-appcc-pwa",
+  "name": "Revisão APPCC — Configuração do Guia Estadual",
+  "short_name": "Revisão APPCC",
+  "description": "Revisão de 76 frases APPCC e da configuração do Guia Estadual Rev.6/V82.55, com salvamento local, backup, importação e impressão.",
+  "lang": "pt-BR",
+  "start_url": "/revisao-appcc-configuracao/index.html",
+  "scope": "/revisao-appcc-configuracao/",
+  "display": "standalone",
+  "background_color": "#ecf2f6",
+  "theme_color": "#103956",
+  "icons": [
+    {
+      "src": "/revisao-appcc-configuracao/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/revisao-appcc-configuracao/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "prefer_related_applications": false
+}

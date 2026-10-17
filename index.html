@@ -3907,13 +3907,24 @@
     el('sourceText').textContent=`Fonte de revisão: ${f.fonte_rev6||'Rev.6/V82.55'} · Textos sujeitos à conferência final.`;
   }
   function yesNo(code,current,ns){return `<span class="yesno"><label class="yn-label"><input type="radio" name="${esc(ns+'_'+code)}" value="S" ${current==='S'?'checked':''}> Sim</label><label class="yn-label"><input type="radio" name="${esc(ns+'_'+code)}" value="N" ${current==='N'?'checked':''}> Não</label><button class="clear-answer" title="Deixar sem resposta" type="button" data-clear="${esc(code)}">Limpar</button></span>`}
+  // Uma mudança no caminho PCC/PPRO invalida as marcações de validação anteriores.
+  // Preservamos os textos de evidência para evitar perda de trabalho do revisor.
+  function invalidatePreviousValidation(before,after){
+    const edit=ensureEdit(index);
+    const oldCandidate=before.route==='3'&&(before.classe==='PCC'||before.classe==='PPRO');
+    const newCandidate=after.route==='3'&&(after.classe==='PCC'||after.classe==='PPRO');
+    const changed=(oldCandidate||newCandidate)&&(before.route!==after.route||before.classe!==after.classe);
+    if(changed){edit.criteria={};edit.aprovacao=false;return true;}
+    edit.aprovacao=false;
+    return false;
+  }
   function renderQuestions(){const f=getPhrase(index),q=getQuestions(index),active=validApplicable(index);
     for(const [id,src] of [['questions1',QUESTIONS1],['questions2',QUESTIONS2]]){
       let html='';for(const [k,title] of Object.entries(src))html+=`<div class="question ${active[k]?'':'disabled'}"><strong>${k}</strong><label class="question-title">${esc(title)}</label>${yesNo(k,q[k]||'',f.n)}</div>`;
       el(id).innerHTML=html;
       el(id).querySelectorAll('.question.disabled input[type="radio"],.question.disabled [data-clear]').forEach(t=>t.disabled=true);
-      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const previousClass=diagnostic(index).classe;ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};const changed=diagnostic(index);if(previousClass&&changed.classe!==previousClass)ensureEdit(index).criteria={...getCriteria(index),limite:''};ensureEdit(index).aprovacao=false;markDirty();renderQuestions();renderCriteria();updateDecision();}));
-      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const previousClass=diagnostic(index).classe;ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};const changed=diagnostic(index);if(previousClass&&changed.classe!==previousClass)ensureEdit(index).criteria={...getCriteria(index),limite:''};ensureEdit(index).aprovacao=false;markDirty();renderQuestions();renderCriteria();updateDecision()}));
+      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
+      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
     }
   }
   function renderCriteria(){const f=getPhrase(index),ed=getEdit(index),c=getCriteria(index),ct=ed.criteriaText||{},defaults=f.passo3_textos||{},d=diagnostic(index);

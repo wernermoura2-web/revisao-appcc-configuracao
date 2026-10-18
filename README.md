@@ -66,3 +66,15 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - É **obrigatório marcar a confirmação da correspondência em cada frase**. A transferência preserva o texto oficial de destino e sua probabilidade histórica por padrão; sobrepor a probabilidade é opcional e explícito. Aprovações técnicas não são transferidas, exigindo nova conferência no destino. Correspondências confirmadas passam a ter prioridade em novas transferências.
 - O aplicativo salva cada guia com chaves locais separadas, faz backup do destino antes da transferência, evita aplicar revisões do guia errado ao importar JSON e mantém o funcionamento offline.
 - A transferência não altera as páginas oficiais de `revisao-guia` nem dados da base Supabase. É uma ferramenta local de revisão e cotejamento.
+
+## Importação seletiva e consolidação (V24 · 18/10/2026)
+
+- Novo bloco **Importar e consolidar**, utilizável a partir do Guia APPCC/BPF ou do Guia APPCC Legislação.
+- Aceita múltiplos JSON: `APPCC-REV6-24EN-76F`, `APPCC-LEG-161F`, exportação histórica `guia-appcc-desenvolvimento` (22 páginas) e `APPCC-CONSOLIDADO-V1`.
+- Escolha por **frase individual**, por **item completo** ou por **indicador completo**; nenhuma frase vem marcada por padrão.
+- Destino pode ser APPCC/BPF ou APPCC Legislação, com correspondência sugerida por referência, texto e mapeamentos anteriormente confirmados. Cada frase exige confirmação do destino; a lista de destinos é editável.
+- A prévia identifica campos a importar e conflitos. **Preencher somente vazios** é o padrão; também há **substituir campos diferentes** ou **preservar frase existente**. Mapas de respostas são consolidados campo a campo.
+- O texto oficial da frase e sua probabilidade são preservados por padrão; importá-los exige seleção expressa. Aprovações técnicas são invalidadas quando qualquer conteúdo da frase muda.
+- Antes de salvar, o aplicativo gera um backup da versão atual do guia de destino. A consolidação é gravada no armazenamento local com rastreabilidade de arquivo, item, frase, revisor e data.
+- O JSON `APPCC-CONSOLIDADO-V1` reúne os estados dos dois guias e o histórico de importações. Quando foi importado o JSON original do guia legislativo, sua inspeção original fica anexada ao arquivo consolidado, e observações por frase ficam disponíveis nos dados importados sem serem convertidas em respostas técnicas APPCC.
+- O arquivo consolidado pode ser reimportado e revisado seletivamente. O processo não altera as fontes oficiais nem o Supabase.

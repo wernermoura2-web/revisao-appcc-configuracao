@@ -85,7 +85,7 @@ function build(ctx){
   +'</div>'
   +'<div class="flow-phrase"><strong>'+esc(f.item)+' — Frase '+esc(f.indice)+':</strong> '+esc(f.frase||'Texto da frase não informado')+'</div>'
   +'<div class="flow-facts"><div class="flow-fact"><strong>PERIGO IDENTIFICADO</strong> '+danger+'</div><div class="flow-fact"><strong>MEDIDA DE CONTROLE</strong> '+measure+'</div></div>'
-  +'<div class="flow-decision-row">'
+  +'<div class="flow-decision-row '+(d.route==='3'&&d.t2?.estado==='nao_aplicavel'?'route-direct':d.route==='2'?'route-base':'')+'">'
   +stage('1','TRIAGEM (A–E)',t1,d.t1,false)
   +stage('2','TIPO DE CONTROLE (F–I)',t2,d.t2,d.t2?.estado==='nao_aplicavel')
   +stage('3','DECISÃO Q1–Q4',t3,t3Summary,d.route!=='3')

@@ -71,3 +71,11 @@
   .flow-print-page.flow-fit-small .flow-decision-row{min-height:49mm}
   .flow-print-page.flow-fit-small .flow-facts{min-height:8mm}
 }
+
+/* A árvore deve mostrar conectores somente em perguntas efetivamente percorridas. */
+@media print {
+.flow-node.s-skip::after{display:none!important}
+.flow-panel.flow-skipped::after{content:'↷';color:#879baa;opacity:.75;top:50%}
+.flow-decision-row.route-direct .flow-panel:first-child::after{content:'↷'}
+.flow-decision-row.route-base .flow-panel:nth-child(2)::after{display:none}
+}

@@ -33,7 +33,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 1,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.1 Anexo I  p/ § 2º Art. 7º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.1",
+      "indice_legado": 0
     },
     {
       "n": 10002,
@@ -62,7 +64,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 1,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.1 Anexo I  p/ § 3º Art. 7º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.1",
+      "indice_legado": 1
     },
     {
       "n": 10003,
@@ -91,7 +95,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 2,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.2 Anexo I  p/ 1 3º Art. 7º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.2",
+      "indice_legado": 0
     },
     {
       "n": 10004,
@@ -120,7 +126,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 2,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.2 Anexo I  p/ Art. 9º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.2",
+      "indice_legado": 1
     },
     {
       "n": 10005,
@@ -149,7 +157,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 2,
       "grupo_legislativo": "cap",
       "referencia_normativa": "PU Art. 6º ANM 193/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.2",
+      "indice_legado": 2
     },
     {
       "n": 10006,
@@ -178,7 +188,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 3,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.3 Anexo I  p/ Art. 11º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.3",
+      "indice_legado": 0
     },
     {
       "n": 10007,
@@ -207,7 +219,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 3,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.1.3 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.3",
+      "indice_legado": 1
     },
     {
       "n": 10008,
@@ -236,7 +250,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 4,
       "grupo_legislativo": "cap",
       "referencia_normativa": "PU Art. 6º ANM 193/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.4",
+      "indice_legado": 0
     },
     {
       "n": 10009,
@@ -265,7 +281,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 5,
       "grupo_legislativo": "cap",
       "referencia_normativa": "4.3.2.3 e 4.2.1 NT 1/09 Port. 374/09 ANM",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.1.cap.5",
+      "indice_legado": 0
     },
     {
       "n": 10010,
@@ -294,7 +312,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 6,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.1 Anexo I  / Art. 14º CP 1365/25 / Art. 15º ANM 193/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.1",
+      "indice_legado": 0
     },
     {
       "n": 10011,
@@ -323,7 +343,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 7,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.2 Anexo I  / Art. 15º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.2",
+      "indice_legado": 0
     },
     {
       "n": 10012,
@@ -352,7 +374,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 7,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.2 Anexo I  / PU Art. 15º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.2",
+      "indice_legado": 1
     },
     {
       "n": 10013,
@@ -381,7 +405,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 7,
       "grupo_legislativo": "cond",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.2",
+      "indice_legado": 2
     },
     {
       "n": 10014,
@@ -410,7 +436,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 8,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.4 Anexo I  / Art. 17º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.3",
+      "indice_legado": 0
     },
     {
       "n": 10015,
@@ -439,7 +467,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 9,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.6 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.4",
+      "indice_legado": 0
     },
     {
       "n": 10016,
@@ -468,7 +498,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 9,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.6 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.4",
+      "indice_legado": 1
     },
     {
       "n": 10017,
@@ -497,7 +529,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 10,
       "grupo_legislativo": "cond",
       "referencia_normativa": "Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.5",
+      "indice_legado": 0
     },
     {
       "n": 10018,
@@ -526,7 +560,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 10,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.7 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.5",
+      "indice_legado": 1
     },
     {
       "n": 10019,
@@ -555,7 +591,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 10,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.7 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.5",
+      "indice_legado": 2
     },
     {
       "n": 10020,
@@ -584,7 +622,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 11,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.8 Anexo I  / § 2º Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.6",
+      "indice_legado": 0
     },
     {
       "n": 10021,
@@ -613,7 +653,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 11,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.8 Anexo I  / § 1º Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.6",
+      "indice_legado": 1
     },
     {
       "n": 10022,
@@ -642,7 +684,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 12,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.9 Anexo I  p/ Inc I Art. 77º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.7",
+      "indice_legado": 0
     },
     {
       "n": 10023,
@@ -671,7 +715,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 12,
       "grupo_legislativo": "cond",
       "referencia_normativa": "Art. 78º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.7",
+      "indice_legado": 1
     },
     {
       "n": 10024,
@@ -700,7 +746,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 12,
       "grupo_legislativo": "cond",
       "referencia_normativa": "4.2.9 Anexo I  p/ Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.2.cond.7",
+      "indice_legado": 2
     },
     {
       "n": 10025,
@@ -729,7 +777,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 13,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.2 Anexo I  / Art. 19º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.1",
+      "indice_legado": 0
     },
     {
       "n": 10026,
@@ -758,7 +808,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 13,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.2 Anexo I  / § 1º Art. 19º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.1",
+      "indice_legado": 1
     },
     {
       "n": 10027,
@@ -787,7 +839,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 13,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.2 Anexo I  / § 2º Art. 19º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.1",
+      "indice_legado": 2
     },
     {
       "n": 10028,
@@ -816,7 +870,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 14,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.3 Anexo I  / Art. 21º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.2",
+      "indice_legado": 0
     },
     {
       "n": 10029,
@@ -845,7 +901,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 14,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.3 Anexo I  / § 2º Art. 21º CP 1365/25/ Art. 18 ANM 193/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.2",
+      "indice_legado": 1
     },
     {
       "n": 10030,
@@ -874,7 +932,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 14,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.3 Anexo I  / § 5º Art. 21º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.2",
+      "indice_legado": 2
     },
     {
       "n": 10031,
@@ -903,7 +963,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 14,
       "grupo_legislativo": "res",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.2",
+      "indice_legado": 3
     },
     {
       "n": 10032,
@@ -932,7 +994,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 15,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.4 Anexo I  / Art. 22º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.3",
+      "indice_legado": 0
     },
     {
       "n": 10033,
@@ -961,7 +1025,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 15,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.4 Anexo I  / § 1º Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.3",
+      "indice_legado": 1
     },
     {
       "n": 10034,
@@ -990,7 +1056,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 16,
       "grupo_legislativo": "res",
       "referencia_normativa": "Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.4",
+      "indice_legado": 0
     },
     {
       "n": 10035,
@@ -1019,7 +1087,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 16,
       "grupo_legislativo": "res",
       "referencia_normativa": "§ 3º Art. 23º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.4",
+      "indice_legado": 1
     },
     {
       "n": 10036,
@@ -1048,7 +1118,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 16,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.5 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.4",
+      "indice_legado": 2
     },
     {
       "n": 10037,
@@ -1077,7 +1149,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 16,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.5 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.4",
+      "indice_legado": 3
     },
     {
       "n": 10038,
@@ -1106,7 +1180,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 17,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.6 Anexo I  / Inc I Art. 77º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.5",
+      "indice_legado": 0
     },
     {
       "n": 10039,
@@ -1135,7 +1211,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 17,
       "grupo_legislativo": "res",
       "referencia_normativa": "Art. 78º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.5",
+      "indice_legado": 1
     },
     {
       "n": 10040,
@@ -1164,7 +1242,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 17,
       "grupo_legislativo": "res",
       "referencia_normativa": "4.3.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.3.res.5",
+      "indice_legado": 2
     },
     {
       "n": 10041,
@@ -1193,7 +1273,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 18,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.2 Anexo I  / Art. 27º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.1",
+      "indice_legado": 0
     },
     {
       "n": 10042,
@@ -1222,7 +1304,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 19,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.4 Anexo I  / Art. 28º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.2",
+      "indice_legado": 0
     },
     {
       "n": 10043,
@@ -1251,7 +1335,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 19,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.4 Anexo I  / PU Art. 28º CP 1365/25 / Inc. I § 1º Art. 27 ANM 193/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.2",
+      "indice_legado": 1
     },
     {
       "n": 10044,
@@ -1280,7 +1366,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 20,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.3",
+      "indice_legado": 0
     },
     {
       "n": 10045,
@@ -1309,7 +1397,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 21,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.4",
+      "indice_legado": 0
     },
     {
       "n": 10046,
@@ -1338,7 +1428,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 21,
       "grupo_legislativo": "rec_ret",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_ret.4",
+      "indice_legado": 1
     },
     {
       "n": 10047,
@@ -1367,7 +1459,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 22,
       "grupo_legislativo": "rec_desc",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_desc.1",
+      "indice_legado": 0
     },
     {
       "n": 10048,
@@ -1396,7 +1490,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 22,
       "grupo_legislativo": "rec_desc",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_desc.1",
+      "indice_legado": 1
     },
     {
       "n": 10049,
@@ -1425,7 +1521,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 23,
       "grupo_legislativo": "rec_desc",
       "referencia_normativa": "4.5.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_desc.2",
+      "indice_legado": 0
     },
     {
       "n": 10050,
@@ -1454,7 +1552,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 24,
       "grupo_legislativo": "rec_desc",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_desc.3",
+      "indice_legado": 0
     },
     {
       "n": 10051,
@@ -1483,7 +1583,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 24,
       "grupo_legislativo": "rec_desc",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_desc.3",
+      "indice_legado": 1
     },
     {
       "n": 10052,
@@ -1512,7 +1614,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 25,
       "grupo_legislativo": "rec_rot",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_rot.1",
+      "indice_legado": 0
     },
     {
       "n": 10053,
@@ -1541,7 +1645,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 25,
       "grupo_legislativo": "rec_rot",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_rot.1",
+      "indice_legado": 1
     },
     {
       "n": 10054,
@@ -1570,7 +1676,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 26,
       "grupo_legislativo": "rec_rot",
       "referencia_normativa": "4.5.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_rot.2",
+      "indice_legado": 0
     },
     {
       "n": 10055,
@@ -1599,7 +1707,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 27,
       "grupo_legislativo": "rec_rot",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_rot.3",
+      "indice_legado": 0
     },
     {
       "n": 10056,
@@ -1628,7 +1738,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 27,
       "grupo_legislativo": "rec_rot",
       "referencia_normativa": "4.5.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_rot.3",
+      "indice_legado": 1
     },
     {
       "n": 10057,
@@ -1657,7 +1769,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 28,
       "grupo_legislativo": "rec_san",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_san.1",
+      "indice_legado": 0
     },
     {
       "n": 10058,
@@ -1686,7 +1800,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 28,
       "grupo_legislativo": "rec_san",
       "referencia_normativa": "4.5.3 Anexo I  / Art. 34º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_san.1",
+      "indice_legado": 1
     },
     {
       "n": 10059,
@@ -1715,7 +1831,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 28,
       "grupo_legislativo": "rec_san",
       "referencia_normativa": "4.5.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_san.1",
+      "indice_legado": 2
     },
     {
       "n": 10060,
@@ -1744,7 +1862,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 29,
       "grupo_legislativo": "rec_san",
       "referencia_normativa": "4.5.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.5.rec_san.2",
+      "indice_legado": 0
     },
     {
       "n": 10061,
@@ -1773,7 +1893,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 30,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.3 Anexo I  / Art. 35º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.1",
+      "indice_legado": 0
     },
     {
       "n": 10062,
@@ -1802,7 +1924,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 31,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.4 Anexo I  / Art. 36º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.2",
+      "indice_legado": 0
     },
     {
       "n": 10063,
@@ -1831,7 +1955,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 32,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.5 Anexo I  / PU Art. 36º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.3",
+      "indice_legado": 0
     },
     {
       "n": 10064,
@@ -1860,7 +1986,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 33,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.6 Anexo I  / § 1º Art. 37º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.4",
+      "indice_legado": 0
     },
     {
       "n": 10065,
@@ -1889,7 +2017,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 33,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.6 Anexo I / § 2º Art. 37º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.4",
+      "indice_legado": 1
     },
     {
       "n": 10066,
@@ -1918,7 +2048,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 34,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.7 Anexo I  / Art. 38º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.5",
+      "indice_legado": 0
     },
     {
       "n": 10067,
@@ -1947,7 +2079,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 35,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.9 Anexo I  / Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.6",
+      "indice_legado": 0
     },
     {
       "n": 10068,
@@ -1976,7 +2110,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 35,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.9 Anexo I  / PU Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.6",
+      "indice_legado": 1
     },
     {
       "n": 10069,
@@ -2005,7 +2141,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 35,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.9 Anexo I  / PU Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.6",
+      "indice_legado": 2
     },
     {
       "n": 10070,
@@ -2034,7 +2172,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 36,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.10 Anexo I  / Art. 41º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.7",
+      "indice_legado": 0
     },
     {
       "n": 10071,
@@ -2063,7 +2203,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 36,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.10 Anexo I  / PU Art. 41º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.7",
+      "indice_legado": 1
     },
     {
       "n": 10072,
@@ -2092,7 +2234,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 37,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.11 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.8",
+      "indice_legado": 0
     },
     {
       "n": 10073,
@@ -2121,7 +2265,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 38,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.9",
+      "indice_legado": 0
     },
     {
       "n": 10074,
@@ -2150,7 +2296,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 38,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.9",
+      "indice_legado": 1
     },
     {
       "n": 10075,
@@ -2179,7 +2327,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 39,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "Art. 31 Res. 193 ANM/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.10",
+      "indice_legado": 0
     },
     {
       "n": 10076,
@@ -2208,7 +2358,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 39,
       "grupo_legislativo": "h_ret",
       "referencia_normativa": "PU Art. 31 Res. 193 ANM/24",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_ret.10",
+      "indice_legado": 1
     },
     {
       "n": 10077,
@@ -2237,7 +2389,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 40,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "4.6.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.1",
+      "indice_legado": 0
     },
     {
       "n": 10078,
@@ -2266,7 +2420,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 40,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "4.6.8 Anexo I  / Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.1",
+      "indice_legado": 1
     },
     {
       "n": 10079,
@@ -2295,7 +2451,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 40,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "§ 1 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.1",
+      "indice_legado": 2
     },
     {
       "n": 10080,
@@ -2324,7 +2482,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 40,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "§ 2 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.1",
+      "indice_legado": 3
     },
     {
       "n": 10081,
@@ -2353,7 +2513,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 40,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "§ 3 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.1",
+      "indice_legado": 4
     },
     {
       "n": 10082,
@@ -2382,7 +2544,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 41,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "4.6.11 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.2",
+      "indice_legado": 0
     },
     {
       "n": 10083,
@@ -2411,7 +2575,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 42,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.3",
+      "indice_legado": 0
     },
     {
       "n": 10084,
@@ -2440,7 +2606,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 42,
       "grupo_legislativo": "t_ret",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_ret.3",
+      "indice_legado": 1
     },
     {
       "n": 10085,
@@ -2469,7 +2637,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 43,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.3 Anexo I  / Art. 35º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.1",
+      "indice_legado": 0
     },
     {
       "n": 10086,
@@ -2498,7 +2668,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 44,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.4 Anexo I  / Art. 36º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.2",
+      "indice_legado": 0
     },
     {
       "n": 10087,
@@ -2527,7 +2699,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 45,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.7 Anexo I  / Art. 38º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.3",
+      "indice_legado": 0
     },
     {
       "n": 10088,
@@ -2556,7 +2730,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 46,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.9 Anexo I  / Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.4",
+      "indice_legado": 0
     },
     {
       "n": 10089,
@@ -2585,7 +2761,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 46,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.9 Anexo I  / PU Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.4",
+      "indice_legado": 1
     },
     {
       "n": 10090,
@@ -2614,7 +2792,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 47,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.9 Anexo I  / PU Art. 40º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.5",
+      "indice_legado": 0
     },
     {
       "n": 10091,
@@ -2643,7 +2823,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 48,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.10 Anexo I  / Art. 41º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.6",
+      "indice_legado": 0
     },
     {
       "n": 10092,
@@ -2672,7 +2854,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 48,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.10 Anexo I  / PU Art. 41º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.6",
+      "indice_legado": 1
     },
     {
       "n": 10093,
@@ -2701,7 +2885,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 49,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.11 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.7",
+      "indice_legado": 0
     },
     {
       "n": 10094,
@@ -2730,7 +2916,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 50,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.8",
+      "indice_legado": 0
     },
     {
       "n": 10095,
@@ -2759,7 +2947,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 50,
       "grupo_legislativo": "h_desc",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.h_desc.8",
+      "indice_legado": 1
     },
     {
       "n": 10096,
@@ -2788,7 +2978,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 51,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "4.6.8 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.1",
+      "indice_legado": 0
     },
     {
       "n": 10097,
@@ -2817,7 +3009,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 51,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "4.6.8 Anexo I  / Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.1",
+      "indice_legado": 1
     },
     {
       "n": 10098,
@@ -2846,7 +3040,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 51,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "§ 1 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.1",
+      "indice_legado": 2
     },
     {
       "n": 10099,
@@ -2875,7 +3071,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 51,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "§ 2 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.1",
+      "indice_legado": 3
     },
     {
       "n": 10100,
@@ -2904,7 +3102,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 51,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "§ 3 Art. 39º CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.1",
+      "indice_legado": 4
     },
     {
       "n": 10101,
@@ -2933,7 +3133,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 52,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "4.6.11 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.2",
+      "indice_legado": 0
     },
     {
       "n": 10102,
@@ -2962,7 +3164,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 53,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.3",
+      "indice_legado": 0
     },
     {
       "n": 10103,
@@ -2991,7 +3195,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 53,
       "grupo_legislativo": "t_desc",
       "referencia_normativa": "4.6.12 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.6.t_desc.3",
+      "indice_legado": 1
     },
     {
       "n": 10104,
@@ -3020,7 +3226,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 54,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.1 Anexo I  / Art. 47 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.2",
+      "indice_legado": 0
     },
     {
       "n": 10105,
@@ -3049,7 +3257,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 54,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.1 Anexo I  / § 1º Art. 47 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.2",
+      "indice_legado": 1
     },
     {
       "n": 10106,
@@ -3078,7 +3288,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.2 Anexo I  / Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 0
     },
     {
       "n": 10107,
@@ -3107,7 +3319,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.2 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 1
     },
     {
       "n": 10108,
@@ -3136,7 +3350,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.2 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 2
     },
     {
       "n": 10109,
@@ -3165,7 +3381,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "§ 1º Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 3
     },
     {
       "n": 10110,
@@ -3194,7 +3412,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "§ 2º Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 4
     },
     {
       "n": 10111,
@@ -3223,7 +3443,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 5
     },
     {
       "n": 10112,
@@ -3252,7 +3474,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 55,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.3",
+      "indice_legado": 6
     },
     {
       "n": 10113,
@@ -3281,7 +3505,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 56,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.4 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.4",
+      "indice_legado": 0
     },
     {
       "n": 10114,
@@ -3310,7 +3536,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 56,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.4 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.4",
+      "indice_legado": 1
     },
     {
       "n": 10115,
@@ -3339,7 +3567,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 57,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.5 Anexo I  / Art. 50 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.5",
+      "indice_legado": 0
     },
     {
       "n": 10116,
@@ -3368,7 +3598,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 57,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.5 Anexo I  / PU Art. 50 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.5",
+      "indice_legado": 1
     },
     {
       "n": 10117,
@@ -3397,7 +3629,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 58,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.6 Anexo I  / Art. 51 CP 1365/25 / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.6",
+      "indice_legado": 0
     },
     {
       "n": 10118,
@@ -3426,7 +3660,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 59,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.8 Anexo I  / Art. 52 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.7",
+      "indice_legado": 0
     },
     {
       "n": 10119,
@@ -3455,7 +3691,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 59,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "4.7.8 Anexo I  / PU Art. 52 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.7",
+      "indice_legado": 1
     },
     {
       "n": 10120,
@@ -3484,7 +3722,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 60,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "Art 37 Res. 193/24 ANM",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.8",
+      "indice_legado": 0
     },
     {
       "n": 10121,
@@ -3513,7 +3753,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 60,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.8",
+      "indice_legado": 1
     },
     {
       "n": 10122,
@@ -3542,7 +3784,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 60,
       "grupo_legislativo": "e_ret",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_ret.8",
+      "indice_legado": 2
     },
     {
       "n": 10123,
@@ -3571,7 +3815,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 61,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.1 Anexo I  / Art. 47 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.2",
+      "indice_legado": 0
     },
     {
       "n": 10124,
@@ -3600,7 +3846,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 61,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.1 Anexo I  / § 1º Art. 47 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.2",
+      "indice_legado": 1
     },
     {
       "n": 10125,
@@ -3629,7 +3877,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.2 Anexo I  / Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 0
     },
     {
       "n": 10126,
@@ -3658,7 +3908,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.2 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 1
     },
     {
       "n": 10127,
@@ -3687,7 +3939,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.2 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 2
     },
     {
       "n": 10128,
@@ -3716,7 +3970,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "§ 1º Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 3
     },
     {
       "n": 10129,
@@ -3745,7 +4001,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "§ 2º Art. 48 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 4
     },
     {
       "n": 10130,
@@ -3774,7 +4032,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 5
     },
     {
       "n": 10131,
@@ -3803,7 +4063,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 62,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.3",
+      "indice_legado": 6
     },
     {
       "n": 10132,
@@ -3832,7 +4094,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 63,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.3 Anexo I  / Art. 49 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.4",
+      "indice_legado": 0
     },
     {
       "n": 10133,
@@ -3861,7 +4125,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 64,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.4 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.5",
+      "indice_legado": 0
     },
     {
       "n": 10134,
@@ -3890,7 +4156,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 64,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.4 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.5",
+      "indice_legado": 1
     },
     {
       "n": 10135,
@@ -3919,7 +4187,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 65,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.5 Anexo I  / Art. 50 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.6",
+      "indice_legado": 0
     },
     {
       "n": 10136,
@@ -3948,7 +4218,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 65,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.5 Anexo I  / PU Art. 50 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.6",
+      "indice_legado": 1
     },
     {
       "n": 10137,
@@ -3977,7 +4249,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 66,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.6 Anexo I  / Art. 51 CP 1365/25 / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.7",
+      "indice_legado": 0
     },
     {
       "n": 10138,
@@ -4006,7 +4280,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 67,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.8 Anexo I  / Art. 52 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.8",
+      "indice_legado": 0
     },
     {
       "n": 10139,
@@ -4035,7 +4311,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 67,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "4.7.8 Anexo I  / PU Art. 52 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.8",
+      "indice_legado": 1
     },
     {
       "n": 10140,
@@ -4064,7 +4342,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 68,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "Art 37 Res. 193/24 ANM",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.9",
+      "indice_legado": 0
     },
     {
       "n": 10141,
@@ -4093,7 +4373,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 68,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.9",
+      "indice_legado": 1
     },
     {
       "n": 10142,
@@ -4122,7 +4404,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 68,
       "grupo_legislativo": "e_desc",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.7.e_desc.9",
+      "indice_legado": 2
     },
     {
       "n": 10143,
@@ -4151,7 +4435,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 69,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.1 Anexo I  / Art. 70 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.1",
+      "indice_legado": 0
     },
     {
       "n": 10144,
@@ -4180,7 +4466,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 70,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.2 Anexo I  / Art. 71 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.2",
+      "indice_legado": 0
     },
     {
       "n": 10145,
@@ -4209,7 +4497,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 71,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.3 Anexo I  / § 2º Art. 71 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.3",
+      "indice_legado": 0
     },
     {
       "n": 10146,
@@ -4238,7 +4528,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 72,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.4 Anexo I  / § 4º Art. 71 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.4",
+      "indice_legado": 0
     },
     {
       "n": 10147,
@@ -4267,7 +4559,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 72,
       "grupo_legislativo": "cq",
       "referencia_normativa": "§ 4º Art. 71 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.4",
+      "indice_legado": 1
     },
     {
       "n": 10148,
@@ -4296,7 +4590,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 72,
       "grupo_legislativo": "cq",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.4",
+      "indice_legado": 2
     },
     {
       "n": 10149,
@@ -4325,7 +4621,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 73,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.5 Anexo I  / § 3º Art. 71 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.5",
+      "indice_legado": 0
     },
     {
       "n": 10150,
@@ -4354,7 +4652,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 74,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.10.6 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.6",
+      "indice_legado": 0
     },
     {
       "n": 10152,
@@ -4383,7 +4683,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 76,
       "grupo_legislativo": "cq",
       "referencia_normativa": "Art. 73 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.8",
+      "indice_legado": 0
     },
     {
       "n": 10153,
@@ -4412,7 +4714,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 77,
       "grupo_legislativo": "cq",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.9",
+      "indice_legado": 0
     },
     {
       "n": 10154,
@@ -4441,7 +4745,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 78,
       "grupo_legislativo": "cq",
       "referencia_normativa": "Art. 74 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.10",
+      "indice_legado": 0
     },
     {
       "n": 10151,
@@ -4470,7 +4776,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 75,
       "grupo_legislativo": "cq",
       "referencia_normativa": "4.12.6 Anexo I  / Art. 24 CP 1365/25",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.10.cq.7",
+      "indice_legado": 0
     },
     {
       "n": 10155,
@@ -4499,7 +4807,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 79,
       "grupo_legislativo": "resp",
       "referencia_normativa": "4.11.1 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.1",
+      "indice_legado": 0
     },
     {
       "n": 10156,
@@ -4528,7 +4838,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 80,
       "grupo_legislativo": "resp",
       "referencia_normativa": "4.11.2 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.2",
+      "indice_legado": 0
     },
     {
       "n": 10157,
@@ -4557,7 +4869,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 80,
       "grupo_legislativo": "resp",
       "referencia_normativa": "Lei Est. 10003/23",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.2",
+      "indice_legado": 1
     },
     {
       "n": 10158,
@@ -4586,7 +4900,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 80,
       "grupo_legislativo": "resp",
       "referencia_normativa": "Lei Est. 10003/23",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.2",
+      "indice_legado": 2
     },
     {
       "n": 10159,
@@ -4615,7 +4931,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 81,
       "grupo_legislativo": "resp",
       "referencia_normativa": "4.11.3 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.3",
+      "indice_legado": 0
     },
     {
       "n": 10160,
@@ -4644,7 +4962,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 81,
       "grupo_legislativo": "resp",
       "referencia_normativa": "Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.3",
+      "indice_legado": 1
     },
     {
       "n": 10161,
@@ -4673,7 +4993,9 @@ window.LEGISLATION_APPCC_DATA = {
       "indicador_original": 82,
       "grupo_legislativo": "resp",
       "referencia_normativa": "4.11.4 Anexo I  / Port. SUVISA",
-      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE"
+      "fonte_probabilidade": "appcc-guia/html.appcc.int.html — PROBABILITY_BASE",
+      "codigo_legado": "4.11.resp.4",
+      "indice_legado": 0
     }
   ]
 };

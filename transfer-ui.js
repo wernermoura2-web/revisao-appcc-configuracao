@@ -10,6 +10,7 @@ const targetData=(isLeg?window.INITIAL_DATA:window.LEGISLATION_APPCC_DATA)?.fras
 const targetStorage=targetGuide==='leg'?'guia_appcc_legislacao_revisao_local_v1':'guia_appcc_rev6_revisao_local_v1';
 const targetBackup=targetGuide==='leg'?'guia_appcc_legislacao_backups_v1':'guia_appcc_rev6_backups_v1';
 const guideURL=targetGuide==='leg'?'?guide=leg':'?guide=bpf';
+const MATCH_KEY='guia_appcc_correspondencias_confirmadas_v1';
 const groupLabels={cap:'Captação',cond:'Condução',res:'Reservatórios',rec_ret:'Recepção retornáveis',rec_desc:'Recepção descartáveis',rec_rot:'Rótulos',rec_san:'Saneantes',h_ret:'Higienização retornáveis',h_desc:'Higienização descartáveis',t_ret:'Tampas retornáveis',t_desc:'Tampas descartáveis',e_ret:'Envase retornáveis',e_desc:'Envase descartáveis',cq:'Controle da qualidade',resp:'Responsabilidade'};
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=x=>String(x??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
@@ -66,8 +67,10 @@ function show(sourceIndexes){
  api.save();
  rows=sourceIndexes.map(i=>{
  const src=api.phraseAt(i),choice=options(src.phrase);
- const highest=choice[0];
- return {src,choice,selected:highest?.score>=35?String(highest.t.n):''};
+ const highest=choice[0],confirmed=read(MATCH_KEY,{});
+ const stored=confirmed[api.guide+':'+src.phrase.n];
+ const fromHistory=choice.find(x=>String(x.t.n)===String(stored));
+ return {src,choice,selected:fromHistory?String(fromHistory.t.n):highest?.score>=70?String(highest.t.n):''};
  });
  const dia=createDialog();
  dia.querySelector('#transferOverwrite').checked=false;
@@ -117,6 +120,7 @@ function commit(){
  if(!confirm('Exportar '+dests.length+' frase(s) para o Guia APPCC '+(targetGuide==='leg'?'Legislação':'/BPF')+'? Será feito um backup dos destinos e a aprovação técnica deverá ser refeita.'))return;
  const before=clone(saved);
  const includeProb=dialog.querySelector('#transferProb').checked;
+ const confirmedMap=read(MATCH_KEY,{});
  const transferable=['foco','perigo','medida','evidencias','orientacao_frase','exemplo_frase','considerando','documentos','passo3_textos','questions','eurestQuestions','criteria','criteriaText','questionNotes','justificativa_revisao','notaAprovacao','t2Nota'];
  for(const {r,d} of dests){
    const src=r.src,phrase=src.phrase,current=saved.edits[d.n]||{},next={...current};
@@ -130,6 +134,8 @@ function commit(){
    next.aprovacao=false;next.t2Aprovacao=false;next.t2Classe='';next.t2Revisor='';next.t2Data='';
    next.transferencia={origem:api.guide,item:phrase.item,frase:phrase.indice,numero:phrase.n,data:new Date().toISOString(),probabilidadeTransferida:includeProb,confirmacaoDestino:true};
    saved.edits[d.n]=next;
+   confirmedMap[api.guide+':'+phrase.n]=d.n;
+   confirmedMap[targetGuide+':'+d.n]=phrase.n;
  }
  if(!saved.reviewer)saved.reviewer=document.getElementById('reviewer')?.value||'';
  if(!saved.date)saved.date=document.getElementById('reviewDate')?.value||'';
@@ -139,6 +145,7 @@ function commit(){
    backups.unshift({date:new Date().toISOString(),reviewer:before.reviewer||'',changes:before.edits||{},aiHistory:before.aiHistory||{},reviewDate:before.date||'',note:'Antes da transferência cruzada de indicadores'});
    localStorage.setItem(targetBackup,JSON.stringify(backups.slice(0,12)));
    localStorage.setItem(targetStorage,JSON.stringify(saved));
+   localStorage.setItem(MATCH_KEY,JSON.stringify(confirmedMap));
  }catch(e){
    dialog.querySelector('#transferResult').textContent='Falha ao salvar (possível limite de espaço local). Nenhuma aprovação foi aplicada: '+e.message;return;
  }

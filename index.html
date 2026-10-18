@@ -3706,7 +3706,7 @@
       "n": 76,
       "item": "4.12.6",
       "indice": 1,
-      "processo": "Controle da qualidade (CO2)",
+      "processo": "Controle de Qualidade",
       "appcc_inicial": "PC",
       "appcc_proposto": "PC",
       "severidade": 4,
@@ -3861,9 +3861,22 @@
   const clone=x=>JSON.parse(JSON.stringify(x));
   const day=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
   const displayDate=s=>s ? s.split('-').reverse().join('/') : 'Data não informada';
-  const processCode=f=>f.item.split('.').slice(0,2).join('.');
-  const PROCESS_LABELS_LEG={'4.1':'Captação','4.2':'Condução','4.3':'Reservatórios','4.5':'Recepção de embalagens e insumos','4.6':'Higienização de embalagens e tampas','4.7':'Envase e fechamento','4.10':'Controle da qualidade','4.11':'Responsabilidade','4.12':'CO₂ e controle da qualidade'};
-  const processes=[...new Map(DATA.map(f=>[processCode(f),SELECTED_GUIDE==='leg'?(PROCESS_LABELS_LEG[processCode(f)]||f.processo):f.processo])).entries()];
+  // A referência normativa de uma frase não determina necessariamente o processo.
+  // Indicador 5 é Captação mesmo quando sua fonte cita 4.3.2.3.
+  // O item 4.12.6 pertence ao processo 4.10 — Controle de Qualidade.
+  const LEG_GROUP_PROCESS={
+    cap:'4.1',cond:'4.2',res:'4.3',
+    rec_ret:'4.5',rec_desc:'4.5',rec_rot:'4.5',rec_san:'4.5',
+    h_ret:'4.6',h_desc:'4.6',t_ret:'4.6',t_desc:'4.6',
+    e_ret:'4.7',e_desc:'4.7',cq:'4.10',resp:'4.11'
+  };
+  const processCode=f=>{
+    if(SELECTED_GUIDE==='leg'&&LEG_GROUP_PROCESS[f.grupo_legislativo])return LEG_GROUP_PROCESS[f.grupo_legislativo];
+    if(String(f.item).startsWith('4.12.6'))return '4.10';
+    return String(f.item).split('.').slice(0,2).join('.');
+  };
+  const PROCESS_LABELS_LEG={'4.1':'Captação','4.2':'Condução','4.3':'Reservatórios','4.5':'Recepção de embalagens e insumos','4.6':'Higienização de embalagens e tampas','4.7':'Envase e fechamento','4.10':'Controle de Qualidade','4.11':'Responsabilidade'};
+  const processes=[...new Map(DATA.map(f=>[processCode(f),processCode(f)==='4.10'?'Controle de Qualidade':SELECTED_GUIDE==='leg'?(PROCESS_LABELS_LEG[processCode(f)]||f.processo):f.processo])).entries()];
   const validYN=v=>v==='S'||v==='N'?v:'';
   const baseEdit={questions:{},eurestQuestions:{},questionNotes:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
   let saved={}; try { saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch{}

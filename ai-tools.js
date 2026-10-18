@@ -3,7 +3,7 @@
    Toda aplicação requer confirmação consciente e admite restauração anterior/original. */
 (function(){
 'use strict';
-const fieldRoot='#analysisView textarea,#configView textarea,#approvalNote,#table2Note';
+const fieldRoot='#analysisView textarea:not([data-question-justification]):not([data-question-evidence]),#configView textarea,#approvalNote,#table2Note';
 const criteriaKeys=['eficacia','limite','monitoramento','correcao','produto','registros'];
 const prepared=new WeakSet(), applying=new WeakSet();
 let modal=null,activeTarget=null,activeKey='',activeName='';

@@ -64,6 +64,12 @@ function build(ctx){
    key==='limite'&&d.classe==='PPRO'?'Critério de ação (PPRO)':key==='limite'&&d.classe==='PCC'?'Limite crítico (PCC)':title,
    ct[key]??defaults[i]??'',criteria[key],d.route==='3'&&['PCC','PPRO'].includes(d.classe))).join('');
  const docs=(ctx.documentos||[]).filter(o=>v(o.observacao).trim()).map(o=>v(o.name)+': '+v(o.observacao)).join('\n');
+ const fullExample=v(f.exemplo_frase).trim();
+ const originalExample=v(ctx.fraseBase?.exemplo_frase).trim();
+ const exampleIsOriginal=fullExample===originalExample;
+ const exampleForPrint=fullExample.length>430&&exampleIsOriginal
+  ?fullExample.slice(0,255).replace(/\\s+\\S*$/, '')+'…\\n[Exemplo original extenso: texto integral na impressão da configuração da frase.]'
+  :fullExample;
  const approval=d.route==='3'?ctx.aprovacao?'Aprovação técnica registrada':'Aprovação técnica pendente':ctx.conferenciaT2?'Conferência da Tabela 2 registrada':'Classificação da Tabela 2 / análise pendente';
  const end=v(ctx.justificativaAprovacao).trim();
  const review=esc(ctx.revisor||'Não informado'), date=esc(ctx.data||'Data não informada');
@@ -88,7 +94,7 @@ function build(ctx){
   +'<div class="flow-observation"><div class="flow-section-title">EVIDÊNCIAS, JUSTIFICATIVAS E OBSERVAÇÕES <small>Textos inseridos ou conservados no editor</small></div><div class="flow-observation-grid">'
   +note('Evidências das inspeções',f.evidencias)
   +note('Justificativa da classificação',ctx.justificativaRevisao||ctx.notaT2)
-  +note('Observações / exemplo da frase',f.exemplo_frase)
+  +note('Observação / exemplo da frase',exampleForPrint)
   +note('Observações dos documentos avaliados',docs)
   +'</div></div>'
   +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: PPHO 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'

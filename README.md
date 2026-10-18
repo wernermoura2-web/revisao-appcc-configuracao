@@ -56,3 +56,13 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - Os campos de cada pergunta indicam resposta Sim/Não/N/A, justificativa, evidências necessárias e se a sugestão foi conferida.
 - Para preservar a integridade dos textos, justificativas excepcionalmente longas ou em quantidade superior à capacidade da folha são encaminhadas às páginas complementares; a exportação JSON mantém o conteúdo integral.
 - A configuração da frase e o Apêndice C mantêm seus formatos anteriores.
+
+## Revisão APPCC/BPF e APPCC Legislação (V19 · 18/10/2026)
+
+- O menu inicial oferece **Guia APPCC/BPF** (76 frases da Rev.6/V82.55) e **Guia APPCC Legislação** (161 frases em 71 indicadores distintos, organizados pelos grupos de origem). Em cada guia permanecem os módulos **APPCC** e **Configuração**.
+- O Guia Legislação utiliza os textos e referências normativas do arquivo `revisao-guia/appcc-desenvolvimento/html.appcc.int.html`, correspondente ao Guia de 22 páginas, e as probabilidades históricas por indicador de `appcc-guia/html.appcc.int.html` (`PROBABILITY_BASE`). São 71/71 indicadores distintos com probabilidade 1–5 recuperada; as frases do mesmo indicador herdam o valor desse indicador até revisão.
+- **Criticidade** no editor: PPHO=1, PPR=2, PC=3, PPRO=4 e PCC=5, sem adotar os pesos de versões antigas. A probabilidade é distinta da criticidade.
+- Em qualquer guia, botões **Exportar frase atual** e **Exportar item inteiro** listam propostas de correspondência baseadas no número normativo e na semelhança textual. O destino é pré-escolhido quando a confiança atinge o limiar mínimo; um destino ambíguo pode ser escolhido manualmente.
+- É **obrigatório marcar a confirmação da correspondência em cada frase**. A transferência preserva o texto oficial de destino e sua probabilidade histórica por padrão; sobrepor a probabilidade é opcional e explícito. Aprovações técnicas não são transferidas, exigindo nova conferência no destino. Correspondências confirmadas passam a ter prioridade em novas transferências.
+- O aplicativo salva cada guia com chaves locais separadas, faz backup do destino antes da transferência, evita aplicar revisões do guia errado ao importar JSON e mantém o funcionamento offline.
+- A transferência não altera as páginas oficiais de `revisao-guia` nem dados da base Supabase. É uma ferramenta local de revisão e cotejamento.

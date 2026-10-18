@@ -122,6 +122,7 @@
 .table2-check p{color:#466878;font-size:12px;margin:5px 0}
 .table2-check .table2-meta{font-size:11px;color:#37627b;margin-top:5px}
 @media print{.table2-check{display:none!important}}
+.metric-grid .metric-source{font-size:10px;line-height:1.28;color:#527080;display:block;margin-top:2px;min-height:0;overflow-wrap:anywhere}
 </style>
 <script>window.INITIAL_DATA = {
   "projeto": "Guia Estadual de Avaliação do Risco Sanitário - configuração Rev6/V82.55",
@@ -3771,7 +3772,7 @@
 <section class="panel"><h2>Relatórios da revisão</h2><button id="processObsBtn" class="btn-outline">Observações gerais do processo</button><button id="expandAllBtn" class="btn-outline">Expandir textos da configuração</button><p class="hint">As observações dos documentos marcados como avaliados podem ser exportadas para as observações gerais do processo.</p></section>
 </aside>
 <div class="workspace">
-<section class="summary" aria-label="Classificação APPCC"><div class="summary-head"><div><span class="kicker" id="processTag">Captação</span><h2 id="phraseTitle">Item 4.1.1 · Frase 1</h2></div><span class="status-pill" id="decisionPill">Decisão pendente</span></div><p id="phraseDesc"></p><div class="metric-grid"><div><small>APPCC inicial</small><strong id="initialClass">—</strong></div><div><small>APPCC proposto</small><strong id="suggestedClass">—</strong></div><div><small>Severidade do perigo (S)</small><strong id="severityMetric">—</strong></div><div><small>Criticidade referência (NC)</small><strong id="criticalMetric">—</strong></div><div><small>Probabilidade P24</small><strong id="probMetric">—</strong></div><div><small>NC × P24 (referência)</small><strong id="scoreMetric">—</strong></div></div><div class="decision-summary"><strong id="computedClass">Classificação calculada: pendente</strong><span id="decisionReason"></span><p class="hint">O resultado calculado pelas respostas é independente da proposta anterior. PCC e PPRO dependem da verificação do Passo 3 e aprovação técnica.</p></div></section>
+<section class="summary" aria-label="Classificação APPCC"><div class="summary-head"><div><span class="kicker" id="processTag">Captação</span><h2 id="phraseTitle">Item 4.1.1 · Frase 1</h2></div><span class="status-pill" id="decisionPill">Decisão pendente</span></div><p id="phraseDesc"></p><div class="metric-grid"><div><small>APPCC inicial</small><strong id="initialClass">—</strong></div><div><small>APPCC proposto</small><strong id="suggestedClass">—</strong><span class="metric-source" id="suggestedOrigin"></span></div><div><small>Severidade do perigo (S)</small><strong id="severityMetric">—</strong></div><div><small>Criticidade referência (NC)</small><strong id="criticalMetric">—</strong></div><div><small>Probabilidade P24</small><strong id="probMetric">—</strong></div><div><small>NC × P24 (referência)</small><strong id="scoreMetric">—</strong></div></div><div class="decision-summary"><strong id="computedClass">Classificação calculada: pendente</strong><span id="decisionReason"></span><p class="hint">O resultado calculado pelas respostas é independente da proposta anterior. PCC e PPRO dependem da verificação do Passo 3 e aprovação técnica.</p></div></section>
 <div class="tabbar" role="tablist" aria-label="Módulos da revisão"><button class="tab active" data-tab="analysis" role="tab" aria-selected="true">Revisar APPCC · 3 tabelas</button><button class="tab" data-tab="config" role="tab" aria-selected="false">Revisar configuração · 4 colunas</button></div>
 <div id="analysisView" class="view">
 <section class="step panel"><div class="step-head"><span class="step-number">1</span><div><a class="reference-inline" href="./referencias.html#tabela1" target="_blank" rel="noopener noreferrer">Ver referências da Tabela 1 ↗</a><h2>Tabela 1 — O controle pode ser um PCC?</h2><p>Identifique perigo, significância, medida e barreiras. Responda apenas às questões do caminho aplicável.</p></div></div><div class="fields-two"><div class="field-box"><label>Perigo identificado</label><textarea data-field="perigo" class="fit-field" rows="2"></textarea></div><div class="field-box"><label>Medida preventiva / de controle</label><textarea data-field="medida" class="fit-field" rows="2"></textarea></div></div><div id="questions1" class="questions"></div><div class="stage-result" id="table1Result" role="status" aria-live="polite"></div><p class="small-note">Uma resposta desconhecida mantém a decisão pendente. A=Significância; B=Medida; C=Etapa especialmente desenvolvida; D=Nível inaceitável; E=Barreira posterior eficaz.</p></section>
@@ -4058,18 +4059,29 @@
     renderTable2Check(d);
   }
   function labelName(f){return `${f.item} · frase ${f.indice}`;}
+  function renderClassMetrics(idx){
+    const f=getPhrase(idx),d=diagnostic(idx),cls=classReference(idx);
+    const nc=WEIGHTS[cls]??null,p=f.probabilidade_24;
+    const reviewed=['confirmado','classificado','conferido'].includes(d.estado)&&!!d.classe;
+    el('suggestedClass').textContent=cls?`${cls} (${nc??'?'})`:'—';
+    const old=f.appcc_proposto||'';
+    const prior=old?`${old} (${WEIGHTS[old]??'?'})`:'não registrada';
+    el('suggestedOrigin').textContent=reviewed
+      ?(cls!==old?`Revisão concluída. Proposta preliminar: ${prior}.`:'Classificação confirmada pelas respostas.')
+      :(d.classe&&d.classe!==cls?`Em análise: ${d.classe} ${d.estado}. NC ainda segue proposta preliminar.`:'Proposta preliminar, sem confirmação final.');
+    el('criticalMetric').textContent=nc?`${nc}/5`:'Pendente';
+    el('probMetric').textContent=p!=null?`${p}/5`:'Não calculada';
+    el('scoreMetric').textContent=nc&&p!=null?nc*p:'—';
+  }
   function updateHeader(){
-    const f=getPhrase(index),d=diagnostic(index),nc=grade(index),p=f.probabilidade_24;
+    const f=getPhrase(index),d=diagnostic(index);
     el('counter').textContent=`Frase ${f.n} de ${DATA.length}`;
     el('phraseTitle').textContent=`Item ${f.item} · Frase ${f.indice}`;
     el('processTag').textContent=`${processCode(f)} · ${f.processo}`;
     el('phraseDesc').textContent=f.frase||'Texto da frase pendente de conferência.';
     el('initialClass').textContent=`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`;
-    el('suggestedClass').textContent=`${f.appcc_proposto||'—'} (${WEIGHTS[f.appcc_proposto]??'?'})`;
     el('severityMetric').textContent=Number.isFinite(+f.severidade)?`${f.severidade}/5 (preliminar)`:'A validar';
-    el('criticalMetric').textContent=nc?`${nc}/5`:'Pendente';
-    el('probMetric').textContent=p!=null?`${p}/5`:'Não calculada';
-    el('scoreMetric').textContent=nc&&p!=null?nc*p:'—';
+    renderClassMetrics(index);
     el('decisionPill').textContent=statusString(d);
     el('decisionPill').classList.toggle('success',d.estado==='confirmado');
     el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;
@@ -4131,14 +4143,14 @@
     el('approvalNote').value=ed.notaAprovacao||'';
     el('approvalNote').disabled=!active;
   }
-  function updateDecision(){const d=diagnostic(index);el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;el('decisionReason').textContent=d.reason;el('decisionPill').textContent=statusString(d);el('decisionPill').classList.toggle('success',d.estado==='confirmado');renderStageResults(d);}
+  function updateDecision(){const d=diagnostic(index);renderClassMetrics(index);el('computedClass').textContent=`APPCC pelas respostas: ${statusString(d)}`;el('decisionReason').textContent=d.reason;el('decisionPill').textContent=statusString(d);el('decisionPill').classList.toggle('success',d.estado==='confirmado');renderStageResults(d);}
   function renderDocs(){const docs=getDocs(index);el('documentList').innerHTML=docs.map((d,k)=>`<article class="doc-card" data-doc="${k}"><h4>Documento ${k+1}</h4><small class="doc-source">${esc(d.source||'Adicionado na revisão')}</small><label>Nome do documento</label><textarea data-doc-field="name" class="fit-field" rows="2">${esc(d.name||'')}</textarea><div class="doc-controls"><label>Manter / remover</label><select data-doc-field="decision"><option value="A decidir" ${(!d.decision||d.decision==='A decidir')?'selected':''}>A decidir</option><option value="Manter" ${d.decision==='Manter'?'selected':''}>Manter</option><option value="Remover" ${d.decision==='Remover'?'selected':''}>Remover</option></select></div><label>Exemplo de observação do documento</label><textarea data-doc-field="example" class="fit-field" rows="3">${esc(d.example||'')}</textarea><label>Orientação para avaliar Sim / Não / NA</label><textarea data-doc-field="orientation" class="fit-field" rows="3">${esc(d.orientation||'')}</textarea><label>Observação registrada na avaliação</label><textarea data-doc-field="observacao" class="fit-field" rows="3">${esc(d.observacao||'')}</textarea><label class="checkbox-line"><input data-doc-field="avaliado" type="checkbox" ${d.avaliado?'checked':''}> Documento avaliado</label></article>`).join('');
     for(const card of el('documentList').querySelectorAll('.doc-card'))for(const control of card.querySelectorAll('[data-doc-field]')){
       fitTextarea(control);
       control.addEventListener(control.type==='checkbox'?'change':'input',()=>{const k=+card.dataset.doc;const arr=clone(getDocs(index));arr[k][control.dataset.docField]=control.type==='checkbox'?control.checked:control.value;ensureEdit(index).documentos=arr;markDirty();if(control.tagName==='TEXTAREA')fitTextarea(control);renderPreview()});
     }
   }
-  function previewTexts(idx){const f=getPhrase(idx),d=diagnostic(idx),cls=d.estado==='confirmado'?d.classe:f.appcc_proposto;
+  function previewTexts(idx){const f=getPhrase(idx),cls=classReference(idx);
     const cons=(cls==='PCC'||cls==='PPRO')?f.considerando.replace(/\[PCC\/PPRO, caso aprovado\]/g,cls).replace(/classificada como PCC/g,`classificada como ${cls}`):'';
     const docs=getDocs(idx).filter(x=>x.decision!=='Remover').map(x=>x.name).filter(x=>x&&!x.startsWith('['));
     return {cons,docs};
@@ -4216,7 +4228,7 @@
   }
   function printHead(f,part){return `<div class="print-head"><strong>GUIA ESTADUAL APPCC | ${esc(part==='analysis'?'TRÊS TABELAS CONSECUTIVAS':'CONFIGURAÇÃO DO GUIA — REV.6')}</strong><div><small>ITEM ${esc(f.item)} • FRASE ${f.indice} • ${esc(f.processo)}</small><br><small>Revisor: ${esc(state.reviewer)} · ${esc(displayDate(state.date))}</small></div></div>`}
   function pageHeader(idx,part){const f=getPhrase(idx);return `<header class="print-header">${printHead(f,part)}</header>`}
-  function statsHTML(idx){const f=getPhrase(idx),nc=grade(idx),p=f.probabilidade_24,d=diagnostic(idx);const fields=[['APPCC inicial',`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`],['APPCC proposto',`${f.appcc_proposto||'—'} (${WEIGHTS[f.appcc_proposto]??'?'})`],['Severidade (S)',f.severidade!=null?`${f.severidade}/5 · preliminar`:'A validar'],['Criticidade NC',nc?`${nc}/5`:'Pendente'],['Probabilidade P24',p!=null?`${p}/5`:'—'],['NC × P24',nc&&p!=null?nc*p:'—']];return `<div class="print-stats">${fields.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('')}</div><p class="print-p3" style="margin:1mm 0"><b>APPCC pelas respostas:</b> ${esc(statusString(d))}. ${esc(d.reason)}</p>`}
+  function statsHTML(idx){const f=getPhrase(idx),nc=grade(idx),p=f.probabilidade_24,d=diagnostic(idx),classeRev=classReference(idx);const fields=[['APPCC inicial',`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`],['APPCC proposto',`${classeRev||'—'} (${WEIGHTS[classeRev]??'?'})`],['Severidade (S)',f.severidade!=null?`${f.severidade}/5 · preliminar`:'A validar'],['Criticidade NC',nc?`${nc}/5`:'Pendente'],['Probabilidade P24',p!=null?`${p}/5`:'—'],['NC × P24',nc&&p!=null?nc*p:'—']];return `<div class="print-stats">${fields.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('')}</div><p class="print-p3" style="margin:1mm 0"><b>APPCC pelas respostas:</b> ${esc(statusString(d))}. ${esc(d.reason)}${classeRev!==f.appcc_proposto?` · Proposta preliminar: ${esc(f.appcc_proposto||'—')} (${esc(WEIGHTS[f.appcc_proposto]??'?')}).`:''}</p>`}
   function printAnalysis(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{},eurQ=getEurestQuestions(idx);const applicable=validApplicable(idx);const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${applicable[k]?sign(q[k]):'N/A'})</b> ${esc(v)}</div>`).join('')}</div>`;
     const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(key==='limite'?(diagnostic(idx).classe==='PCC'?'Limite crítico (PCC)':'Critério de ação (PPRO)'):label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');const dd=diagnostic(idx);const printStage=st=>`<p class="print-stage-result"><b>${esc(stageStatus(st))}</b> · ${esc(st.texto)}</p>`;
     return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. O CONTROLE PODE SER UM PCC?</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}${printStage(dd.t1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}${printStage(dd.t2)}${['PPHO','PPR','PC'].includes(dd.classe)?`<p class="print-stage-result"><b>Conferência (opcional):</b> ${dd.estado==='conferido'?esc((getEdit(idx).t2Revisor||state.reviewer)+' · '+displayDate(getEdit(idx).t2Data||state.date)):'não registrada'}${getEdit(idx).t2Nota?' · '+esc(getEdit(idx).t2Nota):''}. Sem necessidade de validação da Tabela 3.</p>`:''}</section><section class="print-step"><h3>3. CONFIRMAR PCC / PPRO E CONSOLIDAR</h3><div class="print-eurest"><strong>Árvore de decisão Q1–Q4 (P-R-001_F v6 — 01/08/2023):</strong><div class="print-questions">${Object.entries(EUREST_Q).map(([k,t])=>`<div class="print-q"><b>${esc(k)} (${dd.route==='3'&&dd.eur.active[k]?sign(eurQ[k]):'N/A'})</b> ${esc(t)}</div>`).join('')}</div><div class="print-eurest-result"><b>Resultado da árvore:</b> ${esc(dd.route==='3'?dd.eur.caminho+' — '+dd.eur.texto:'Não aplicável')}</div></div>${printStage(dd.t3)}<div class="print-criteria">${dd.route==='3'?cr:'Não aplicável para a classificação obtida nas Tabelas 1 e 2.'}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
@@ -4301,7 +4313,7 @@
     el('table2Note').oninput=()=>{ensureEdit(index).t2Nota=el('table2Note').value;markDirty();};
     el('technicalApproval').onchange=()=>{ensureEdit(index).aprovacao=el('technicalApproval').checked;markDirty();updateDecision()};
     el('approvalNote').oninput=()=>{ensureEdit(index).notaAprovacao=el('approvalNote').value;markDirty();updateDecision()};
-    el('regenConsiderando').onclick=()=>{const f=getPhrase(index),d=diagnostic(index),cls=d.classe&&d.estado==='confirmado'?d.classe:f.appcc_proposto;if(!['PCC','PPRO'].includes(cls)){toast('O considerando é gerado somente para PCC/PPRO.');return}const msg=`Considerando que a frase ${f.indice}, do item ${f.item}, do processo ${f.processo}, classificada como ${cls}, apresentou resultado INSATISFATÓRIO: ${f.foco||f.frase}`;updateField('considerando',msg);document.querySelector('#configView [data-field="considerando"]').value=msg;toast('Considerando atualizado para conferência.');};
+    el('regenConsiderando').onclick=()=>{const f=getPhrase(index),cls=classReference(index);if(!['PCC','PPRO'].includes(cls)){toast('O considerando é gerado somente para PCC/PPRO.');return}const msg=`Considerando que a frase ${f.indice}, do item ${f.item}, do processo ${f.processo}, classificada como ${cls}, apresentou resultado INSATISFATÓRIO: ${f.foco||f.frase}`;updateField('considerando',msg);document.querySelector('#configView [data-field="considerando"]').value=msg;toast('Considerando atualizado para conferência.');};
     el('addDocument').onclick=()=>{const arr=clone(getDocs(index));arr.push({uid:`novo_${Date.now()}`,name:'',source:'Novo documento — proposta',linked:false,orientation:'',example:'',decision:'A decidir',observacao:'',avaliado:false});ensureEdit(index).documentos=arr;markDirty();renderDocs();el('documentList').lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'})};
     el('saveBtn').onclick=()=>save();el('exportBtn').onclick=exportJSON;el('importBtn').onclick=()=>el('importFile').click();el('importFile').onchange=e=>{importJSON(e.target.files?.[0]);e.target.value=''};
     el('backupBtn').onclick=()=>makeBackup(true);el('exportGuiaBtn').onclick=configExport;el('backupInterval').onchange=()=>{state.backupInterval=+el('backupInterval').value;markDirty();resetBackupClock()};

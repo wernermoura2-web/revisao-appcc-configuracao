@@ -29,15 +29,19 @@ function response(q,k,active){
  if(!active)return {label:'N/A',css:'skip'};
  return q[k]==='S'?{label:'Sim',css:'yes'}:q[k]==='N'?{label:'Não',css:'no'}:{label:'—',css:'pending'};
 }
-function node(k,caption,q,active){
+function node(k,caption,q,active,notes){
  const answer=response(q,k,active);
- return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+'</span><span class="nanswer">'+answer.label+'</span></div>';
+ const n=notes?.[k]||{},just=v(n.justification).trim();
+ const snippet=just?(just.length>94?just.slice(0,90).trimEnd()+'…':just):'';
+ const source=n.reviewed?'Justificativa conferida':n.source==='gemini'?'Sugestão IA não conferida':'Justificativa registrada';
+ const detail=snippet?'<span class="flow-node-just"><b>'+esc(source)+':</b> '+esc(snippet)+'</span>':'';
+ return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+detail+'</span><span class="nanswer">'+answer.label+'</span></div>';
 }
-function pathNodes(items,q,active){
+function pathNodes(items,q,active,notes){
  const all=Object.entries(items);
  const used=all.filter(([k])=>!!active[k]);
  const skipped=all.filter(([k])=>!active[k]).map(([k])=>k);
- const main=used.map(([k,t],i)=>node(k,t,q,true).replace('class="flow-node ',i===used.length-1?'class="flow-node flow-last-active ':'class="flow-node ')).join('');
+ const main=used.map(([k,t],i)=>node(k,t,q,true,notes).replace('class="flow-node ',i===used.length-1?'class="flow-node flow-last-active ':'class="flow-node ')).join('');
  const path=main||'<div class="flow-inactive">Etapa não percorrida neste caminho</div>';
  const note=skipped.length?'<div class="flow-unused">Não aplicável: '+skipped.map(esc).join(' · ')+'</div>':'';
  return path+note;
@@ -65,10 +69,11 @@ function build(ctx){
  const f=ctx.frase||{}, d=ctx.diagnostico||{}, q=ctx.respostas||{}, e=ctx.q3||{}, active=ctx.aplicabilidade||{};
  const criteria=ctx.criterios||{},ct=ctx.textosCriterios||{},labels=ctx.rotulosCriterios||{},defaults=f.passo3_textos||{};
  const before=f.appcc_inicial||'—', after=ctx.depois||f.appcc_proposto||'—', p=f.probabilidade_24, n=weight[after];
- const t1=pathNodes(short1,q,active);
- const t2=pathNodes(short2,q,active);
+ const notes=ctx.justificativasPerguntas||{};
+ const t1=pathNodes(short1,q,active,notes);
+ const t2=pathNodes(short2,q,active,notes);
  const qActive=d.route==='3'?(d.eur?.active||{}):{};
- const t3=pathNodes(short3,e,qActive);
+ const t3=pathNodes(short3,e,qActive,notes);
  const t3Summary=Object.assign({},d.t3||{});
  if(d.route==='3'&&!d.classe) t3Summary.texto=(d.eur?.caminho||'Aguardando Q1–Q4')+'. '+(d.t3?.texto||'');
  const cards=Object.entries(labels).map(([key,title],i)=>{
@@ -89,7 +94,7 @@ function build(ctx){
  const end=v(ctx.justificativaAprovacao).trim();
  const review=esc(ctx.revisor||'Não informado'), date=esc(ctx.data||'Data não informada');
  const danger=esc(f.perigo||'Não registrado'), measure=esc(f.medida||'Não registrada');
- return '<article class="print-page flow-print-page" data-part="analysis">'
+ const graphic='<article class="print-page flow-print-page" data-part="analysis">'
   +'<header class="flow-header"><b>GUIA ESTADUAL · REVISÃO APPCC — FLUXO DA FRASE</b><span class="flow-revisor">Item '+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'<br>Revisor: '+review+' · '+date+'</span></header>'
   +'<div class="flow-body">'
   +'<div class="flow-identity">'
@@ -114,6 +119,58 @@ function build(ctx){
   +'</div></div>'
   +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: PPHO 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'
   +'</div></article>';
+ return graphic+printJustificationPages(ctx);
+}
+function safeParts(value,limit){
+ const str=v(value).trim();
+ if(!str)return [];
+ const chunks=[];let rest=str;
+ while(rest.length>limit){
+  let cut=rest.lastIndexOf(' ',limit);
+  if(cut<limit*.5)cut=limit;
+  chunks.push(rest.slice(0,cut).trim());rest=rest.slice(cut).trimStart();
+ }
+ if(rest)chunks.push(rest);
+ return chunks;
+}
+function printJustificationPages(ctx){
+ const f=ctx.frase||{},notes=ctx.justificativasPerguntas||{};
+ const all={...short1,...short2,...short3};
+ const q=ctx.respostas||{},e=ctx.q3||{},app=ctx.aplicabilidade||{};
+ const qapp=ctx.diagnostico?.route==='3'?ctx.diagnostico?.eur?.active||{}:{};
+ const cards=[];
+ for(const [k,label] of Object.entries(all)){
+  const n=notes[k]||{},why=v(n.justification).trim(),evidence=v(n.evidence).trim();
+  if(!why&&!evidence)continue;
+  const active=k.startsWith('Q')?!!qapp[k]:!!app[k];
+  const resp=k.startsWith('Q')?e[k]:q[k];
+  const val=active?resp==='S'?'SIM':resp==='N'?'NÃO':'PENDENTE':'NÃO APLICÁVEL NO CAMINHO ATUAL';
+  const review=n.reviewed?'Conferida pelo revisor'+(n.reviewedBy?' · '+n.reviewedBy:'')
+    :n.source==='gemini'?'Sugestão do Gemini — não conferida':'Redação registrada — conferência pendente';
+  const j=safeParts(why,420),ev=safeParts(evidence,210);
+  for(let i=0;i<Math.max(j.length,ev.length,1);i++){
+   cards.push({k,label,val,review,part:i+1,total:Math.max(j.length,ev.length,1),why:j[i]||'',evidence:ev[i]||''});
+  }
+ }
+ if(!cards.length)return '';
+ let html='';
+ for(let p=0;p<cards.length;p+=4){
+  const group=cards.slice(p,p+4);
+  const number=1+Math.floor(p/4);
+  html+='<article class="print-page flow-justifications-page" data-part="analysis-justifications">'
+   +'<header class="flow-jheader"><b>APPCC · JUSTIFICATIVAS DAS DECISÕES (A–I / Q1–Q4)</b>'
+   +'<span>'+esc(f.processo)+' · '+esc(f.item)+' · Frase '+esc(f.indice)+' · Página complementar '+number+'</span></header>'
+   +'<div class="flow-jintro"><b>Frase analisada:</b> '+esc(f.frase||'')+'<br><b>Revisor:</b> '+esc(ctx.revisor||'Não informado')+' · '+esc(ctx.data||'Data não informada')+'</div>'
+   +'<div class="flow-jgrid">'+group.map(c=>'<section class="flow-jcard">'
+   +'<div class="flow-jcard-head"><b>'+esc(c.k)+' · '+esc(c.val)+'</b><span>'+esc(c.review)+'</span></div>'
+   +'<div class="flow-jquestion">'+esc(c.label)+(c.total>1?' · continuação '+c.part+'/'+c.total:'')+'</div>'
+   +'<div class="flow-jcontent"><b>Justificativa:</b> '+(c.why?esc(c.why):'<i>Sem texto nesta parte</i>')+'</div>'
+   +'<div class="flow-jcontent"><b>Evidência necessária / fundamentação:</b> '+(c.evidence?esc(c.evidence):'<i>Não informada nesta parte</i>')+'</div>'
+   +'</section>').join('')+'</div>'
+   +'<footer class="flow-jfoot">As justificativas do Gemini são sugestões. As respostas Sim/Não e a homologação dependem de verificação técnica do revisor. Os campos integrais ficam preservados na exportação JSON.</footer>'
+   +'</article>';
+ }
+ return html;
 }
 window.APPCC_FLOW_PRINT={build};
 })();

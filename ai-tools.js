@@ -7,6 +7,7 @@ const fieldRoot='#analysisView textarea,#configView textarea,#approvalNote,#tabl
 const criteriaKeys=['eficacia','limite','monitoramento','correcao','produto','registros'];
 const prepared=new WeakSet(), applying=new WeakSet();
 let modal=null,activeTarget=null,activeKey='',activeName='';
+const RETURN_KEY='appccGeminiReturnView_v1';
 const bridge=()=>window.APPCC_EDITOR_BRIDGE;
 function context(){return bridge()?.context?.()||{};}
 function signature(control){
@@ -114,7 +115,8 @@ function ensureDialog(){
  modal.innerHTML='<h2>Consultar IA Google · Gemini</h2>'
  +'<p class="ai-hint">O Gemini é um serviço externo. <b>Nada é enviado automaticamente.</b> Confira e retire nomes, dados pessoais ou informações sigilosas antes de copiar. A resposta da IA é uma sugestão e <b>não constitui evidência técnica nem validação sanitária</b>.</p>'
  +'<label for="geminiPrompt">Consulta preparada (editável)</label><textarea id="geminiPrompt"></textarea>'
- +'<div class="ai-dialog-actions"><button type="button" id="geminiCopy">1 · Copiar consulta</button><button type="button" id="geminiOpen" class="ai-open-google">2 · Abrir Gemini ↗</button></div>'
+ +'<div class="ai-dialog-actions"><button type="button" id="geminiCopy">1 · Copiar consulta</button><button type="button" id="geminiOpen" class="ai-open-google">2 · Abrir Gemini ↗</button><button type="button" id="geminiOpenTab">Abrir em outra aba</button></div>'
+ +'<p class="ai-return-hint"><b>Como voltar ao Guia APPCC:</b> depois de copiar a resposta, toque em <b>Voltar (◀)</b> no Android para retornar diretamente à revisão. Se optar por outra aba, use <b>Abas do Chrome</b> ou <b>Aplicativos recentes</b> e selecione Revisão APPCC. A frase em edição será recuperada.</p>'
  +'<label for="geminiSuggestion">3 · Cole abaixo a sugestão recebida no Gemini</label><textarea id="geminiSuggestion" placeholder="Cole aqui a redação sugerida. Revise antes de aplicar."></textarea>'
  +'<div class="ai-dialog-actions"><button type="button" id="geminiPaste">Colar resposta copiada</button><button type="button" id="geminiApply">Aplicar ao campo</button><button type="button" id="geminiClose">Cancelar / Fechar</button></div>'
  +'<p id="geminiMessage" aria-live="polite" class="ai-hint">As respostas não são transferidas automaticamente do Gemini. Você escolhe quando aplicar.</p>';
@@ -126,11 +128,18 @@ function ensureDialog(){
   catch(_){const box=modal.querySelector('#geminiPrompt');box.focus();box.select();const done=document.execCommand?.('copy');say(done?'Consulta copiada.':'Selecione e copie o texto manualmente.');}
  };
  modal.querySelector('#geminiOpen').onclick=()=>{
+  rememberReturn();
+  // Mesma navegação: a ação Voltar do Android regressa ao Guia no Chrome.
+  // No modo PWA, o navegador pode abrir o Gemini em um painel externo fechável.
+  window.location.assign('https://gemini.google.com/app');
+ };
+ modal.querySelector('#geminiOpenTab').onclick=()=>{
+  rememberReturn();
   const link=document.createElement('a');
   link.href='https://gemini.google.com/app';
   link.target='_blank';link.rel='noopener noreferrer';
   document.body.appendChild(link);link.click();link.remove();
-  say('O Gemini será aberto em nova aba. Cole a consulta copiada e, depois, a resposta no campo 3.');
+  say('Para retornar, abra Aplicativos recentes (PWA) ou a aba Revisão APPCC no Chrome; depois cole a resposta abaixo.');
  };
  modal.querySelector('#geminiPaste').onclick=async()=>{
   try{
@@ -151,6 +160,40 @@ function ensureDialog(){
  return modal;
 }
 function say(message){const info=modal?.querySelector('#geminiMessage');if(info)info.textContent=message;}
+// Salva a posição da revisão antes de sair para o Gemini. Dados não são enviados.
+function rememberReturn(){
+ const get=id=>document.getElementById(id)?.value||'';
+ const data={process:get('processSelect'),item:get('itemSelect'),phrase:get('phraseSelect'),
+   mode:document.getElementById('configView')?.hidden?'analysis':'config',key:activeKey};
+ try{sessionStorage.setItem(RETURN_KEY,JSON.stringify(data));}
+ catch(_){say('Não foi possível registrar a posição; use Aplicativos recentes para voltar ao guia.');}
+}
+function resumeReturn(){
+ let data;
+ try{const saved=sessionStorage.getItem(RETURN_KEY);if(!saved)return;data=JSON.parse(saved);}
+ catch(_){return;}
+ if(modal?.open&&activeTarget?.isConnected){
+   sessionStorage.removeItem(RETURN_KEY);
+   say('Você voltou ao Guia APPCC. Cole a resposta do Gemini no campo 3, revise e toque em Aplicar ao campo.');
+   return;
+ }
+ const select=(id,value)=>{
+   const el=document.getElementById(id);
+   if(el&&value&&[...el.options].some(o=>o.value===value)){
+     el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));
+   }
+ };
+ select('processSelect',data.process);
+ select('itemSelect',data.item);
+ select('phraseSelect',data.phrase);
+ const tab=document.getElementById(data.mode==='config'?'modeConfig':'modeAppcc');
+ tab?.click();
+ sessionStorage.removeItem(RETURN_KEY);
+ const item=[...document.querySelectorAll(fieldRoot)].find(t=>signature(t)===data.key&&!t.disabled&&!t.readOnly);
+ if(item){openConsult(item);say('Você voltou à frase em edição. Cole a resposta do Gemini, revise e aplique ao campo.');}
+}
+window.addEventListener('pageshow',()=>{requestAnimationFrame(resumeReturn);});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&modal?.open)resumeReturn();});
 function openConsult(control){
  activeTarget=control;activeKey=signature(control);activeName=fieldName(control);
  if(!activeKey)return;

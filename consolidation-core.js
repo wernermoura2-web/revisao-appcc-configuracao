@@ -133,6 +133,21 @@ function parse(payload,filename){
  }
  throw Error('Formato não reconhecido. Exporte JSON do Guia APPCC/BPF, do Guia APPCC Legislação ou do consolidado.');
 }
+function mergeValue(old,value,path,strategy,conflicts){
+ if(!filled(value))return {value:old,changed:false};
+ if(!filled(old))return {value:clone(value),changed:true};
+ if(JSON.stringify(old)===JSON.stringify(value))return {value:old,changed:false};
+ if(obj(old)&&obj(value)){
+  const merged=clone(old);let changed=false;
+  for(const [k,incoming] of Object.entries(value)){
+   const node=mergeValue(old[k],incoming,path+'.'+k,strategy,conflicts);
+   if(node.changed){merged[k]=node.value;changed=true;}
+  }
+  return {value:merged,changed};
+ }
+ conflicts.push({key:path,previous:old,incoming:value});
+ return strategy==='replace'?{value:clone(value),changed:true}:{value:old,changed:false};
+}
 function diff(dest,source,opts){
  const strategy=opts?.strategy||'blank',overProb=!!opts?.probability,overText=!!opts?.text;
  const updates={},conflicts=[];
@@ -140,12 +155,8 @@ function diff(dest,source,opts){
   if(!filled(value))continue;
   if(blocked.has(key)&&!(key==='probabilidade_24'&&overProb||key==='frase'&&overText))continue;
   if(!allowed.has(key)&&key!=='frase'&&key!=='probabilidade_24')continue;
-  const old=dest[key];
-  if(filled(old)&&JSON.stringify(old)!==JSON.stringify(value)){
-   conflicts.push({key,previous:old,incoming:value});
-   if(strategy!=='replace')continue;
-  }else if(filled(old)&&JSON.stringify(old)===JSON.stringify(value))continue;
-  updates[key]=clone(value);
+  const node=mergeValue(dest?.[key],value,key,strategy,conflicts);
+  if(node.changed)updates[key]=node.value;
  }
  return {updates,conflicts};
 }

@@ -68,7 +68,7 @@ function build(ctx){
  const originalExample=v(ctx.fraseBase?.exemplo_frase).trim();
  const exampleIsOriginal=fullExample===originalExample;
  const exampleForPrint=fullExample.length>430&&exampleIsOriginal
-  ?fullExample.slice(0,255).replace(/\\s+\\S*$/, '')+'…\\n[Exemplo original extenso: texto integral na impressão da configuração da frase.]'
+  ?fullExample.slice(0,255).replace(/\s+\S*$/, '')+'…\n[Exemplo original extenso: texto integral na impressão da configuração da frase.]'
   :fullExample;
  const approval=d.route==='3'?ctx.aprovacao?'Aprovação técnica registrada':'Aprovação técnica pendente':ctx.conferenciaT2?'Conferência da Tabela 2 registrada':'Classificação da Tabela 2 / análise pendente';
  const end=v(ctx.justificativaAprovacao).trim();

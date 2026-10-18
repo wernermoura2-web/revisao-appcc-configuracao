@@ -4385,7 +4385,7 @@
   }
   function fitPrintLayout(){
     document.querySelectorAll('#printArea .flow-print-page').forEach(page=>{
-      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion,.flow-nodes,.flow-node .ntxt')];
+      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion,.flow-nodes,.flow-node .ntxt,.flow-inline-card,.flow-inline-grid')];
       for(let n=0;n<9;n++){
         const long=blocks().some(x=>x.scrollHeight>x.clientHeight+2);
         const overflow=page.scrollHeight>page.clientHeight+2;
@@ -4395,7 +4395,7 @@
         if(n>2)page.classList.add('flow-fit-small');
       }
       if(page.scrollHeight>page.clientHeight+5){
-        page.dataset.printCheck='Texto extenso; confira visualmente a prévia de impressão.';
+        page.dataset.printCheck='Conteúdo extenso: confirme se todos os textos estão visíveis na prévia de impressão.';
       }
     });
     // Redução progressiva da fonte e controle de excesso; conserva o layout de quatro colunas.

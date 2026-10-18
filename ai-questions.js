@@ -131,7 +131,8 @@ function saveNotes(reviewed){
  const evidence=dialog.querySelector('#qaiEvidence').value.trim();
  if(!justification&&!evidence){msg('Registre ou cole uma justificativa ou evidência antes de salvar.');return false;}
  const old=window.APPCC_EDITOR_BRIDGE?.getQuestionNote?.(active.code)||{};
- const note={justification,evidence,source:'gemini',reviewed:!!reviewed,reviewedBy:reviewed?context().revisor||'Revisor não identificado':'',reviewedAt:reviewed?new Date().toISOString():'',suggestedAnswer:parsedAnswer(dialog.querySelector('#qaiReply').value)||old.suggestedAnswer||''};
+ const fromGemini=!!dialog.querySelector('#qaiReply').value.trim();
+ const note={justification,evidence,source:fromGemini?'gemini':'manual',reviewed:!!reviewed,reviewedBy:reviewed?context().revisor||'Revisor não identificado':'',reviewedAt:reviewed?new Date().toISOString():'',suggestedAnswer:parsedAnswer(dialog.querySelector('#qaiReply').value)||old.suggestedAnswer||''};
  window.APPCC_EDITOR_BRIDGE?.setQuestionNote?.(active.code,note);
  const row=questionRow(active.group,active.code);
  const j=row?.querySelector('[data-question-justification]');
@@ -139,7 +140,7 @@ function saveNotes(reviewed){
  if(j)j.value=justification;
  if(e)e.value=evidence;
  const status=row?.querySelector('.question-note-status');
- if(status)status.textContent=reviewed?'Conferida pelo revisor':'Sugestão Gemini — pendente de revisão';
+ if(status)status.textContent=reviewed?'Conferida pelo revisor':fromGemini?'Sugestão Gemini — pendente de revisão':'Justificativa manual — pendente de revisão';
  msg(reviewed?'Justificativa e decisão registradas.':'Justificativa registrada; resposta Sim/Não não foi alterada.');
  return true;
 }

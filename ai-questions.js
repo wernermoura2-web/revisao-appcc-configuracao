@@ -140,7 +140,15 @@ function applyDecision(){
   msg('A frase ou o caminho mudou. Retorne à pergunta aplicável antes de confirmar.');return;
  }
  const current=rowAnswer(row);
- if(choice==='I'){msg('Nenhuma marcação foi alterada: registre as evidências necessárias e revise depois.');dialog.close();return;}
+ if(choice==='I'){
+  if(current){
+   if(!confirm('A pergunta '+active.code+' já está marcada como '+answerText(current)+'. Limpar a marcação por falta de evidências? O fluxo e as validações serão recalculados.'))return;
+   const clear=row.querySelector('[data-clear]');
+   if(!clear||clear.disabled){msg('Não foi possível limpar a resposta neste caminho.');return;}
+   clear.click();
+  }
+  dialog.close();return;
+ }
  const radio=[...row.querySelectorAll('input[type="radio"]')].find(r=>r.value===choice&&!r.disabled);
  if(!radio){msg('Esta pergunta não está disponível no caminho atual.');return;}
  if(current===choice){dialog.close();return;}

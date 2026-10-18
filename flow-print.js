@@ -33,6 +33,15 @@ function node(k,caption,q,active){
  const answer=response(q,k,active);
  return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+'</span><span class="nanswer">'+answer.label+'</span></div>';
 }
+function pathNodes(items,q,active){
+ const all=Object.entries(items);
+ const used=all.filter(([k])=>!!active[k]);
+ const skipped=all.filter(([k])=>!active[k]).map(([k])=>k);
+ const main=used.map(([k,t])=>node(k,t,q,true)).join('');
+ const path=main||'<div class="flow-inactive">Etapa não percorrida neste caminho</div>';
+ const note=skipped.length?'<div class="flow-unused">Não aplicável: '+skipped.map(esc).join(' · ')+'</div>':'';
+ return path+note;
+}
 function stage(num,name,nodes,result,skip){
  const title=result?.classe?(result.classe+(result.estado==='confirmado'?' confirmado':result.estado==='classificado'?' classificado':result.estado==='conferido'?' conferido':' candidato')):(skip?'Não aplicável':'Decisão pendente');
  const desc=result?.texto||'';
@@ -44,32 +53,33 @@ function note(title,text){
  const density=text.length>320?'very-dense':text.length>185?'dense':'';
  return '<div class="flow-note '+density+'"><strong>'+esc(title)+'</strong>'+(text?esc(text):'<span class="flow-sheet-missing">Não registrado</span>')+'</div>';
 }
-function criterion(key,label,text,status,active){
+function criterion(key,label,text,status,active,isBase){
  const answer=active?status==='S'?'Sim':status==='N'?'Não':'Pendente':'N/A';
  const signal=active?status==='S'?'yes':status==='N'?'no':'pending':'skip';
  const content=v(text).trim();
- return '<div class="flow-criterion"><div class="ctop"><span>'+esc(label)+'</span><span class="csignal '+signal+'">'+answer+'</span></div>'+(content?esc(content):'<span class="flow-sheet-missing">Sem justificativa registrada</span>')+'</div>';
+ 
+ return '<div class="flow-criterion'+(isBase?' flow-criterion-base':'')+'"><div class="ctop"><span>'+esc(label)+'</span><span class="csignal '+signal+'">'+answer+'</span></div>'
+   +(content?'<span class="flow-criterion-source">'+(isBase?'Texto-base de orientação (não comprovado): ':'Justificativa registrada: ')+'</span>'+esc(content):'<span class="flow-sheet-missing">Sem justificativa registrada</span>')+'</div>';
 }
 function build(ctx){
  const f=ctx.frase||{}, d=ctx.diagnostico||{}, q=ctx.respostas||{}, e=ctx.q3||{}, active=ctx.aplicabilidade||{};
  const criteria=ctx.criterios||{},ct=ctx.textosCriterios||{},labels=ctx.rotulosCriterios||{},defaults=f.passo3_textos||{};
  const before=f.appcc_inicial||'—', after=ctx.depois||f.appcc_proposto||'—', p=f.probabilidade_24, n=weight[after];
- const t1=Object.entries(short1).map(([k,t])=>node(k,t,q,!!active[k])).join('');
- const t2=Object.entries(short2).map(([k,t])=>node(k,t,q,!!active[k])).join('');
+ const t1=pathNodes(short1,q,active);
+ const t2=pathNodes(short2,q,active);
  const qActive=d.route==='3'?(d.eur?.active||{}):{};
- const t3=Object.entries(short3).map(([k,t])=>node(k,t,e,!!qActive[k])).join('');
+ const t3=pathNodes(short3,e,qActive);
  const t3Summary=Object.assign({},d.t3||{});
  if(d.route==='3'&&!d.classe) t3Summary.texto=(d.eur?.caminho||'Aguardando Q1–Q4')+'. '+(d.t3?.texto||'');
- const cards=Object.entries(labels).map(([key,title],i)=>criterion(key,
-   key==='limite'&&d.classe==='PPRO'?'Critério de ação (PPRO)':key==='limite'&&d.classe==='PCC'?'Limite crítico (PCC)':title,
-   ct[key]??defaults[i]??'',criteria[key],d.route==='3'&&['PCC','PPRO'].includes(d.classe))).join('');
+ const cards=Object.entries(labels).map(([key,title],i)=>{
+   const edited=Object.prototype.hasOwnProperty.call(ct,key) && v(ct[key]).trim().length>0;
+   return criterion(key,
+     key==='limite'&&d.classe==='PPRO'?'Critério de ação (PPRO)':key==='limite'&&d.classe==='PCC'?'Limite crítico (PCC)':title,
+     edited?ct[key]:defaults[i]??'',criteria[key],d.route==='3'&&['PCC','PPRO'].includes(d.classe),!edited);
+ }).join('');
  const docs=(ctx.documentos||[]).filter(o=>v(o.observacao).trim()).map(o=>v(o.name)+': '+v(o.observacao)).join('\n');
  const fullExample=v(f.exemplo_frase).trim();
- const originalExample=v(ctx.fraseBase?.exemplo_frase).trim();
- const exampleIsOriginal=fullExample===originalExample;
- const exampleForPrint=fullExample.length>430&&exampleIsOriginal
-  ?fullExample.slice(0,255).replace(/\s+\S*$/, '')+'…\n[Exemplo original extenso: texto integral na impressão da configuração da frase.]'
-  :fullExample;
+ const exampleForPrint=fullExample;
  const approval=d.route==='3'?ctx.aprovacao?'Aprovação técnica registrada':'Aprovação técnica pendente':ctx.conferenciaT2?'Conferência da Tabela 2 registrada':'Classificação da Tabela 2 / análise pendente';
  const end=v(ctx.justificativaAprovacao).trim();
  const review=esc(ctx.revisor||'Não informado'), date=esc(ctx.data||'Data não informada');

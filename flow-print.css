@@ -24,14 +24,14 @@
   .flow-fact{border:1px solid #cddce4;border-radius:1.2mm;background:#fffdf9;padding:1.4mm 1.9mm;line-height:1.25;overflow-wrap:anywhere}
   .flow-fact strong{font-size:calc(6.5pt * var(--flow-fit));color:#986015}
   .flow-decision-row{display:grid;grid-template-columns:1.1fr .98fr 1.12fr;gap:2mm;flex:1.08;min-height:58mm;max-height:69mm}
-  .flow-panel{border:1px solid #a6c4d6;border-radius:1.2mm;display:flex;flex-direction:column;min-width:0;min-height:0;background:#f8fbfd;position:relative;overflow:hidden}
+  .flow-panel{border:1px solid #a6c4d6;border-radius:1.2mm;display:flex;flex-direction:column;min-width:0;min-height:0;background:#f8fbfd;position:relative;overflow:visible}
   .flow-panel:not(:last-child)::after{content:'➜';font-size:calc(14pt * var(--flow-fit));font-weight:bold;color:#237ba0;position:absolute;right:-1.85mm;top:48%;z-index:2;background:#fff;border-radius:100%}
   .flow-panel-head{background:#174f72;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:1mm;padding:1.35mm 2mm;min-height:8mm}
   .flow-panel-head b{font-size:calc(8pt * var(--flow-fit))}
   .flow-panel-head small{font-size:calc(5.6pt * var(--flow-fit));font-weight:normal;color:#e0ecf5}
   .flow-panel.flow-skipped{background:#f0f3f5;border-color:#cbd5db}
   .flow-panel.flow-skipped .flow-panel-head{background:#677f8e}
-  .flow-nodes{display:flex;flex-direction:column;justify-content:space-around;flex:1;min-height:0;padding:1.2mm 1.6mm;gap:.4mm}
+  .flow-nodes{display:flex;flex-direction:column;justify-content:space-around;flex:1;min-height:0;padding:1.2mm 1.6mm;gap:.4mm;overflow:hidden}
   .flow-node{display:grid;grid-template-columns:7.6mm 1fr 12mm;gap:1mm;align-items:center;border:1px solid #d0dee6;border-radius:1.1mm;background:#fff;padding:.65mm 1mm;position:relative;min-height:7.2mm;line-height:1.16;font-size:calc(5.85pt * var(--flow-fit))}
   .flow-node .nkey{background:#e3eff6;color:#125473;border-radius:1mm;display:flex;align-items:center;justify-content:center;font-size:calc(7.3pt * var(--flow-fit));font-weight:bold;min-height:5.6mm}
   .flow-node .ntxt{overflow-wrap:anywhere}
@@ -43,7 +43,7 @@
   .flow-node.s-skip{opacity:.49}
   .flow-node.s-pending{border-style:dashed}
   .flow-node:not(:last-child)::after{content:'↓';position:absolute;color:#16789b;font-weight:bold;left:4.6mm;bottom:-2mm;z-index:1;background:#fff;font-size:calc(8.5pt * var(--flow-fit));height:1.8mm;line-height:1}
-  .flow-conclusion{min-height:8mm;background:#e7f2f9;border-top:1px solid #c2d9e6;padding:1mm 1.8mm;font-size:calc(6.35pt * var(--flow-fit));line-height:1.21}
+  .flow-conclusion{min-height:8mm;background:#e7f2f9;border-top:1px solid #c2d9e6;padding:1mm 1.8mm;overflow:hidden;font-size:calc(6.35pt * var(--flow-fit));line-height:1.21}
   .flow-conclusion strong{display:block;color:#155878;font-size:calc(7.1pt * var(--flow-fit))}
   .flow-conclusion.is-confirmed{background:#dff3e9}.flow-conclusion.is-confirmed strong{color:#146448}
   .flow-conclusion.is-pending{background:#fff2e0}.flow-conclusion.is-pending strong{color:#915c16}

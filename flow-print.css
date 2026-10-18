@@ -123,3 +123,203 @@
  .flow-jcontent b{color:#144d6a}
  .flow-jfoot{border-top:1px solid #c7d8e3;padding-top:2mm;min-height:7mm;font-size:7.3pt;color:#5f7381}
 }
+
+
+/* REV.12 — Uma folha A4 retrato por frase com fluxograma e até seis justificativas.
+   O formato retrato evita as folhas quase vazias que surgiam no PDF do Android.
+   Textos excepcionais são continuados apenas quando não cabem na folha. */
+@page appcc-joined { size: A4 portrait; margin: 8mm; }
+@media print {
+  .print-page.flow-print-page.flow-with-justifications {
+    page: appcc-joined;
+    box-sizing:border-box;
+    width:194mm!important;
+    min-width:194mm!important;
+    max-width:194mm!important;
+    height:281mm!important;
+    min-height:281mm!important;
+    max-height:281mm!important;
+    --flow-fit:1;
+    font-size:7pt;
+    overflow:hidden;
+  }
+  .flow-with-justifications .flow-header {
+    min-height:10mm;
+    padding:1.6mm 2mm;
+  }
+  .flow-with-justifications .flow-header b{font-size:9pt}
+  .flow-with-justifications .flow-body{
+    gap:1mm;
+    padding-top:.8mm;
+    flex:1;
+    min-height:0;
+  }
+  .flow-with-justifications .flow-identity{
+    min-height:10mm;max-height:12mm;
+    grid-template-columns:1.28fr .75fr .75fr .85fr;
+    gap:1mm;
+  }
+  .flow-with-justifications .flow-badge{
+    padding:.8mm 1.1mm;
+    font-size:6.5pt;
+  }
+  .flow-with-justifications .flow-badge strong{font-size:9.2pt}
+  .flow-with-justifications .flow-phrase{
+    min-height:9mm;max-height:15mm;
+    font-size:7.4pt;
+    padding:1.1mm 1.8mm;
+  }
+  .flow-with-justifications .flow-facts{
+    min-height:11mm;
+    max-height:17mm;
+    gap:1mm;
+  }
+  .flow-with-justifications .flow-fact{padding:1mm 1.4mm;font-size:6.8pt}
+  .flow-with-justifications .flow-decision-row{
+    flex:0 0 72mm;
+    min-height:72mm;
+    max-height:72mm;
+    gap:1.5mm;
+    grid-template-columns:1.08fr .98fr 1.05fr;
+  }
+  .flow-with-justifications .flow-panel-head{min-height:7mm;padding:1mm}
+  .flow-with-justifications .flow-panel-head b{font-size:7.1pt}
+  .flow-with-justifications .flow-nodes{padding:.75mm;gap:.25mm}
+  .flow-with-justifications .flow-node{
+    min-height:6.2mm;
+    grid-template-columns:5mm minmax(0,1fr) 8.8mm;
+    gap:.55mm;
+    padding:.4mm .7mm;
+    font-size:6.1pt;
+  }
+  .flow-with-justifications .flow-node .nkey{
+    min-height:4.7mm;
+    font-size:7pt;
+  }
+  .flow-with-justifications .flow-node .nanswer{font-size:5.6pt}
+  .flow-with-justifications .flow-node-just{display:none!important}
+  .flow-with-justifications .flow-conclusion{
+    min-height:8mm;
+    padding:.6mm 1mm;
+    font-size:5.9pt;
+  }
+  .flow-with-justifications .flow-validation{
+    flex:0 0 37mm;
+    min-height:37mm;
+    max-height:37mm;
+  }
+  .flow-with-justifications .flow-section-title{
+    padding:.8mm 1.5mm;
+    min-height:5.8mm;
+    font-size:7.1pt;
+  }
+  .flow-with-justifications .flow-section-title small{font-size:5.7pt}
+  .flow-with-justifications .flow-validation-grid{
+    gap:.8mm;
+    padding:.8mm;
+  }
+  .flow-with-justifications .flow-criterion{
+    font-size:5.9pt;
+    padding:.75mm 1mm;
+  }
+  .flow-with-justifications .flow-observation{
+    flex:0 0 39mm;
+    min-height:39mm;
+    max-height:39mm;
+  }
+  .flow-with-justifications .flow-observation-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:.75mm;
+    padding:.75mm;
+  }
+  .flow-with-justifications .flow-note{
+    padding:.75mm 1mm;
+    font-size:5.8pt;
+  }
+  .flow-with-justifications .flow-note strong{font-size:6.2pt}
+  .flow-with-justifications .flow-inline-notes{
+    display:flex;
+    flex:1 1 60mm;
+    flex-direction:column;
+    min-height:60mm;
+    border:1px solid #acc9d8;
+    border-radius:1mm;
+    background:#f7fafc;
+    overflow:hidden;
+  }
+  .flow-with-justifications .flow-inline-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:.8mm;
+    flex:1;
+    min-height:0;
+    padding:.8mm;
+  }
+  .flow-inline-card{
+    min-height:0;
+    padding:1mm 1.2mm;
+    display:flex;
+    flex-direction:column;
+    gap:.45mm;
+    border:1px solid #c9dce7;
+    background:#fff;
+    border-radius:.9mm;
+    overflow:hidden;
+    overflow-wrap:anywhere;
+  }
+  .flow-inline-card .flow-jcard-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:.7mm;
+    background:#e5f1f8;
+    padding:.55mm .8mm;
+    border-radius:.5mm;
+    min-height:4.2mm;
+  }
+  .flow-inline-card .flow-jcard-head b{
+    font-size:7.1pt;
+    color:#145c7d;
+    flex-shrink:0;
+  }
+  .flow-inline-card .flow-jcard-head span{
+    font-size:5.4pt;
+    color:#476b7c;
+    text-align:right;
+    line-height:1.1;
+  }
+  .flow-inline-card .flow-jquestion{
+    font-size:6.5pt;
+    line-height:1.16;
+    font-weight:750;
+    color:#185675;
+  }
+  .flow-inline-card .flow-jcontent{
+    font-size:6.4pt;
+    line-height:1.15;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+  }
+  .flow-inline-card .flow-jcontent b{color:#165b78}
+  .flow-with-justifications .flow-footer{
+    min-height:5mm;
+    font-size:5.6pt;
+    padding-top:.8mm;
+  }
+  .flow-with-justifications.flow-fit-small .flow-inline-card .flow-jcontent{font-size:5.9pt}
+  .flow-with-justifications.flow-fit-small .flow-inline-card .flow-jquestion{font-size:6pt}
+  /* Página complementar de exceção, também em A4 retrato. */
+  .print-page.flow-justifications-page{
+    page:appcc-joined;
+    width:194mm;
+    height:281mm;
+    min-height:281mm;
+    max-height:281mm;
+  }
+  .flow-justifications-page .flow-jgrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(0,1fr));
+  }
+}

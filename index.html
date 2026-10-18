@@ -3862,7 +3862,8 @@
   const day=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
   const displayDate=s=>s ? s.split('-').reverse().join('/') : 'Data não informada';
   const processCode=f=>f.item.split('.').slice(0,2).join('.');
-  const processes=[...new Map(DATA.map(f=>[processCode(f),f.processo])).entries()];
+  const PROCESS_LABELS_LEG={'4.1':'Captação','4.2':'Condução','4.3':'Reservatórios','4.5':'Recepção de embalagens e insumos','4.6':'Higienização de embalagens e tampas','4.7':'Envase e fechamento','4.10':'Controle da qualidade','4.11':'Responsabilidade','4.12':'CO₂ e controle da qualidade'};
+  const processes=[...new Map(DATA.map(f=>[processCode(f),SELECTED_GUIDE==='leg'?(PROCESS_LABELS_LEG[processCode(f)]||f.processo):f.processo])).entries()];
   const validYN=v=>v==='S'||v==='N'?v:'';
   const baseEdit={questions:{},eurestQuestions:{},questionNotes:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
   let saved={}; try { saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch{}

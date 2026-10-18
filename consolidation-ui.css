@@ -1,0 +1,48 @@
+/* Importação seletiva APPCC: controles para item, indicador e frase. */
+.consol-panel{border:1px solid #b8d4e1}
+.consol-start{display:flex;gap:8px;flex-wrap:wrap}
+.consol-start button{flex:1 1 140px;font-size:12px;font-weight:750;padding:9px;border:1px solid #a9cada;border-radius:7px;background:#e8f5f9;color:#145776}
+#consolImportOpen{background:#dff2ea;color:#135e47;border-color:#9ccdb5}
+.consol-dialog{box-sizing:border-box;width:min(98vw,1000px);max-width:1000px;max-height:95dvh;overflow-y:auto;border:1px solid #adc9d8;border-radius:12px;padding:18px;background:#fff;color:#153e57;box-shadow:0 22px 65px #152d4570}
+.consol-dialog::backdrop{background:#1a3146ac}
+.consol-dialog h2{font-size:20px;color:#155a78;margin:0 0 8px}
+.consol-desc,.consol-hint{font-size:12px;line-height:1.5;margin:10px 0;color:#375b70}
+.consol-file-label{display:block;font-weight:800;font-size:13px;border:1px dashed #a2c4d6;background:#f4fafc;border-radius:9px;padding:11px}
+.consol-file-label input{display:block;width:100%;margin-top:8px;font-size:12px}
+.consol-actions{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.consol-actions button{padding:9px 12px;border-radius:7px;border:1px solid #acc9d8;background:#eef6fa;color:#1b536d;font-size:12px;font-weight:700}
+.consol-files{display:grid;gap:5px;font-size:12px;color:#3f6477;margin:10px 0}
+.consol-file{padding:6px 8px;border-radius:6px;background:#f1f7fa}
+.consol-settings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.consol-settings label{font-size:12px;font-weight:750}
+.consol-settings select,.consol-row-choices select{display:block;width:100%;min-width:0;box-sizing:border-box;border:1px solid #a9c9d8;background:white;border-radius:7px;padding:9px;margin-top:5px;font-size:12px}
+.consol-groups{display:grid;gap:8px;max-height:50vh;overflow:auto;border:1px solid #d1e0e8;border-radius:8px;padding:8px;background:#fbfdfe}
+.consol-group{border:1px solid #b8d2df;border-radius:7px;overflow:hidden;background:#fff}
+.consol-group>summary{cursor:pointer;padding:9px 10px;background:#eaf4f9;color:#185879;font-size:12px;font-weight:750}
+.consol-group>summary span{display:inline}
+.consol-group>summary small{font-weight:500;color:#577383}
+.consol-group-tools{padding:7px 10px;background:#f5fafc;border-bottom:1px solid #c9dce5;font-weight:700;font-size:12px}
+.consol-group-tools label{display:flex;align-items:center;gap:8px}
+.consol-row{padding:10px 11px;border-bottom:1px solid #d7e4eb}
+.consol-row:last-child{border-bottom:0}
+.consol-row-label{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4;cursor:pointer}
+.consol-row-label span span{display:block;font-weight:400;color:#445e6b;margin-top:3px}
+.consol-row-choices{padding-left:22px;margin-top:7px}
+.consol-row-choices>label,.consol-compare{display:block;font-size:12px;font-weight:700;margin:7px 0}
+.consol-row-choices .consol-small-check{display:flex;align-items:flex-start;gap:8px;font-size:12px;font-weight:600;margin:9px 0;line-height:1.4}
+.consol-row-choices input[type=checkbox],.consol-group-tools input[type=checkbox]{margin-top:2px;accent-color:#187354}
+.consol-recommendation{font-size:11px;color:#527084;margin:7px 0}
+.consol-dest-text{font-size:12px;line-height:1.45;padding:9px;background:#ecf7fb;border-radius:7px}
+.consol-diff{font-size:12px;line-height:1.45;padding:8px;background:#fff8e9;border:1px solid #e8d9b2;border-radius:7px}
+.consol-diff details p{padding:7px;border-bottom:1px solid #e9ddc2;overflow-wrap:anywhere}
+.consol-verify{font-weight:800!important;color:#176249}
+.consol-summary{font-size:12px;font-weight:750;margin:10px 0;color:#1d5a79}
+.consol-status{font-size:12px;line-height:1.5;min-height:16px;margin:8px 0}
+.consol-status[data-kind=error]{color:#a62929}
+.consol-status[data-kind=warning]{color:#8a5d15}
+.consol-status[data-kind=success]{color:#13714c}
+.consol-bottom{justify-content:flex-end}
+.consol-bottom .consol-primary{background:#187258;color:#fff;border-color:#187258;font-weight:800}
+.consol-empty{font-size:12px;color:#607686;text-align:center}
+@media(max-width:620px){.consol-dialog{padding:11px;max-height:95dvh}.consol-settings{grid-template-columns:1fr}.consol-start button{font-size:11px}.consol-bottom button{flex:1 1 175px}}
+@media print{.consol-panel,.consol-dialog{display:none!important}}

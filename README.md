@@ -28,7 +28,7 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 
 - Campos individuais de **justificativa** e **evidência necessária/fundamentação** em todas as perguntas A–I e Q1–Q4 (por frase), preenchidos manualmente ou a partir da resposta colada do Gemini e editáveis pelo revisor.
 - A consulta Gemini oferece a opção **Salvar justificativa sem marcar Sim/Não**. A resposta sugerida não marca automaticamente nenhum botão.
-- Dados em `edits[n].questionNotes[k]` são mantidos no salvamento local, no JSON exportado e nos backups, inclusive se o caminho da árvore mudar; perguntas não aplicáveis ficam em modo somente leitura.
+- Dados em `edits[n].questionNotes[k]` são mantidos no salvamento local, no JSON exportado e nos backups, inclusive se o caminho da árvore mudar; perguntas não aplicáveis ficam em modo somente leitura. Cada campo pode restaurar a versão anterior, com histórico no backup.
 - Na **impressão gráfica**, o fluxograma mostra um resumo sob cada pergunta ativa que tem justificativa. Havendo registros, páginas complementares apresentam **a íntegra da justificativa e evidências**, com pergunta, decisão e indicação de conferência. Textos longos passam para novas páginas sem corte.
 
 ## Proteção dos dados

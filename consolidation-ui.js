@@ -236,15 +236,16 @@ function apply(){
  oldBackups.unshift({date:now,reviewer:before.reviewer,reviewDate:before.date,
    changes:before.edits,aiHistory:before.aiHistory,note:'Anterior à importação seletiva e consolidação'});
  try{
-  localStorage.setItem(core.backups[targetGuide],JSON.stringify(oldBackups.slice(0,12)));
-  localStorage.setItem(core.keys[targetGuide],JSON.stringify(states[targetGuide]));
   history.push({at:now,guide:targetGuide,updated:seen.size,copiedFields:summary.updates,conflicts:summary.conflicts,
     sources:[...new Set(audit.map(x=>x.originFile))],records:audit});
+  // O estado principal é gravado por último, após histórico e cópia preventiva.
   localStorage.setItem(HIST,JSON.stringify(history.slice(-300)));
-  if(targetGuide===bridge.guide)bridge.adoptLocalState?.(states[targetGuide]);
+  localStorage.setItem(core.backups[targetGuide],JSON.stringify(oldBackups.slice(0,12)));
+  localStorage.setItem(core.keys[targetGuide],JSON.stringify(states[targetGuide]));
  }catch(e){
-  note('Não foi possível gravar no dispositivo: '+e.message+'. Guarde seus arquivos originais.','error');return;
+  note('Não foi possível concluir a gravação: '+e.message+'. Preserve os arquivos de origem; a revisão principal não foi substituída.','error');return;
  }
+ if(targetGuide===bridge.guide)bridge.adoptLocalState?.(states[targetGuide]);
  const approved=storage(MAP,{});
  for(const a of audit){
   approved[a.originGuide+':'+a.originNumber]=a.targetNumber;

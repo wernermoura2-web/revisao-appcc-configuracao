@@ -104,7 +104,16 @@ function addCurrent(){
   parsed.local=true;parsed.sourceGuide=g;
   addParsed(parsed,parsed.filename);count+=parsed.rows.length;
  }
- filesList();render();note('Foram adicionadas '+count+' frases preenchidas das revisões locais. Marque somente as que deseja consolidar.');
+ // O Guia APPCC legislativo anterior utiliza outra chave, no mesmo domínio GitHub Pages.
+ const legacySource=storage('guia-appcc-desenvolvimento-v1',null);
+ if(legacySource&&!originals.some(f=>f.local&&f.sourceGuide==='legacy')){
+  try{
+   const parsed=core.parse({format:'guia-appcc-desenvolvimento',state:legacySource},'Guia legislativo anterior (salvo no navegador)');
+   parsed.local=true;parsed.sourceGuide='legacy';
+   addParsed(parsed,parsed.filename);count+=parsed.rows.length;
+  }catch(err){note('Não foi possível interpretar o guia legislativo salvo: '+err.message,'warning');}
+ }
+ filesList();render();note('Foram adicionadas '+count+' frases preenchidas das revisões locais e do guia legislativo anterior, quando disponível. Marque somente o que deseja consolidar.');
 }
 function filesList(){
  const el=dialog.querySelector('#consolFileInfo');

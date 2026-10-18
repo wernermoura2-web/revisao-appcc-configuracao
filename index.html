@@ -3870,10 +3870,41 @@
   const getEurestQuestions=idx=>Object.assign({},getEdit(idx).eurestQuestions||{});
   const getDocs=idx=>getEdit(idx).documentos||DATA[idx].documentos||[];
   const getQuestionNote=(idx,k)=>getEdit(idx).questionNotes?.[k]||{};
+  const noteHistoryKey=(idx,k,field)=>'question:'+DATA[idx].n+':'+k+':'+field;
+  function pushNoteHistory(idx,k,field,value){
+    const id=noteHistoryKey(idx,k,field),hist=state.aiHistory||(state.aiHistory={});
+    const stack=Array.isArray(hist[id])?hist[id].slice():[];
+    if(stack[stack.length-1]!==value)stack.push(value);
+    hist[id]=stack.slice(-6);markDirty();
+  }
+  function restoreQuestionNote(k,field){
+    const id=noteHistoryKey(index,k,field),hist=state.aiHistory||(state.aiHistory={});
+    const stack=Array.isArray(hist[id])?hist[id].slice():[];
+    const current=safe(getQuestionNote(index,k)[field]||'');
+    while(stack.length&&stack[stack.length-1]===current)stack.pop();
+    if(!stack.length){toast('Não há texto anterior salvo neste campo.');return;}
+    if(!confirm('Restaurar o texto anterior da pergunta '+k+'?'))return;
+    const previous=stack.pop();hist[id]=stack;
+    setQuestionNote(index,k,{[field]:previous,source:'manual',reviewed:false,reviewedAt:'',reviewedBy:''});
+    const name=field==='justification'?'questionJustification':'questionEvidence';
+    for(const t of document.querySelectorAll('[data-question-justification],[data-question-evidence]')){
+      if(t.dataset[name]===k){
+        t.value=previous;
+        const status=t.closest('.question-note-block')?.querySelector('.question-note-status');
+        if(status)status.textContent='Texto anterior restaurado — confira a justificativa';
+      }
+    }
+  }
   function setQuestionNote(idx,k,patch){
     if(!/^(?:[A-I]|Q[1-4])$/.test(k))return;
     const edit=ensureEdit(idx),notes=edit.questionNotes||(edit.questionNotes={});
-    notes[k]={...(notes[k]||{}),...patch,updatedAt:new Date().toISOString()};
+    const old=notes[k]||{};
+    if(patch.suggestedAnswer!==undefined||patch.source==='gemini'){
+      for(const field of ['justification','evidence']){
+        if(patch[field]!==undefined&&safe(patch[field])!==safe(old[field]||''))pushNoteHistory(idx,k,field,safe(old[field]||''));
+      }
+    }
+    notes[k]={...old,...patch,updatedAt:new Date().toISOString()};
     markDirty();
   }
   function noteStale(idx,k){
@@ -3883,11 +3914,18 @@
   function questionNoteHtml(k,active){
     const n=getQuestionNote(index,k),just=safe(n.justification||''),evidence=safe(n.evidence||'');
     const status=n.reviewed?'Conferida pelo revisor':n.source==='gemini'?'Sugestão Gemini — pendente de revisão':'Justificativa editável do revisor';
-    return `<div class="question-note-block${active?'':' question-note-inactive'}" data-note="${esc(k)}"><div class="question-note-status">${esc(status)}${!active?' · pergunta não aplicável neste caminho':''}</div><label>Justificativa da resposta <textarea data-question-justification="${esc(k)}" rows="2" placeholder="Registre a justificativa técnica da resposta" ${active?'':'readonly'}>${esc(just)}</textarea></label><label>Evidência necessária / fundamentação <textarea data-question-evidence="${esc(k)}" rows="2" placeholder="Registre a verificação necessária" ${active?'':'readonly'}>${esc(evidence)}</textarea></label></div>`;
+    return `<div class="question-note-block${active?'':' question-note-inactive'}" data-note="${esc(k)}"><div class="question-note-status">${esc(status)}${!active?' · pergunta não aplicável neste caminho':''}</div><label>Justificativa da resposta <textarea data-question-justification="${esc(k)}" rows="2" placeholder="Registre a justificativa técnica da resposta" ${active?'':'readonly'}>${esc(just)}</textarea></label><label>Evidência necessária / fundamentação <textarea data-question-evidence="${esc(k)}" rows="2" placeholder="Registre a verificação necessária" ${active?'':'readonly'}>${esc(evidence)}</textarea></label><div class="question-note-actions"><button type="button" data-note-restore="justification" data-qnote="${esc(k)}" ${active?'':'disabled'}>↶ Restaurar justificativa</button><button type="button" data-note-restore="evidence" data-qnote="${esc(k)}" ${active?'':'disabled'}>↶ Restaurar evidência</button></div></div>`;
   }
   function bindQuestionNotes(container){
     container.querySelectorAll('[data-question-justification],[data-question-evidence]').forEach(t=>{
+      t.addEventListener('focus',()=>{t.__previousNoteText=t.value;t.__capturedNote=false;});
       t.addEventListener('input',()=>{
+        if(!t.__capturedNote){
+          const code=t.dataset.questionJustification||t.dataset.questionEvidence;
+          const field=t.dataset.questionJustification?'justification':'evidence';
+          pushNoteHistory(index,code,field,t.__previousNoteText??'');
+          t.__capturedNote=true;
+        }
         const k=t.dataset.questionJustification||t.dataset.questionEvidence;
         const key=t.dataset.questionJustification?'justification':'evidence';
         setQuestionNote(index,k,{[key]:t.value,source:'manual',reviewed:false});
@@ -3895,6 +3933,7 @@
         if(status)status.textContent='Justificativa editável do revisor · ainda não conferida';
       });
     });
+    container.querySelectorAll('[data-note-restore]').forEach(btn=>btn.addEventListener('click',()=>restoreQuestionNote(btn.dataset.qnote,btn.dataset.noteRestore)));
   }
   const nameError=()=>!state.reviewer.trim()||!state.date;
   const markDirty=()=>{dirty=true;el('saveState').textContent='Alterações pendentes';clearTimeout(autosaveTimer);autosaveTimer=setTimeout(()=>save(false),850)};

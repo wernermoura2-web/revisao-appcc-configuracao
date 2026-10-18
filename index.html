@@ -3759,13 +3759,18 @@
 <link rel="stylesheet" href="./flow-print.css">
 <link rel="stylesheet" href="./ai-tools.css">
 <link rel="stylesheet" href="./ai-questions.css">
+<link rel="stylesheet" href="./transfer-ui.css">
 </head>
 <body>
 <header class="app-header"><div class="brand"><div class="brand-mark">APPCC</div><div><h1>Revisão APPCC · Configuração do Guia</h1><p>Guia Estadual de Avaliação do Risco Sanitário · Rev.6 / V82.55 · 24 envasadoras</p></div></div><div class="header-status"><span id="saveState" aria-live="polite">Aguardando identificação</span><span id="counter">Frase 1 de 76</span></div></header>
 <main class="app-layout">
 <aside class="sidebar" aria-label="Navegação e arquivos">
+<section class="panel guide-choice-panel"><h2>1 · Selecionar guia</h2><div class="guide-select-pair" role="group" aria-label="Guia a revisar">
+<a id="guideBpf" class="guide-choice" href="?guide=bpf">Guia APPCC/BPF</a>
+<a id="guideLeg" class="guide-choice" href="?guide=leg">Guia APPCC Legislação</a>
+</div><p class="hint">Os guias têm revisões e cópias de segurança separadas. Os botões APPCC e Configuração funcionam nos dois.</p></section>
 <section class="panel identity"><h2>Identificação da revisão</h2><label for="reviewer">Nome do revisor <span class="required">*</span></label><input id="reviewer" autocomplete="name" placeholder="Nome completo do revisor" required><label for="reviewDate">Data da revisão <span class="required">*</span></label><input id="reviewDate" type="date" required><p class="hint">A identificação consta dos arquivos e das páginas impressas.</p></section>
-<section class="panel mode-panel"><h2>O que deseja revisar?</h2><div class="mode-switch" role="group" aria-label="Módulo da revisão"><button id="modeAppcc" type="button" class="mode-choice active" aria-pressed="true">1 · Revisar APPCC</button><button id="modeConfig" type="button" class="mode-choice" aria-pressed="false">2 · Revisar configuração da frase</button></div><p class="hint">Os dois módulos compartilham o mesmo revisor, data, item e backup. Você pode alternar sem perder alterações.</p></section>
+<section class="panel mode-panel"><h2>2 · O que deseja revisar?</h2><div class="mode-switch" role="group" aria-label="Módulo da revisão"><button id="modeAppcc" type="button" class="mode-choice active" aria-pressed="true">1 · Revisar APPCC</button><button id="modeConfig" type="button" class="mode-choice" aria-pressed="false">2 · Revisar configuração da frase</button></div><p class="hint">Os dois módulos compartilham o mesmo revisor, data, item e backup. Você pode alternar sem perder alterações.</p></section>
 <section class="panel install-panel"><h2>Instalar no celular</h2><button id="installPwaBtn" class="btn-install" type="button">Instalar Revisão APPCC</button><p id="installPwaInfo" class="hint" role="status">Aplicativo independente do Guia APPCC e do Guia BPF. Disponível para uso offline após a primeira abertura.</p><details id="installPwaHelp"><summary>Chrome diz “já instalado”?</summary><p>1. Abra a lista de aplicativos do Android e procure <strong>Revisão APPCC</strong>.</p><p>2. Confira também <strong>Configurações → Aplicativos → Revisão APPCC</strong> e a pesquisa da tela inicial.</p><p>3. Se não encontrar, abra este endereço <strong>diretamente no Chrome</strong> e use ⋮ → <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>.</p><p><strong>Antes de remover um atalho ou aplicativo antigo:</strong> use “Exportar revisão (JSON)” para guardar suas respostas. Não limpe os dados do Chrome sem essa cópia.</p></details></section>
 <section class="panel references-panel"><h2>Referências técnicas</h2><a id="referencesBtn" class="reference-main-btn" href="./referencias.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir referências das Tabelas 1, 2 e 3">📚 Referências · Tabelas 1, 2 e 3 ↗</a><p class="hint">Fluxogramas, Codex, ISO 22000, FSSC e documentos da revisão.</p></section>
 <section class="panel appendix-panel" aria-label="Imprimir comparativo APPCC Antes/Depois"><h2>Apêndice C · APPCC Antes/Depois</h2><label for="appendixScope">Abrangência do comparativo</label><select id="appendixScope"><option value="all">Todas as 76 frases</option><option value="process">Processo selecionado</option><option value="item">Item selecionado</option><option value="phrase">Frase selecionada</option></select><button id="appendixPrintBtn" type="button" class="btn-print" style="width:100%;margin-top:9px">Imprimir APPCC Antes/Depois</button><p class="hint">Relatório separado das Tabelas 1, 2 e 3, com nome do revisor, data e classificações antes/depois. O campo Depois indica uma proposta até que a validação esteja concluída.</p></section>
@@ -3812,14 +3817,16 @@
 <dialog id="observationsDialog" class="dialog wide-dialog"><div class="dialog-tools"><strong>Observações gerais dos documentos avaliados</strong><button id="closeObservations" class="btn-outline mini">Fechar</button></div><p id="observationsSubtitle"></p><textarea id="observationsText" rows="16" readonly></textarea><button id="downloadObservations">Baixar observações (.txt)</button></dialog>
 <div id="toast" aria-live="polite"></div><div id="printArea" aria-hidden="true"></div>
 <script src="./flow-print.js"></script>
+<script src="./legislation-data.js"></script>
 <script>/* Guia Estadual APPCC — revisão independente da base oficial. Dados permanecem no navegador. */
 'use strict';
 (() => {
-  const ROOT = window.INITIAL_DATA;
-  const DATA = ROOT && Array.isArray(ROOT.frases) ? ROOT.frases : [];
+  const SELECTED_GUIDE=new URLSearchParams(location.search).get('guide')==='leg'?'leg':'bpf';
+  const ROOT=SELECTED_GUIDE==='leg'?window.LEGISLATION_APPCC_DATA:window.INITIAL_DATA;
+  const DATA=ROOT&&Array.isArray(ROOT.frases)?ROOT.frases:[];
   if (!DATA.length) { document.body.insertAdjacentHTML('afterbegin','<p style="background:#fee;padding:20px">Não foi possível carregar os dados de referência.</p>'); return; }
-  const STORAGE_KEY='guia_appcc_rev6_revisao_local_v1';
-  const BACKUP_KEY='guia_appcc_rev6_backups_v1';
+  const STORAGE_KEY=SELECTED_GUIDE==='leg'?'guia_appcc_legislacao_revisao_local_v1':'guia_appcc_rev6_revisao_local_v1';
+  const BACKUP_KEY=SELECTED_GUIDE==='leg'?'guia_appcc_legislacao_backups_v1':'guia_appcc_rev6_backups_v1';
   const QUESTIONS1={
     A:'O perigo identificado é significativo? Considere gravidade e probabilidade de ocorrência.',
     B:'Existe uma medida preventiva ou de controle nesta etapa ou em outra?',
@@ -4442,11 +4449,24 @@
     el('closeObservations').onclick=()=>el('observationsDialog').close();el('downloadObservations').onclick=()=>download(el('observationsText').value,`observacoes-documentos-${el('processSelect').value}.txt`,'text/plain');
     el('modalDate').value=state.date||day();el('modalReviewer').value=state.reviewer;
     el('welcomeForm').onsubmit=e=>{e.preventDefault();state.reviewer=el('modalReviewer').value.trim();state.date=el('modalDate').value;el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;save(false);el('welcomeDialog').close();render();};
-    render();renderBackups();resetBackupClock();openMode('analysis');if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
+    const requested=Number(new URLSearchParams(location.search).get('phrase'));
+    const startAt=DATA.findIndex(f=>f.n===requested);
+    render(startAt>=0?startAt:0);renderBackups();resetBackupClock();openMode('analysis');if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
     window.addEventListener('beforeprint',fitPrintLayout);
     window.addEventListener('beforeunload',()=>{if(dirty)save(false)});
   }
   boot();
+  // API limitada ao transporte entre duas revisões locais, sem tocar na base oficial.
+  window.APPCC_GUIDE_BRIDGE={
+    guide:SELECTED_GUIDE,
+    current:()=>({index,base:getBase(index),phrase:getPhrase(index),edit:clone(getEdit(index)),diagnostic:diagnostic(index)}),
+    dataset:()=>DATA.map(f=>({n:f.n,item:f.item,indice:f.indice,frase:f.frase,processo:f.processo})),
+    itemIndexes:()=>DATA.map((f,i)=>f.item===DATA[index].item?i:-1).filter(i=>i>=0),
+    phraseAt:idx=>({index:idx,base:getBase(idx),phrase:getPhrase(idx),edit:clone(getEdit(idx)),diagnostic:diagnostic(idx)}),
+    save:()=>save(false),
+    sourceStorage:STORAGE_KEY,
+    sourceBackup:BACKUP_KEY
+  };
   // Diagnósticos básicos acessíveis aos testes (somente leitura).
   window.APPCC_REVISAO_DIAGNOSTICO={total:DATA.length,frases:()=>DATA.length,status:()=>diagnostic(index),arvoreQ1Q4:()=>diagnostic(index).eur,impressao:()=>({modulo:el('printModule').value,abrangencia:el('printScope').value})};
   window.APPCC_EDITOR_BRIDGE={
@@ -4461,6 +4481,7 @@
 </script>
 <script src="./ai-tools.js"></script>
 <script src="./ai-questions.js"></script>
+<script src="./transfer-ui.js"></script>
 
 <script>
 /* Instalação exclusiva da Revisão APPCC: não remove nem altera outros PWAs. */

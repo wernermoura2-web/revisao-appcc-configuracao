@@ -1,5 +1,5 @@
 /* PWA exclusivo da Revisão APPCC. Não compartilha escopo/cache com outros guias. */
-const CACHE_ID = 'revisao-appcc-configuracao-v7-20261018';
+const CACHE_ID = 'revisao-appcc-configuracao-v8-20261018';
 const PREFIX = 'revisao-appcc-configuracao-v';
 const SHELL = ['./index.html', './referencias.html', './flow-print.css', './flow-print.js', './ai-tools.css', './ai-tools.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {

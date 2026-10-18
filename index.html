@@ -4380,6 +4380,7 @@
     el('modalDate').value=state.date||day();el('modalReviewer').value=state.reviewer;
     el('welcomeForm').onsubmit=e=>{e.preventDefault();state.reviewer=el('modalReviewer').value.trim();state.date=el('modalDate').value;el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;save(false);el('welcomeDialog').close();render();};
     render();renderBackups();resetBackupClock();openMode('analysis');if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
+    window.addEventListener('beforeprint',fitPrintLayout);
     window.addEventListener('beforeunload',()=>{if(dirty)save(false)});
   }
   boot();

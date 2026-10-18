@@ -204,9 +204,9 @@
     font-size:5.9pt;
   }
   .flow-with-justifications .flow-validation{
-    flex:0 0 37mm;
-    min-height:37mm;
-    max-height:37mm;
+    flex:0 0 42mm;
+    min-height:42mm;
+    max-height:42mm;
   }
   .flow-with-justifications .flow-section-title{
     padding:.8mm 1.5mm;
@@ -217,6 +217,11 @@
   .flow-with-justifications .flow-validation-grid{
     gap:.8mm;
     padding:.8mm;
+    /* Segunda linha ligeiramente mais alta, para a fundamentação de correção/ação corretiva. */
+    grid-template-rows:minmax(0,1fr) minmax(0,1.12fr);
+  }
+  .flow-with-justifications .flow-validation-grid .flow-criterion:nth-child(4){
+    padding:1mm 1.2mm;
   }
   .flow-with-justifications .flow-criterion{
     font-size:5.9pt;

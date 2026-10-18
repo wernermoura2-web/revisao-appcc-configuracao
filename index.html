@@ -4384,38 +4384,20 @@
     return main+more;
   }
   function fitPrintLayout(){
-    document.querySelectorAll('#printArea .flow-print-page').forEach(page=>{
-      // Ajuste local dos seis quadros: não modificar a posição da Tabela 3,
-      // nem permitir que textos longos avancem sobre Evidências.
-      for(const card of page.querySelectorAll('.flow-validation-grid .flow-criterion')){
-        card.style.fontSize='';
-        const original=parseFloat(getComputedStyle(card).fontSize)||8;
-        for(let factor=1;factor>=.84;factor-=.04){
-          card.style.fontSize=(original*factor).toFixed(2)+'px';
-          if(card.scrollHeight<=card.clientHeight+1)break;
-        }
+    // O CSS @media print define fontes, dimensões e áreas da folha A4.
+    // Não aplicar tamanhos inline antes de window.print(): getComputedStyle
+    // mede a página na mídia de TELA (fontes maiores), causando a sobreposição
+    // observada nas páginas com justificativas.
+    // Ajustes do módulo de configuração permanecem independentes.
+    document.querySelectorAll('#printArea .print-page[data-part="config"] .print-col').forEach(col=>{
+      let f=8.0, tries=0;
+      const els=col.querySelectorAll('.print-val,.print-doc');
+      while(col.scrollHeight>col.clientHeight+2&&f>=5.6&&tries<12){
+        f-=.2;
+        els.forEach(e=>e.style.fontSize=f+'pt');
+        tries++;
       }
-      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion,.flow-nodes,.flow-node .ntxt,.flow-inline-card,.flow-inline-grid')];
-      for(let n=0;n<9;n++){
-        const long=blocks().some(x=>x.scrollHeight>x.clientHeight+2);
-        const overflow=page.scrollHeight>page.clientHeight+2;
-        if(!long&&!overflow)break;
-        const scale=Math.max(.68,1-.04*(n+1));
-        page.style.setProperty('--flow-fit',scale.toFixed(2));
-        if(n>2)page.classList.add('flow-fit-small');
-      }
-      if(page.scrollHeight>page.clientHeight+5){
-        page.dataset.printCheck='Conteúdo extenso: confirme se todos os textos estão visíveis na prévia de impressão.';
-      }
-    });
-    // Redução progressiva da fonte e controle de excesso; conserva o layout de quatro colunas.
-    document.querySelectorAll('#printArea .print-page').forEach(page=>{
-      const isConfig=page.dataset.part==='config';if(!isConfig)return;
-      page.querySelectorAll('.print-col').forEach(col=>{
-        let f=8.0;let els=col.querySelectorAll('.print-val,.print-doc');let tries=0;
-        while(col.scrollHeight>col.clientHeight+2&&f>=5.6&&tries<12){f-=.2;els.forEach(e=>e.style.fontSize=f+'pt');tries++}
-        if(col.scrollHeight>col.clientHeight+5){col.classList.add('print-overflow');}
-      });
+      if(col.scrollHeight>col.clientHeight+5)col.classList.add('print-overflow');
     });
   }
   function runPrint(){if(nameError()){toast('Informe o nome do revisor e a data antes de imprimir.');return}save(false);const selection=buildPrintSelection(),pref=el('printModule').value,chosen=pref==='current'?(mode==='analysis'?'appcc':'config'):pref;const area=el('printArea');area.replaceChildren();const html=[];for(const idx of selection){if(chosen==='appcc'||chosen==='both')html.push(printAnalysis(idx));if(chosen==='config'||chosen==='both')html.push(printConfig(idx));}area.innerHTML=html.join('');el('printModule').dataset.resolved=chosen;requestAnimationFrame(()=>{fitPrintLayout();window.print();toast(`Preparadas ${area.querySelectorAll('.print-page').length} páginas para impressão.`)})}

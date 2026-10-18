@@ -176,9 +176,9 @@
   }
   .flow-with-justifications .flow-fact{padding:1mm 1.4mm;font-size:6.8pt}
   .flow-with-justifications .flow-decision-row{
-    flex:0 0 68mm;
-    min-height:68mm;
-    max-height:68mm;
+    flex:0 0 62mm;
+    min-height:62mm;
+    max-height:62mm;
     gap:1.5mm;
     grid-template-columns:1.08fr .98fr 1.05fr;
   }
@@ -204,11 +204,11 @@
     font-size:5.9pt;
   }
   .flow-with-justifications .flow-validation{
-    /* Altura suficiente para as duas linhas, sem invadir a seção seguinte. */
-    flex:0 0 55mm;
-    height:55mm;
-    min-height:55mm;
-    max-height:55mm;
+    /* A Tabela 3 reserva toda a altura de suas duas linhas; nenhum quadro vaza para evidências. */
+    flex:0 0 65mm;
+    height:65mm;
+    min-height:65mm;
+    max-height:65mm;
     min-width:0;
     overflow:hidden;
   }
@@ -223,9 +223,12 @@
     padding:.8mm;
     box-sizing:border-box;
     flex:1 1 auto;
+    height:0;
     min-height:0;
+    min-width:0;
     overflow:hidden;
-    /* A linha de correções tem espaço adicional sem ultrapassar a Tabela 3. */
+    align-content:stretch;
+    align-items:stretch;
     grid-template-rows:minmax(0,1fr) minmax(0,1.14fr);
   }
   .flow-with-justifications .flow-validation-grid .flow-criterion:nth-child(4){
@@ -234,8 +237,11 @@
   .flow-with-justifications .flow-validation-grid .flow-criterion{
     box-sizing:border-box;
     min-height:0;
+    max-height:100%;
+    min-width:0;
     overflow:hidden;
     overflow-wrap:anywhere;
+    line-height:1.12;
   }
   .flow-with-justifications .flow-criterion{
     font-size:5.9pt;
@@ -260,9 +266,9 @@
   .flow-with-justifications .flow-note strong{font-size:6.2pt}
   .flow-with-justifications .flow-inline-notes{
     display:flex;
-    flex:1 1 54mm;
+    flex:1 1 50mm;
     flex-direction:column;
-    min-height:54mm;
+    min-height:50mm;
     border:1px solid #acc9d8;
     border-radius:1mm;
     background:#f7fafc;

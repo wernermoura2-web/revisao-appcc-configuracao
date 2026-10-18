@@ -24,6 +24,13 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - **Somente o revisor** escolhe e confirma Sim ou Não; não se alteram respostas automaticamente. Se faltarem evidências, ele pode deixar a pergunta sem nova marcação.
 - As regras vigentes de habilitação das perguntas e de invalidação/revisão das classificações seguem sendo aplicadas pelo próprio editor. O aplicativo oferece instrução de retorno ao Android/Gemini e procura recuperar a frase após o retorno.
 
+## Registro e impressão das justificativas por pergunta
+
+- Campos individuais de **justificativa** e **evidência necessária/fundamentação** em todas as perguntas A–I e Q1–Q4 (por frase), preenchidos manualmente ou a partir da resposta colada do Gemini e editáveis pelo revisor.
+- A consulta Gemini oferece a opção **Salvar justificativa sem marcar Sim/Não**. A resposta sugerida não marca automaticamente nenhum botão.
+- Dados em `edits[n].questionNotes[k]` são mantidos no salvamento local, no JSON exportado e nos backups, inclusive se o caminho da árvore mudar; perguntas não aplicáveis ficam em modo somente leitura.
+- Na **impressão gráfica**, o fluxograma mostra um resumo sob cada pergunta ativa que tem justificativa. Havendo registros, páginas complementares apresentam **a íntegra da justificativa e evidências**, com pergunta, decisão e indicação de conferência. Textos longos passam para novas páginas sem corte.
+
 ## Proteção dos dados
 
 - Salvamento local e cópias de segurança configuráveis.

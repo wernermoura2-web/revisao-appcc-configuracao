@@ -3756,6 +3756,8 @@
 };
 </script>
 
+<link rel="stylesheet" href="./flow-print.css">
+<link rel="stylesheet" href="./ai-tools.css">
 </head>
 <body>
 <header class="app-header"><div class="brand"><div class="brand-mark">APPCC</div><div><h1>Revisão APPCC · Configuração do Guia</h1><p>Guia Estadual de Avaliação do Risco Sanitário · Rev.6 / V82.55 · 24 envasadoras</p></div></div><div class="header-status"><span id="saveState" aria-live="polite">Aguardando identificação</span><span id="counter">Frase 1 de 76</span></div></header>
@@ -3768,7 +3770,7 @@
 <section class="panel appendix-panel" aria-label="Imprimir comparativo APPCC Antes/Depois"><h2>Apêndice C · APPCC Antes/Depois</h2><label for="appendixScope">Abrangência do comparativo</label><select id="appendixScope"><option value="all">Todas as 76 frases</option><option value="process">Processo selecionado</option><option value="item">Item selecionado</option><option value="phrase">Frase selecionada</option></select><button id="appendixPrintBtn" type="button" class="btn-print" style="width:100%;margin-top:9px">Imprimir APPCC Antes/Depois</button><p class="hint">Relatório separado das Tabelas 1, 2 e 3, com nome do revisor, data e classificações antes/depois. O campo Depois indica uma proposta até que a validação esteja concluída.</p></section>
 <section class="panel"><h2>Selecionar frase</h2><label for="processSelect">Processo</label><select id="processSelect"></select><label for="itemSelect">Item</label><select id="itemSelect"></select><label for="phraseSelect">Frase</label><select id="phraseSelect"></select><div class="prev-next"><button id="prevPhrase" class="btn-outline">← Anterior</button><button id="nextPhrase" class="btn-outline">Próxima →</button></div></section>
 <section class="panel"><h2>Arquivo e segurança</h2><div class="actions-column"><button id="saveBtn">Salvar alterações</button><button id="exportBtn" class="btn-secondary">Exportar revisão (JSON)</button><button id="importBtn" class="btn-secondary">Importar revisão (JSON)</button><input id="importFile" type="file" accept="application/json,.json" hidden><button id="backupBtn" class="btn-outline">Criar cópia de segurança</button><button id="exportGuiaBtn" class="btn-outline">Exportar configuração para o Guia</button></div><label for="backupInterval">Cópia automática enquanto aberto</label><select id="backupInterval"><option value="0">Desativada</option><option value="1">A cada 1 minuto</option><option value="5" selected>A cada 5 minutos</option><option value="10">A cada 10 minutos</option><option value="30">A cada 30 minutos</option><option value="60">A cada 60 minutos</option></select><div id="backupList" class="backup-list"></div><p class="hint">Os dados são guardados neste navegador. Exporte um JSON regularmente para evitar perda ao limpar os dados do dispositivo.</p></section>
-<section class="panel"><h2>Impressão</h2><label for="printModule">Conteúdo da impressão</label><select id="printModule"><option value="current">Conforme módulo aberto</option><option value="appcc">Somente as 3 tabelas APPCC (página 1)</option><option value="config">Somente a configuração das frases (página 2)</option><option value="both">APPCC + configuração (2 páginas por frase)</option></select><label for="printScope">Abrangência</label><select id="printScope"><option value="item">Item selecionado (todas as frases)</option><option value="process">Processo selecionado</option><option value="all">Todos os processos (76 frases)</option><option value="phrase">Somente esta frase</option></select><button id="printBtn" class="btn-print">Imprimir / salvar em PDF</button><p class="hint">Formato A4 paisagem. Imprima apenas APPCC, apenas configuração ou ambas as páginas; escolha frase, item, processo ou tudo.</p></section>
+<section class="panel"><h2>Impressão</h2><label for="printModule">Conteúdo da impressão</label><select id="printModule"><option value="current">Conforme módulo aberto</option><option value="appcc">APPCC gráfico: Tabelas 1, 2, 3 + fluxograma (1 página/frase)</option><option value="config">Somente a configuração das frases (página 2)</option><option value="both">APPCC + configuração (2 páginas por frase)</option></select><label for="printScope">Abrangência</label><select id="printScope"><option value="item">Item selecionado (todas as frases)</option><option value="process">Processo selecionado</option><option value="all">Todos os processos (76 frases)</option><option value="phrase">Somente esta frase</option></select><button id="printBtn" class="btn-print">Imprimir / salvar em PDF</button><p class="hint">Formato A4 horizontal (paisagem). APPCC gráfico com decisões A–I/Q1–Q4, validação, evidências e observações; a configuração permanece em quatro colunas. Escolha frase, item, processo ou tudo.</p></section>
 <section class="panel"><h2>Relatórios da revisão</h2><button id="processObsBtn" class="btn-outline">Observações gerais do processo</button><button id="expandAllBtn" class="btn-outline">Expandir textos da configuração</button><p class="hint">As observações dos documentos marcados como avaliados podem ser exportadas para as observações gerais do processo.</p></section>
 </aside>
 <div class="workspace">
@@ -3797,7 +3799,7 @@
 <div id="criteria3" class="criteria-grid"></div><div class="stage-result" id="table3Result" role="status" aria-live="polite"></div><div class="approval-row"><label class="checkbox-line"><input type="checkbox" id="technicalApproval"> Aprovação técnica da classificação após verificar todas as evidências</label><input id="approvalNote" placeholder="Identificação/justificativa da aprovação, se aplicável"></div></section>
 <section class="panel evidence"><h2>Evidências de inspeções e fundamentação</h2><textarea data-field="evidencias" class="fit-field" rows="4"></textarea><label>Observações adicionais sobre a classificação</label><textarea data-field="justificativa_revisao" class="fit-field" rows="3" placeholder="Registre por que manteve ou alterou a classificação APPCC."></textarea></section>
 </div>
-<div id="configView" class="view" hidden><div class="config-intro"><h2>Segunda página — Configuração para o Guia Rev.6</h2><p>Quatro colunas por frase. Os campos se expandem na tela e ajustam a fonte automaticamente. Na impressão, mantêm a disposição em quatro colunas.</p></div><div class="config-grid">
+<div id="configView" class="view" hidden><div class="config-intro"><h2>Segunda página — Configuração para o Guia Rev.6</h2><p>Quatro colunas por frase. Os campos se expandem na tela e ajustam a fonte automaticamente. Use os botões de consulta ao Gemini, restaurar texto anterior e restaurar original em cada campo. Na impressão, mantêm a disposição em quatro colunas.</p></div><div class="config-grid">
 <section class="config-column"><h3>1 · Foco APPCC e considerando</h3><label>Foco da frase</label><textarea data-field="foco" class="fit-field grow" rows="5"></textarea><label>Considerando (PCC / PPRO)</label><textarea data-field="considerando" class="fit-field grow" rows="8"></textarea><p class="hint">Destinação: observações finais / avaliação de risco, abaixo da matriz. Gerado apenas quando aplicável.</p><button id="regenConsiderando" class="btn-outline mini">Atualizar considerando da classificação</button></section>
 <section class="config-column"><h3>2 · Exemplo e orientação da frase</h3><label>Exemplo de observação da frase</label><textarea data-field="exemplo_frase" class="fit-field grow" rows="8"></textarea><label>Orientação para avaliar Sim / Não / NA</label><textarea data-field="orientacao_frase" class="fit-field grow" rows="11"></textarea><p class="hint">O texto será exibido quando o fiscal abrir o botão F da frase.</p></section>
 <section class="config-column"><h3>3 · Textos do item e frase</h3><label>Texto do item</label><textarea data-field="texto_item" class="fit-field grow" rows="8"></textarea><label>Texto normativo da frase</label><textarea data-field="frase" class="fit-field grow" rows="12"></textarea><p class="hint" id="sourceText">Fonte: Rev.6 / V82.55.</p></section>
@@ -3808,6 +3810,7 @@
 <dialog id="editDialog" class="dialog wide-dialog"><div class="dialog-tools"><strong id="editTitle">Editar texto</strong><button id="closeEdit" class="btn-outline mini">Fechar</button></div><textarea id="expandedEditor"></textarea><p class="hint">Edição expandida; as alterações são aplicadas ao campo de origem ao digitar.</p></dialog>
 <dialog id="observationsDialog" class="dialog wide-dialog"><div class="dialog-tools"><strong>Observações gerais dos documentos avaliados</strong><button id="closeObservations" class="btn-outline mini">Fechar</button></div><p id="observationsSubtitle"></p><textarea id="observationsText" rows="16" readonly></textarea><button id="downloadObservations">Baixar observações (.txt)</button></dialog>
 <div id="toast" aria-live="polite"></div><div id="printArea" aria-hidden="true"></div>
+<script src="./flow-print.js"></script>
 <script>/* Guia Estadual APPCC — revisão independente da base oficial. Dados permanecem no navegador. */
 'use strict';
 (() => {
@@ -3855,7 +3858,7 @@
   const validYN=v=>v==='S'||v==='N'?v:'';
   const baseEdit={questions:{},eurestQuestions:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
   let saved={}; try { saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch{}
-  let state={version:1,reviewer:safe(saved.reviewer||''),date:safe(saved.date||''),edits:saved.edits&&typeof saved.edits==='object'?saved.edits:{},backupInterval:[0,1,5,10,30,60].includes(+saved.backupInterval)?+saved.backupInterval:5,updatedAt:saved.updatedAt||null};
+  let state={version:1,reviewer:safe(saved.reviewer||''),date:safe(saved.date||''),edits:saved.edits&&typeof saved.edits==='object'?saved.edits:{},aiHistory:saved.aiHistory&&typeof saved.aiHistory==='object'?saved.aiHistory:{},backupInterval:[0,1,5,10,30,60].includes(+saved.backupInterval)?+saved.backupInterval:5,updatedAt:saved.updatedAt||null};
   let index=0, mode='analysis',dirty=false,autosaveTimer=null,backupTimer=null,activeEditor=null,zoom=false;
   const getBase=idx=>DATA[idx];
   const getEdit=idx=>state.edits[DATA[idx].n]||{};
@@ -4176,7 +4179,7 @@
   function editExpanded(target){activeEditor=target;el('editTitle').textContent=target.closest('section')?.querySelector('h3')?.textContent||'Editar texto';el('expandedEditor').value=target.value;el('editDialog').showModal();el('expandedEditor').focus()}
   function download(content,name,mime='application/json'){const blob=new Blob([content],{type:mime+';charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1200)}
   function exportJSON(){if(nameError()){toast('Informe revisor e data antes de exportar.');return}save(false);download(JSON.stringify({format:'APPCC-REV6-24EN-76F',createdAt:new Date().toISOString(),...state},null,2),`revisao-appcc-${state.date||day()}.json`);toast('Revisão completa exportada.')}
-  function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const payload=JSON.parse(reader.result);if(payload.format!=='APPCC-REV6-24EN-76F'&&!payload.edits)throw Error('Arquivo não é uma revisão exportada por este aplicativo.');if(!confirm('Importar substituirá a revisão local atual. Deseja continuar?'))return;state={version:1,reviewer:safe(payload.reviewer||''),date:safe(payload.date||''),edits:payload.edits&&typeof payload.edits==='object'?payload.edits:{},backupInterval:+payload.backupInterval||5,updatedAt:payload.updatedAt||null};if(!save(false))return;el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;el('backupInterval').value=String(state.backupInterval);render();resetBackupClock();toast('Revisão importada.');}catch(e){toast('Não foi possível importar: '+e.message)}};reader.readAsText(file)}
+  function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const payload=JSON.parse(reader.result);if(payload.format!=='APPCC-REV6-24EN-76F'&&!payload.edits)throw Error('Arquivo não é uma revisão exportada por este aplicativo.');if(!confirm('Importar substituirá a revisão local atual. Deseja continuar?'))return;state={version:1,reviewer:safe(payload.reviewer||''),date:safe(payload.date||''),edits:payload.edits&&typeof payload.edits==='object'?payload.edits:{},aiHistory:payload.aiHistory&&typeof payload.aiHistory==='object'?payload.aiHistory:{},backupInterval:+payload.backupInterval||5,updatedAt:payload.updatedAt||null};if(!save(false))return;el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;el('backupInterval').value=String(state.backupInterval);render();resetBackupClock();toast('Revisão importada.');}catch(e){toast('Não foi possível importar: '+e.message)}};reader.readAsText(file)}
   function makeBackup(manual=false){save(false);let backups=[];try{backups=JSON.parse(localStorage.getItem(BACKUP_KEY)||'[]')}catch{}const item={date:new Date().toISOString(),reviewer:state.reviewer,changes:clone(state.edits),reviewDate:state.date};backups.unshift(item);backups=backups.slice(0,12);try{localStorage.setItem(BACKUP_KEY,JSON.stringify(backups));if(manual){download(JSON.stringify({format:'APPCC-REV6-24EN-76F',...state,backupAt:item.date},null,2),`backup-appcc-${new Date().toISOString().slice(0,16).replaceAll(':','-')}.json`);toast('Backup criado e arquivo baixado.')}}catch(e){if(manual)toast('Backup local sem espaço; exporte o JSON.')}renderBackups()}
   function renderBackups(){let list=[];try{list=JSON.parse(localStorage.getItem(BACKUP_KEY)||'[]')}catch{}el('backupList').innerHTML=list.map((b,i)=>`<button type="button" data-restore="${i}" title="Restaurar backup">${new Date(b.date).toLocaleString('pt-BR')} · ${Object.keys(b.changes||{}).length} frases</button>`).join('');el('backupList').querySelectorAll('[data-restore]').forEach(b=>b.onclick=()=>{let v=list[+b.dataset.restore];if(!confirm('Restaurar esta cópia e substituir alterações atuais?'))return;state.edits=clone(v.changes||{});state.reviewer=v.reviewer||'';state.date=v.reviewDate||'';el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;save();render();toast('Cópia restaurada.');});}
   function resetBackupClock(){if(backupTimer)clearInterval(backupTimer);if(state.backupInterval>0)backupTimer=setInterval(()=>makeBackup(false),state.backupInterval*60000)}
@@ -4240,9 +4243,34 @@
   function printHead(f,part){return `<div class="print-head"><strong>GUIA ESTADUAL APPCC | ${esc(part==='analysis'?'TRÊS TABELAS CONSECUTIVAS':'CONFIGURAÇÃO DO GUIA — REV.6')}</strong><div><small>ITEM ${esc(f.item)} • FRASE ${f.indice} • ${esc(f.processo)}</small><br><small>Revisor: ${esc(state.reviewer)} · ${esc(displayDate(state.date))}</small></div></div>`}
   function pageHeader(idx,part){const f=getPhrase(idx);return `<header class="print-header">${printHead(f,part)}</header>`}
   function statsHTML(idx){const f=getPhrase(idx),nc=grade(idx),p=f.probabilidade_24,d=diagnostic(idx),classeRev=classReference(idx);const fields=[['APPCC inicial',`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`],['APPCC proposto',`${classeRev||'—'} (${WEIGHTS[classeRev]??'?'})`],['Severidade (S)',f.severidade!=null?`${f.severidade}/5 · preliminar`:'A validar'],['Criticidade NC',nc?`${nc}/5`:'Pendente'],['Probabilidade P24',p!=null?`${p}/5`:'—'],['NC × P24',nc&&p!=null?nc*p:'—']];return `<div class="print-stats">${fields.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('')}</div><p class="print-p3" style="margin:1mm 0"><b>APPCC pelas respostas:</b> ${esc(statusString(d))}. ${esc(d.reason)}${classeRev!==f.appcc_proposto?` · Proposta preliminar: ${esc(f.appcc_proposto||'—')} (${esc(WEIGHTS[f.appcc_proposto]??'?')}).`:''}</p>`}
-  function printAnalysis(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{},eurQ=getEurestQuestions(idx);const applicable=validApplicable(idx);const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${applicable[k]?sign(q[k]):'N/A'})</b> ${esc(v)}</div>`).join('')}</div>`;
+  function printAnalysisLegacy(idx){const f=getPhrase(idx),q=getQuestions(idx),criteria=getCriteria(idx),ct=getEdit(idx).criteriaText||{},defaults=f.passo3_textos||{},eurQ=getEurestQuestions(idx);const applicable=validApplicable(idx);const qs=(obj)=>`<div class="print-questions">${Object.entries(obj).map(([k,v])=>`<div class="print-q"><b>${esc(k)} (${applicable[k]?sign(q[k]):'N/A'})</b> ${esc(v)}</div>`).join('')}</div>`;
     const cr=Object.entries(CRITERIA3).map(([key,label],n)=>`<div><b>${esc(key==='limite'?(diagnostic(idx).classe==='PCC'?'Limite crítico (PCC)':'Critério de ação (PPRO)'):label)} — ${sign(criteria[key])}</b>${esc(ct[key]??defaults[n]??'')}</div>`).join('');const dd=diagnostic(idx);const printStage=st=>`<p class="print-stage-result"><b>${esc(stageStatus(st))}</b> · ${esc(st.texto)}</p>`;
     return `<article class="print-page" data-part="analysis">${printHead(f,'analysis')}${statsHTML(idx)}<div class="print-phrase"><b>${esc(f.item)} — Frase ${f.indice}:</b> ${esc(f.frase)}</div><section class="print-step"><h3>1. IDENTIFICAR CONTROLE SIGNIFICATIVO — PCC/PPRO CANDIDATO</h3><div class="print-facts"><div><b>Perigo:</b> ${esc(f.perigo)}</div><div><b>Medida:</b> ${esc(f.medida)}</div></div>${qs(QUESTIONS1)}${printStage(dd.t1)}</section><section class="print-step"><h3>2. DISTINGUIR PPRO, PPHO, PPR E PC</h3>${qs(QUESTIONS2)}${printStage(dd.t2)}${['PPHO','PPR','PC'].includes(dd.classe)?`<p class="print-stage-result"><b>Conferência (opcional):</b> ${dd.estado==='conferido'?esc((getEdit(idx).t2Revisor||state.reviewer)+' · '+displayDate(getEdit(idx).t2Data||state.date)):'não registrada'}${getEdit(idx).t2Nota?' · '+esc(getEdit(idx).t2Nota):''}. Sem necessidade de validação da Tabela 3.</p>`:''}</section><section class="print-step"><h3>3. DISTINGUIR PCC / PPRO (Q1–Q4) E VALIDAR</h3><div class="print-eurest"><strong>Árvore de decisão Q1–Q4 (P-R-001_F v6 — 01/08/2023):</strong><div class="print-questions">${Object.entries(EUREST_Q).map(([k,t])=>`<div class="print-q"><b>${esc(k)} (${dd.route==='3'&&dd.eur.active[k]?sign(eurQ[k]):'N/A'})</b> ${esc(t)}</div>`).join('')}</div><div class="print-eurest-result"><b>Resultado da árvore:</b> ${esc(dd.route==='3'?dd.eur.caminho+' — '+dd.eur.texto:'Não aplicável')}</div></div>${printStage(dd.t3)}<div class="print-criteria">${dd.route==='3'&&['PCC','PPRO'].includes(dd.classe)?cr:'Não aplicável para a classificação obtida nas Tabelas 1 e 2.'}</div><p class="print-p3">Aprovação técnica: ${getEdit(idx).aprovacao?'SIM':'Pendente'}. ${esc(getEdit(idx).notaAprovacao||'')}</p></section><section class="print-step"><h3>EVIDÊNCIAS E JUSTIFICATIVA</h3><p class="print-p3">${esc(f.evidencias)}</p><p class="print-p3">${esc(getEdit(idx).justificativa_revisao||'')}</p></section><div class="print-foot">Fonte: 24 envasadoras • APPCC revisão preliminar • documento para validação, não substitui Guia oficial</div></article>`}
+
+  function printAnalysis(idx){
+    const module=window.APPCC_FLOW_PRINT;
+    if(!module?.build) return printAnalysisLegacy(idx);
+    const f=getPhrase(idx),edit=getEdit(idx),d=diagnostic(idx);
+    return module.build({
+      frase:f,
+      revisor:state.reviewer,
+      data:displayDate(state.date),
+      depois:classReference(idx),
+      diagnostico:d,
+      respostas:getQuestions(idx),
+      aplicabilidade:validApplicable(idx),
+      q3:getEurestQuestions(idx),
+      criterios:getCriteria(idx),
+      textosCriterios:edit.criteriaText||{},
+      rotulosCriterios:CRITERIA3,
+      documentos:getDocs(idx),
+      aprovacao:!!edit.aprovacao,
+      justificativaAprovacao:edit.notaAprovacao||'',
+      justificativaRevisao:edit.justificativa_revisao||f.justificativa_revisao||'',
+      notaT2:edit.t2Nota||'',
+      conferenciaT2:!!edit.t2Aprovacao
+    });
+  }
   function printVal(label,v,cls=''){return `<div class="print-val-wrap"><b>${esc(label)}</b><div class="print-val ${cls}">${esc(v||'—')}</div></div>`}
   function printConfig(idx){
     const f=getPhrase(idx), docs=getDocs(idx), consider=previewTexts(idx).cons;
@@ -4284,6 +4312,20 @@
     return main+more;
   }
   function fitPrintLayout(){
+    document.querySelectorAll('#printArea .flow-print-page').forEach(page=>{
+      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion')];
+      for(let n=0;n<9;n++){
+        const long=blocks().some(x=>x.scrollHeight>x.clientHeight+2);
+        const overflow=page.scrollHeight>page.clientHeight+2;
+        if(!long&&!overflow)break;
+        const scale=Math.max(.68,1-.04*(n+1));
+        page.style.setProperty('--flow-fit',scale.toFixed(2));
+        if(n>2)page.classList.add('flow-fit-small');
+      }
+      if(page.scrollHeight>page.clientHeight+5){
+        page.dataset.printCheck='Texto extenso; confira visualmente a prévia de impressão.';
+      }
+    });
     // Redução progressiva da fonte e controle de excesso; conserva o layout de quatro colunas.
     document.querySelectorAll('#printArea .print-page').forEach(page=>{
       const isConfig=page.dataset.part==='config';if(!isConfig)return;
@@ -4342,8 +4384,14 @@
   boot();
   // Diagnósticos básicos acessíveis aos testes (somente leitura).
   window.APPCC_REVISAO_DIAGNOSTICO={total:DATA.length,frases:()=>DATA.length,status:()=>diagnostic(index),arvoreQ1Q4:()=>diagnostic(index).eur,impressao:()=>({modulo:el('printModule').value,abrangencia:el('printScope').value})};
+  window.APPCC_EDITOR_BRIDGE={
+    context:()=>({phrase:getPhrase(index),base:getBase(index),docs:getDocs(index),revisor:state.reviewer,data:state.date}),
+    getHistory:()=>state.aiHistory||{},
+    setHistory:history=>{state.aiHistory=history;markDirty();}
+  };
 })();
 </script>
+<script src="./ai-tools.js"></script>
 
 <script>
 /* Instalação exclusiva da Revisão APPCC: não remove nem altera outros PWAs. */

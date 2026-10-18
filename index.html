@@ -3876,6 +3876,10 @@
     notes[k]={...(notes[k]||{}),...patch,updatedAt:new Date().toISOString()};
     markDirty();
   }
+  function noteStale(idx,k){
+    const note=getEdit(idx).questionNotes?.[k];
+    if(note&&note.reviewed){note.reviewed=false;note.reviewedBy='';note.reviewedAt='';}
+  }
   function questionNoteHtml(k,active){
     const n=getQuestionNote(index,k),just=safe(n.justification||''),evidence=safe(n.evidence||'');
     const status=n.reviewed?'Conferida pelo revisor':n.source==='gemini'?'Sugestão Gemini — pendente de revisão':'Justificativa editável do revisor';
@@ -4147,8 +4151,8 @@
       el(id).innerHTML=html;
       bindQuestionNotes(el(id));
       el(id).querySelectorAll('.question.disabled input[type="radio"],.question.disabled [data-clear]').forEach(t=>t.disabled=true);
-      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
-      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
+      el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};noteStale(index,r.name.split('_').pop());for(const k of ['Q1','Q2','Q3','Q4'])noteStale(index,k);const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
+      el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};noteStale(index,b.dataset.clear);for(const k of ['Q1','Q2','Q3','Q4'])noteStale(index,k);const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
     }
   }
   function renderEurest(){
@@ -4162,6 +4166,7 @@
       const order=['Q1','Q2','Q3','Q4'];
       for(const following of order.slice(order.indexOf(key)+1))delete newQuestions[following];
       edit.eurestQuestions=newQuestions;
+      for(const changedKey of order.slice(order.indexOf(key)))noteStale(index,changedKey);
       const after=diagnostic(index),newRoute=(before.eur?.classe||'')!==(after.eur?.classe||'');
       if(newRoute){edit.criteria={};edit.aprovacao=false;}else edit.aprovacao=false;
       markDirty();renderEurest();renderCriteria();updateDecision();
@@ -4341,7 +4346,7 @@
   }
   function fitPrintLayout(){
     document.querySelectorAll('#printArea .flow-print-page').forEach(page=>{
-      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion')];
+      const blocks=()=>[...page.querySelectorAll('.flow-note,.flow-criterion,.flow-conclusion,.flow-nodes,.flow-node .ntxt')];
       for(let n=0;n<9;n++){
         const long=blocks().some(x=>x.scrollHeight>x.clientHeight+2);
         const overflow=page.scrollHeight>page.clientHeight+2;
@@ -4364,7 +4369,7 @@
       });
     });
   }
-  function runPrint(){if(nameError()){toast('Informe o nome do revisor e a data antes de imprimir.');return}save(false);const selection=buildPrintSelection(),pref=el('printModule').value,chosen=pref==='current'?(mode==='analysis'?'appcc':'config'):pref;const area=el('printArea');area.replaceChildren();const html=[];for(const idx of selection){if(chosen==='appcc'||chosen==='both')html.push(printAnalysis(idx));if(chosen==='config'||chosen==='both')html.push(printConfig(idx));}area.innerHTML=html.join('');el('printModule').dataset.resolved=chosen;requestAnimationFrame(()=>{fitPrintLayout();window.print();toast(`Preparadas ${html.length} páginas para impressão.`)})}
+  function runPrint(){if(nameError()){toast('Informe o nome do revisor e a data antes de imprimir.');return}save(false);const selection=buildPrintSelection(),pref=el('printModule').value,chosen=pref==='current'?(mode==='analysis'?'appcc':'config'):pref;const area=el('printArea');area.replaceChildren();const html=[];for(const idx of selection){if(chosen==='appcc'||chosen==='both')html.push(printAnalysis(idx));if(chosen==='config'||chosen==='both')html.push(printConfig(idx));}area.innerHTML=html.join('');el('printModule').dataset.resolved=chosen;requestAnimationFrame(()=>{fitPrintLayout();window.print();toast(`Preparadas ${area.querySelectorAll('.print-page').length} páginas para impressão.`)})}
   // Seleções e carregamento.
   function boot(){
     el('processSelect').innerHTML=processes.map(([id,name])=>`<option value="${esc(id)}">${esc(id)} — ${esc(name)}</option>`).join('');

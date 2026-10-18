@@ -114,7 +114,7 @@ function ensureDialog(){
  +'<label for="geminiPrompt">Consulta preparada (editável)</label><textarea id="geminiPrompt"></textarea>'
  +'<div class="ai-dialog-actions"><button type="button" id="geminiCopy">1 · Copiar consulta</button><button type="button" id="geminiOpen" class="ai-open-google">2 · Abrir Gemini ↗</button></div>'
  +'<label for="geminiSuggestion">3 · Cole abaixo a sugestão recebida no Gemini</label><textarea id="geminiSuggestion" placeholder="Cole aqui a redação sugerida. Revise antes de aplicar."></textarea>'
- +'<div class="ai-dialog-actions"><button type="button" id="geminiApply">Aplicar ao campo</button><button type="button" id="geminiClose">Cancelar / Fechar</button></div>'
+ +'<div class="ai-dialog-actions"><button type="button" id="geminiPaste">Colar resposta copiada</button><button type="button" id="geminiApply">Aplicar ao campo</button><button type="button" id="geminiClose">Cancelar / Fechar</button></div>'
  +'<p id="geminiMessage" aria-live="polite" class="ai-hint">As respostas não são transferidas automaticamente do Gemini. Você escolhe quando aplicar.</p>';
  document.body.appendChild(modal);
  modal.querySelector('#geminiClose').onclick=()=>modal.close();
@@ -129,6 +129,13 @@ function ensureDialog(){
   link.target='_blank';link.rel='noopener noreferrer';
   document.body.appendChild(link);link.click();link.remove();
   say('O Gemini será aberto em nova aba. Cole a consulta copiada e, depois, a resposta no campo 3.');
+ };
+ modal.querySelector('#geminiPaste').onclick=async()=>{
+  try{
+    const copied=await navigator.clipboard.readText();
+    if(copied){modal.querySelector('#geminiSuggestion').value=copied;say('Resposta copiada para revisão. Confira o texto e toque em Aplicar ao campo.');}
+    else say('Área de transferência vazia. Cole manualmente a resposta no campo 3.');
+  }catch(_){say('Chrome não autorizou a leitura da área de transferência. Cole a resposta manualmente.');}
  };
  modal.querySelector('#geminiApply').onclick=()=>{
   if(!activeTarget||!document.contains(activeTarget)){say('O campo de origem mudou. Feche a consulta e abra o campo novamente.');return;}

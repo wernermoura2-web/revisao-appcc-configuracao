@@ -98,6 +98,8 @@ function promptFor(control){
   'Processo: '+(f.processo||'Não informado'),
   'Item: '+(f.item||'Não informado')+'; frase: '+(f.indice??'?'),
   'Texto da frase: '+(f.frase||'Não disponível'),
+  'APPCC proposto antes de concluir: '+(f.appcc_proposto||'Não informado'),
+  'APPCC pela árvore de decisão: '+(c.classificacao?.classe||'Pendente')+' ('+(c.classificacao?.estado||'em análise')+').',
   'Perigo identificado: '+(f.perigo||'Não informado'),
   'Medida preventiva/de controle: '+(f.medida||'Não informada'),
   'Campo a revisar: '+field,
@@ -138,7 +140,7 @@ function ensureDialog(){
   }catch(_){say('Chrome não autorizou a leitura da área de transferência. Cole a resposta manualmente.');}
  };
  modal.querySelector('#geminiApply').onclick=()=>{
-  if(!activeTarget||!document.contains(activeTarget)){say('O campo de origem mudou. Feche a consulta e abra o campo novamente.');return;}
+  if(!activeTarget||!document.contains(activeTarget)||activeTarget.disabled){say('O campo está indisponível neste caminho. Retorne à frase e valide o caminho antes de aplicar a sugestão.');return;}
   const key=signature(activeTarget);
   if(key!==activeKey){say('Você selecionou outra frase. Retorne à frase original antes de aplicar.');return;}
   const suggestion=modal.querySelector('#geminiSuggestion').value.trim();
@@ -160,7 +162,7 @@ function openConsult(control){
  if(!dialog.open)dialog.showModal();
 }
 function enhance(control){
- if(prepared.has(control)||control.readOnly)return;
+ if(prepared.has(control)||control.readOnly||control.disabled)return;
  prepared.add(control);
  const tools=document.createElement('div');tools.className='ai-field-tools';tools.setAttribute('role','group');tools.setAttribute('aria-label','Assistência e restauração do campo');
  const consult=document.createElement('button');consult.className='ai-open-google';consult.type='button';consult.textContent='✦ Consultar IA Google';consult.title='Preparar consulta curta ao Gemini';

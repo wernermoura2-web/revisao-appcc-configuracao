@@ -70,7 +70,7 @@ function fromReview(p,filename){
   }
   if(!Object.keys(data).length)continue;
   rows.push({sourceGuide:g,sourceType:'revisao',filename,sourcePhrase:{...phrase,guide:g},
-   data,sourceKey:key,originVersion:p.format||'revisao-local'});
+   data,sourceKey:key,originVersion:p.format||'revisao-local',sourceReviewer:state.reviewer,sourceDate:state.date});
  }
  return rows;
 }
@@ -111,7 +111,7 @@ function legacyRows(payload,filename){
   if(ins.length)data.inspecao_legislativa=ins;
   if(!Object.keys(data).length)continue;
   rows.push({sourceGuide:'leg',sourceType:'legacy',filename,sourcePhrase:{...f,guide:'leg'},sourceKey:String(f.n),data,
-   originVersion:'guia-appcc-desenvolvimento'});
+   originVersion:'guia-appcc-desenvolvimento',sourceReviewer:String(s.m?.co||''),sourceDate:String(s.m?.dt||'')});
  }
  return rows;
 }

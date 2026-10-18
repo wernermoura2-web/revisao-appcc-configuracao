@@ -218,7 +218,7 @@ function apply(){
   const updated={...dest,...compare.updates,aprovacao:false,t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:''};
   updated.consolidationHistory=Array.isArray(dest.consolidationHistory)?clone(dest.consolidationHistory):[];
   const proof={originFile:item.file,originGuide:item.row.sourceGuide,originItem:item.row.sourcePhrase.item,
-    originPhrase:item.row.sourcePhrase.indice,originNumber:item.row.sourcePhrase.n,targetGuide,
+    originPhrase:item.row.sourcePhrase.indice,originNumber:item.row.sourcePhrase.n,sourceReviewer:item.row.sourceReviewer||'',sourceDate:item.row.sourceDate||'',targetGuide,
     targetNumber:target.n,fields:Object.keys(compare.updates),strategy,at:new Date().toISOString(),
     verified:true,conflicts:compare.conflicts.map(c=>c.key)};
   updated.consolidationHistory.push(proof);

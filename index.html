@@ -4253,6 +4253,7 @@
     const f=getPhrase(idx),edit=getEdit(idx),d=diagnostic(idx);
     return module.build({
       frase:f,
+      fraseBase:getBase(idx),
       revisor:state.reviewer,
       data:displayDate(state.date),
       depois:classReference(idx),

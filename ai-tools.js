@@ -124,9 +124,11 @@ function ensureDialog(){
   catch(_){const box=modal.querySelector('#geminiPrompt');box.focus();box.select();const done=document.execCommand?.('copy');say(done?'Consulta copiada.':'Selecione e copie o texto manualmente.');}
  };
  modal.querySelector('#geminiOpen').onclick=()=>{
-  const tab=window.open('https://gemini.google.com/app','_blank','noopener,noreferrer');
-  if(!tab)say('Não foi possível abrir uma aba. Acesse gemini.google.com/app diretamente no Chrome.');
-  else say('Cole no Gemini a consulta copiada. A resposta deve ser colada no campo 3.');
+  const link=document.createElement('a');
+  link.href='https://gemini.google.com/app';
+  link.target='_blank';link.rel='noopener noreferrer';
+  document.body.appendChild(link);link.click();link.remove();
+  say('O Gemini será aberto em nova aba. Cole a consulta copiada e, depois, a resposta no campo 3.');
  };
  modal.querySelector('#geminiApply').onclick=()=>{
   if(!activeTarget||!document.contains(activeTarget)){say('O campo de origem mudou. Feche a consulta e abra o campo novamente.');return;}

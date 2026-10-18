@@ -78,6 +78,9 @@ function ensureDialog(){
  '<p class="qai-return"><b>Para voltar:</b> copie a resposta no Gemini e use a seta Voltar do Android. Se o Gemini abrir como aplicativo, use Aplicativos recentes e selecione Revisão APPCC. Depois cole a resposta aqui.</p>',
  '<label for="qaiReply">3 · Resposta do Gemini (cole aqui)</label><textarea id="qaiReply" rows="5" placeholder="RESPOSTA: INDETERMINADO\nJUSTIFICATIVA: ...\nEVIDÊNCIA NECESSÁRIA: ..."></textarea>',
  '<div class="qai-actions"><button type="button" id="qaiPaste">Colar resposta copiada</button></div>',
+ '<label for="qaiJustification">Justificativa gerada — revise ou edite antes de salvar</label><textarea id="qaiJustification" rows="3" placeholder="Justificativa específica desta pergunta"></textarea>',
+ '<label for="qaiEvidence">Evidência necessária — revise ou complemente</label><textarea id="qaiEvidence" rows="2" placeholder="Documento, registro ou verificação necessária"></textarea>',
+ '<div class="qai-actions"><button type="button" id="qaiSaveNotes">Salvar justificativa sem marcar Sim/Não</button></div>',
  '<p class="qai-extracted" id="qaiExtracted">A sugestão aparecerá aqui. Examine a justificativa antes de marcar Sim ou Não.</p>',
  '<fieldset class="qai-review"><legend>4 · Decisão do revisor (obrigatória para alterar a resposta)</legend>',
  '<label><input type="radio" name="qaiChoice" value="S"> Confirmar SIM</label>',
@@ -108,13 +111,45 @@ function ensureDialog(){
   catch(_){msg('O navegador bloqueou a leitura automática. Toque no campo de resposta e escolha Colar.');}
  };
  dialog.querySelector('#qaiReply').addEventListener('input',updateParsed);
+ dialog.querySelector('#qaiSaveNotes').onclick=()=>saveNotes(false);
  dialog.querySelector('#qaiApply').onclick=applyDecision;
  return dialog;
+}
+function extractFields(reply){
+ const lines=String(reply||'').split(/\r?\n/),sections={justification:'',evidence:''};
+ let current='';
+ for(const line of lines){
+  const match=line.match(/^\s*\*{0,2}(JUSTIFICATIVA|EVID[EÊ]NCIA\s+NECESS[AÁ]RIA)\*{0,2}\s*:\s*(.*)$/i);
+  if(match){current=/^JUSTIFICATIVA/i.test(match[1])?'justification':'evidence';sections[current]+=(sections[current]?'\n':'')+match[2].trim();}
+  else if(current&&line.trim())sections[current]+='\n'+line.trim();
+ }
+ return sections;
+}
+function saveNotes(reviewed){
+ if(!active||String(context().phrase?.n)!==String(active.phraseId)){msg('Mudança de frase detectada: volte à pergunta original antes de salvar.');return false;}
+ const justification=dialog.querySelector('#qaiJustification').value.trim();
+ const evidence=dialog.querySelector('#qaiEvidence').value.trim();
+ if(!justification&&!evidence){msg('Registre ou cole uma justificativa ou evidência antes de salvar.');return false;}
+ const old=window.APPCC_EDITOR_BRIDGE?.getQuestionNote?.(active.code)||{};
+ const note={justification,evidence,source:'gemini',reviewed:!!reviewed,reviewedBy:reviewed?context().revisor||'Revisor não identificado':'',reviewedAt:reviewed?new Date().toISOString():'',suggestedAnswer:parsedAnswer(dialog.querySelector('#qaiReply').value)||old.suggestedAnswer||''};
+ window.APPCC_EDITOR_BRIDGE?.setQuestionNote?.(active.code,note);
+ const row=questionRow(active.group,active.code);
+ const j=row?.querySelector('[data-question-justification]');
+ const e=row?.querySelector('[data-question-evidence]');
+ if(j)j.value=justification;
+ if(e)e.value=evidence;
+ const status=row?.querySelector('.question-note-status');
+ if(status)status.textContent=reviewed?'Conferida pelo revisor':'Sugestão Gemini — pendente de revisão';
+ msg(reviewed?'Justificativa e decisão registradas.':'Justificativa registrada; resposta Sim/Não não foi alterada.');
+ return true;
 }
 function updateParsed(){
  const result=parsedAnswer(dialog.querySelector('#qaiReply').value);
  const desc=result==='S'?'SIM':result==='N'?'NÃO':result==='I'?'INDETERMINADO':'não identificada no formato esperado';
- dialog.querySelector('#qaiExtracted').textContent='Sugestão extraída do Gemini: '+desc+'. Confira a justificativa e selecione sua decisão abaixo; nenhuma resposta é marcada automaticamente.';
+ dialog.querySelector('#qaiExtracted').textContent='Sugestão extraída do Gemini: '+desc+'. Confira e edite os campos antes de salvar; nenhuma resposta é marcada automaticamente.';
+ const parts=extractFields(dialog.querySelector('#qaiReply').value);
+ dialog.querySelector('#qaiJustification').value=parts.justification;
+ dialog.querySelector('#qaiEvidence').value=parts.evidence;
 }
 function openQuestion(row,group,code){
  if(!isActive(row))return;
@@ -125,6 +160,9 @@ function openQuestion(row,group,code){
  pop.querySelector('#qaiSubject').textContent=code+' — '+(row.querySelector('.question-title')?.textContent||'');
  pop.querySelector('#qaiPrompt').value=promptFor(row,group,code);
  pop.querySelector('#qaiReply').value='';
+ const note=window.APPCC_EDITOR_BRIDGE?.getQuestionNote?.(code)||{};
+ pop.querySelector('#qaiJustification').value=note.justification||'';
+ pop.querySelector('#qaiEvidence').value=note.evidence||'';
  pop.querySelectorAll('[name="qaiChoice"]').forEach(r=>r.checked=false);
  pop.querySelector('#qaiExtracted').textContent='A sugestão aparecerá aqui. Examine a justificativa antes de marcar Sim ou Não.';
  msg('Pergunta '+code+' selecionada. Somente sua confirmação altera o Guia.');
@@ -141,6 +179,7 @@ function applyDecision(){
  }
  const current=rowAnswer(row);
  if(choice==='I'){
+  if(dialog.querySelector('#qaiJustification').value.trim()||dialog.querySelector('#qaiEvidence').value.trim())saveNotes(false);
   if(current){
    if(!confirm('A pergunta '+active.code+' já está marcada como '+answerText(current)+'. Limpar a marcação por falta de evidências? O fluxo e as validações serão recalculados.'))return;
    const clear=row.querySelector('[data-clear]');
@@ -151,11 +190,12 @@ function applyDecision(){
  }
  const radio=[...row.querySelectorAll('input[type="radio"]')].find(r=>r.value===choice&&!r.disabled);
  if(!radio){msg('Esta pergunta não está disponível no caminho atual.');return;}
- if(current===choice){dialog.close();return;}
+ if(current===choice){if(dialog.querySelector('#qaiJustification').value.trim()||dialog.querySelector('#qaiEvidence').value.trim())saveNotes(true);dialog.close();return;}
  const warning=current?'A resposta anterior ('+answerText(current)+') será substituída. ':'';
  if(!confirm(warning+'Confirmar '+answerText(choice)+' em '+active.code+'? O fluxo APPCC será recalculado e as validações anteriores poderão ser invalidadas.'))return;
  radio.checked=true;
  radio.dispatchEvent(new Event('change',{bubbles:true}));
+ if(dialog.querySelector('#qaiJustification').value.trim()||dialog.querySelector('#qaiEvidence').value.trim())saveNotes(true);
  dialog.close();
 }
 function enhanceQuestions(){

@@ -4387,7 +4387,7 @@
   // Diagnósticos básicos acessíveis aos testes (somente leitura).
   window.APPCC_REVISAO_DIAGNOSTICO={total:DATA.length,frases:()=>DATA.length,status:()=>diagnostic(index),arvoreQ1Q4:()=>diagnostic(index).eur,impressao:()=>({modulo:el('printModule').value,abrangencia:el('printScope').value})};
   window.APPCC_EDITOR_BRIDGE={
-    context:()=>({phrase:getPhrase(index),base:getBase(index),docs:getDocs(index),revisor:state.reviewer,data:state.date}),
+    context:()=>({phrase:getPhrase(index),base:getBase(index),docs:getDocs(index),classificacao:diagnostic(index),revisor:state.reviewer,data:state.date}),
     getHistory:()=>state.aiHistory||{},
     setHistory:history=>{state.aiHistory=history;markDirty();}
   };

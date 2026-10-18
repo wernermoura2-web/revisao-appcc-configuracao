@@ -3857,7 +3857,7 @@
   const processCode=f=>f.item.split('.').slice(0,2).join('.');
   const processes=[...new Map(DATA.map(f=>[processCode(f),f.processo])).entries()];
   const validYN=v=>v==='S'||v==='N'?v:'';
-  const baseEdit={questions:{},eurestQuestions:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
+  const baseEdit={questions:{},eurestQuestions:{},questionNotes:{},criteria:{},criteriaText:{},aprovacao:false,notaAprovacao:'',t2Aprovacao:false,t2Classe:'',t2Revisor:'',t2Data:'',t2Nota:'',justificativa_revisao:''};
   let saved={}; try { saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch{}
   let state={version:1,reviewer:safe(saved.reviewer||''),date:safe(saved.date||''),edits:saved.edits&&typeof saved.edits==='object'?saved.edits:{},aiHistory:saved.aiHistory&&typeof saved.aiHistory==='object'?saved.aiHistory:{},backupInterval:[0,1,5,10,30,60].includes(+saved.backupInterval)?+saved.backupInterval:5,updatedAt:saved.updatedAt||null};
   let index=0, mode='analysis',dirty=false,autosaveTimer=null,backupTimer=null,activeEditor=null,zoom=false;
@@ -3869,6 +3869,29 @@
   const getCriteria=idx=>Object.assign({},getEdit(idx).criteria||{});
   const getEurestQuestions=idx=>Object.assign({},getEdit(idx).eurestQuestions||{});
   const getDocs=idx=>getEdit(idx).documentos||DATA[idx].documentos||[];
+  const getQuestionNote=(idx,k)=>getEdit(idx).questionNotes?.[k]||{};
+  function setQuestionNote(idx,k,patch){
+    if(!/^(?:[A-I]|Q[1-4])$/.test(k))return;
+    const edit=ensureEdit(idx),notes=edit.questionNotes||(edit.questionNotes={});
+    notes[k]={...(notes[k]||{}),...patch,updatedAt:new Date().toISOString()};
+    markDirty();
+  }
+  function questionNoteHtml(k,active){
+    const n=getQuestionNote(index,k),just=safe(n.justification||''),evidence=safe(n.evidence||'');
+    const status=n.reviewed?'Conferida pelo revisor':n.source==='gemini'?'Sugestão Gemini — pendente de revisão':'Justificativa editável do revisor';
+    return `<div class="question-note-block${active?'':' question-note-inactive'}" data-note="${esc(k)}"><div class="question-note-status">${esc(status)}${!active?' · pergunta não aplicável neste caminho':''}</div><label>Justificativa da resposta <textarea data-question-justification="${esc(k)}" rows="2" placeholder="Registre a justificativa técnica da resposta" ${active?'':'readonly'}>${esc(just)}</textarea></label><label>Evidência necessária / fundamentação <textarea data-question-evidence="${esc(k)}" rows="2" placeholder="Registre a verificação necessária" ${active?'':'readonly'}>${esc(evidence)}</textarea></label></div>`;
+  }
+  function bindQuestionNotes(container){
+    container.querySelectorAll('[data-question-justification],[data-question-evidence]').forEach(t=>{
+      t.addEventListener('input',()=>{
+        const k=t.dataset.questionJustification||t.dataset.questionEvidence;
+        const key=t.dataset.questionJustification?'justification':'evidence';
+        setQuestionNote(index,k,{[key]:t.value,source:'manual',reviewed:false});
+        const status=t.closest('.question-note-block')?.querySelector('.question-note-status');
+        if(status)status.textContent='Justificativa editável do revisor · ainda não conferida';
+      });
+    });
+  }
   const nameError=()=>!state.reviewer.trim()||!state.date;
   const markDirty=()=>{dirty=true;el('saveState').textContent='Alterações pendentes';clearTimeout(autosaveTimer);autosaveTimer=setTimeout(()=>save(false),850)};
   function toast(t){const b=el('toast');b.textContent=t;b.style.display='block';clearTimeout(toast.timeout);toast.timeout=setTimeout(()=>{b.style.display='none'},3000)}
@@ -4120,8 +4143,9 @@
   }
   function renderQuestions(){const f=getPhrase(index),q=getQuestions(index),active=validApplicable(index);
     for(const [id,src] of [['questions1',QUESTIONS1],['questions2',QUESTIONS2]]){
-      let html='';for(const [k,title] of Object.entries(src))html+=`<div class="question ${active[k]?'':'disabled'}"><strong>${k}</strong><label class="question-title">${esc(title)}</label>${yesNo(k,q[k]||'',f.n)}</div>`;
+      let html='';for(const [k,title] of Object.entries(src))html+=`<div class="question ${active[k]?'':'disabled'}"><strong>${k}</strong><label class="question-title">${esc(title)}</label>${yesNo(k,q[k]||'',f.n)}${questionNoteHtml(k,!!active[k])}</div>`;
       el(id).innerHTML=html;
+      bindQuestionNotes(el(id));
       el(id).querySelectorAll('.question.disabled input[type="radio"],.question.disabled [data-clear]').forEach(t=>t.disabled=true);
       el(id).querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[r.name.split('_').pop()]:r.value};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
       el(id).querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{const before=diagnostic(index);ensureEdit(index).questions={...getQuestions(index),[b.dataset.clear]:''};const after=diagnostic(index);const revalidate=invalidatePreviousValidation(before,after);markDirty();renderQuestions();renderEurest();renderCriteria();updateDecision();if(revalidate)toast('Caminho PCC/PPRO alterado: valide novamente os seis critérios da Tabela 3. Os textos foram preservados.');}));
@@ -4130,7 +4154,8 @@
   function renderEurest(){
     const f=getPhrase(index),q=getEurestQuestions(index),d=diagnostic(index);
     const active=d.route==='3'?d.eur.active:Object.fromEntries(Object.keys(EUREST_Q).map(k=>[k,false]));
-    el('questionsEurest').innerHTML=Object.entries(EUREST_Q).map(([key,title])=>`<div class="question ${active[key]?'':'disabled'}"><strong>${key}</strong><label class="question-title">${esc(title)}</label>${yesNo(key,q[key]||'',`arvore3_${f.n}`)}</div>`).join('');
+    el('questionsEurest').innerHTML=Object.entries(EUREST_Q).map(([key,title])=>`<div class="question ${active[key]?'':'disabled'}"><strong>${key}</strong><label class="question-title">${esc(title)}</label>${yesNo(key,q[key]||'',`arvore3_${f.n}`)}${questionNoteHtml(key,!!active[key])}</div>`).join('');
+    bindQuestionNotes(el('questionsEurest'));
     el('questionsEurest').querySelectorAll('.question.disabled input[type="radio"],.question.disabled [data-clear]').forEach(t=>t.disabled=true);
     function change(key,value){
       const before=diagnostic(index),edit=ensureEdit(index),newQuestions={...getEurestQuestions(index),[key]:value};
@@ -4262,6 +4287,7 @@
       respostas:getQuestions(idx),
       aplicabilidade:validApplicable(idx),
       q3:getEurestQuestions(idx),
+      justificativasPerguntas:edit.questionNotes||{},
       criterios:getCriteria(idx),
       textosCriterios:edit.criteriaText||{},
       rotulosCriterios:CRITERIA3,
@@ -4390,7 +4416,10 @@
   window.APPCC_EDITOR_BRIDGE={
     context:()=>({phrase:getPhrase(index),base:getBase(index),docs:getDocs(index),classificacao:diagnostic(index),revisor:state.reviewer,data:state.date}),
     getHistory:()=>state.aiHistory||{},
-    setHistory:history=>{state.aiHistory=history;markDirty();}
+    setHistory:history=>{state.aiHistory=history;markDirty();},
+    getQuestionNote:key=>getQuestionNote(index,key),
+    setQuestionNote:(key,patch)=>{setQuestionNote(index,key,patch);return true;},
+    currentQuestionAnswer:key=>key.startsWith('Q')?getEurestQuestions(index)[key]||'':getQuestions(index)[key]||''
   };
 })();
 </script>

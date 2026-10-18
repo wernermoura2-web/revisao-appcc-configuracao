@@ -153,6 +153,9 @@ function diff(dest,source,opts){
  const updates={},conflicts=[];
  for(const [key,value] of Object.entries(source||{})){
   if(!filled(value))continue;
+  if(key==='probabilidade_24'&&(!Number.isInteger(Number(value))||Number(value)<1||Number(value)>5))continue;
+  if(key==='appcc_proposto'&&!['PPHO','PPR','PC','PPRO','PCC'].includes(String(value)))continue;
+  if(key==='frase'&&(typeof value!=='string'||!value.trim()))continue;
   if(blocked.has(key)&&!(key==='probabilidade_24'&&overProb||key==='frase'&&overText))continue;
   if(!allowed.has(key)&&key!=='frase'&&key!=='probabilidade_24')continue;
   const node=mergeValue(dest?.[key],value,key,strategy,conflicts);

@@ -6,7 +6,7 @@ if(!core||!bridge)return;
 const HIST='guia_appcc_consolidacao_historico_v1';
 const MAP='guia_appcc_correspondencias_confirmadas_v1';
 const clone=x=>JSON.parse(JSON.stringify(x));
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','"':'&quot;'}[c]));
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=x=>Number(x)||0;
 const storage=(k,def)=>{try{return JSON.parse(localStorage.getItem(k)||'null')??def}catch(_){return def}};
 const readStates=()=>({bpf:core.normalizeState(storage(core.keys.bpf,{})),leg:core.normalizeState(storage(core.keys.leg,{}))});
@@ -241,6 +241,7 @@ function apply(){
   history.push({at:now,guide:targetGuide,updated:seen.size,copiedFields:summary.updates,conflicts:summary.conflicts,
     sources:[...new Set(audit.map(x=>x.originFile))],records:audit});
   localStorage.setItem(HIST,JSON.stringify(history.slice(-300)));
+  if(targetGuide===bridge.guide)bridge.adoptLocalState?.(states[targetGuide]);
  }catch(e){
   note('Não foi possível gravar no dispositivo: '+e.message+'. Guarde seus arquivos originais.','error');return;
  }

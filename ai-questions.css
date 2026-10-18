@@ -32,3 +32,8 @@
 .qai-dialog #qaiJustification,.qai-dialog #qaiEvidence{min-height:74px}
 @media(max-width:560px){.question-note-block{grid-column:1 / -1;grid-template-columns:1fr}.question-note-block .question-note-status{grid-column:1 / -1}}
 @media print{.question-note-block{display:none!important}}
+
+.question-note-actions{grid-column:1 / -1;display:flex;gap:7px;flex-wrap:wrap}
+.question-note-actions button{font-size:10px!important;padding:5px 9px!important;background:#f5f8fc!important;border:1px solid #bad0df!important;border-radius:6px!important;color:#285974!important}
+.question-note-actions button:disabled{opacity:.35;cursor:not-allowed}
+@media print{.question-note-actions{display:none!important}}

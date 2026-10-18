@@ -37,7 +37,7 @@ function pathNodes(items,q,active){
  const all=Object.entries(items);
  const used=all.filter(([k])=>!!active[k]);
  const skipped=all.filter(([k])=>!active[k]).map(([k])=>k);
- const main=used.map(([k,t])=>node(k,t,q,true)).join('');
+ const main=used.map(([k,t],i)=>node(k,t,q,true).replace('class="flow-node ',i===used.length-1?'class="flow-node flow-last-active ':'class="flow-node ')).join('');
  const path=main||'<div class="flow-inactive">Etapa não percorrida neste caminho</div>';
  const note=skipped.length?'<div class="flow-unused">Não aplicável: '+skipped.map(esc).join(' · ')+'</div>':'';
  return path+note;

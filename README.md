@@ -49,3 +49,10 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 6. Atualizado cache PWA para incorporar os arquivos de impressão e consulta.
 
 **Validações realizadas no código:** 17 caminhos de decisão APPCC (incluindo os percursos PCC/PPRO da simulação); geração de 76 páginas HTML gráficas, uma para cada frase; verificações de sintaxe dos scripts. A impressão real e o comportamento de instalação ainda devem ser conferidos no navegador/dispositivo usado pelo revisor.
+
+## Impressão gráfica compacta (18/10/2026)
+
+- **Fluxograma e até seis quadros de justificativa na mesma folha A4 vertical** por frase (substitui a separação anterior entre folha do fluxograma e duas folhas de justificativas).
+- Os campos de cada pergunta indicam resposta Sim/Não/N/A, justificativa, evidências necessárias e se a sugestão foi conferida.
+- Para preservar a integridade dos textos, justificativas excepcionalmente longas ou em quantidade superior à capacidade da folha são encaminhadas às páginas complementares; a exportação JSON mantém o conteúdo integral.
+- A configuração da frase e o Apêndice C mantêm seus formatos anteriores.

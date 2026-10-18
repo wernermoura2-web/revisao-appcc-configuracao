@@ -3760,6 +3760,7 @@
 <link rel="stylesheet" href="./ai-tools.css">
 <link rel="stylesheet" href="./ai-questions.css">
 <link rel="stylesheet" href="./transfer-ui.css">
+<link rel="stylesheet" href="./consolidation-ui.css">
 </head>
 <body>
 <header class="app-header"><div class="brand"><div class="brand-mark">APPCC</div><div><h1>Revisão APPCC · Configuração do Guia</h1><p>Guia Estadual de Avaliação do Risco Sanitário · Rev.6 / V82.55 · 24 envasadoras</p></div></div><div class="header-status"><span id="saveState" aria-live="polite">Aguardando identificação</span><span id="counter">Frase 1 de 76</span></div></header>
@@ -4476,6 +4477,18 @@
   // API limitada ao transporte entre duas revisões locais, sem tocar na base oficial.
   window.APPCC_GUIDE_BRIDGE={
     guide:SELECTED_GUIDE,
+    adoptLocalState:newState=>{
+      if(!newState||!newState.edits||typeof newState.edits!=='object')return false;
+      state={
+        version:1,reviewer:safe(newState.reviewer||''),date:safe(newState.date||''),
+        edits:clone(newState.edits),aiHistory:clone(newState.aiHistory||{}),
+        backupInterval:+newState.backupInterval||5,updatedAt:newState.updatedAt||null
+      };
+      el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;
+      el('backupInterval').value=String(state.backupInterval);
+      render();renderBackups();resetBackupClock();
+      return true;
+    },
     current:()=>({index,base:getBase(index),phrase:getPhrase(index),edit:clone(getEdit(index)),diagnostic:diagnostic(index)}),
     dataset:()=>DATA.map(f=>({n:f.n,item:f.item,indice:f.indice,frase:f.frase,processo:f.processo})),
     itemIndexes:()=>DATA.map((f,i)=>f.item===DATA[index].item?i:-1).filter(i=>i>=0),
@@ -4499,6 +4512,8 @@
 <script src="./ai-tools.js"></script>
 <script src="./ai-questions.js"></script>
 <script src="./transfer-ui.js"></script>
+<script src="./consolidation-core.js"></script>
+<script src="./consolidation-ui.js"></script>
 
 <script>
 /* Instalação exclusiva da Revisão APPCC: não remove nem altera outros PWAs. */

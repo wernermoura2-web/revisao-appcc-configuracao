@@ -94,7 +94,10 @@ function build(ctx){
  const end=v(ctx.justificativaAprovacao).trim();
  const review=esc(ctx.revisor||'Não informado'), date=esc(ctx.data||'Data não informada');
  const danger=esc(f.perigo||'Não registrado'), measure=esc(f.medida||'Não registrada');
- const graphic='<article class="print-page flow-print-page" data-part="analysis">'
+ const notesCards=collectNoteCards(ctx);
+ const inside=notesCards.slice(0,6);
+ const extra=notesCards.slice(6);
+ const graphic='<article class="print-page flow-print-page'+(inside.length?' flow-with-justifications':'')+'" data-part="analysis">'
   +'<header class="flow-header"><b>GUIA ESTADUAL · REVISÃO APPCC — FLUXO DA FRASE</b><span class="flow-revisor">Item '+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'<br>Revisor: '+review+' · '+date+'</span></header>'
   +'<div class="flow-body">'
   +'<div class="flow-identity">'
@@ -117,9 +120,10 @@ function build(ctx){
   +note('Observação / exemplo da frase'+(isUneditedBase?' · texto-base':' · texto revisado'),exampleForPrint)
   +note('Observações dos documentos avaliados',docs)
   +'</div></div>'
+  +inlineJustifications(inside)
   +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: PPHO 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'
   +'</div></article>';
- return graphic+printJustificationPages(ctx);
+ return graphic+printJustificationPages(ctx,extra);
 }
 function safeParts(value,limit){
  const str=v(value).trim();
@@ -133,7 +137,8 @@ function safeParts(value,limit){
  if(rest)chunks.push(rest);
  return chunks;
 }
-function printJustificationPages(ctx){
+
+function collectNoteCards(ctx){
  const f=ctx.frase||{},notes=ctx.justificativasPerguntas||{};
  const all={...short1,...short2,...short3};
  const q=ctx.respostas||{},e=ctx.q3||{},app=ctx.aplicabilidade||{};
@@ -144,30 +149,50 @@ function printJustificationPages(ctx){
   if(!why&&!evidence)continue;
   const active=k.startsWith('Q')?!!qapp[k]:!!app[k];
   const resp=k.startsWith('Q')?e[k]:q[k];
-  const val=active?resp==='S'?'SIM':resp==='N'?'NÃO':'PENDENTE':'NÃO APLICÁVEL NO CAMINHO ATUAL';
+  const val=active?resp==='S'?'SIM':resp==='N'?'NÃO':'PENDENTE':'NÃO APLICÁVEL';
   const review=n.reviewed?'Conferida pelo revisor'+(n.reviewedBy?' · '+n.reviewedBy:'')
-    :n.source==='gemini'?'Sugestão do Gemini — não conferida':'Redação registrada — conferência pendente';
-  const j=safeParts(why,420),ev=safeParts(evidence,210);
-  for(let i=0;i<Math.max(j.length,ev.length,1);i++){
-   cards.push({k,label,val,review,part:i+1,total:Math.max(j.length,ev.length,1),why:j[i]||'',evidence:ev[i]||''});
+    :n.source==='gemini'?'Sugestão Gemini — conferir':'Conferência pendente';
+  // Cards curtos permitem 3 colunas × 2 linhas na folha do fluxograma.
+  // Conteúdo extenso continua em outra página; nunca é descartado.
+  const chunksWhy=safeParts(why,245),chunksEvidence=safeParts(evidence,145);
+  const total=Math.max(chunksWhy.length,chunksEvidence.length,1);
+  for(let i=0;i<total;i++){
+   cards.push({k,label,val,review,part:i+1,total,why:chunksWhy[i]||'',evidence:chunksEvidence[i]||''});
   }
  }
+ return cards;
+}
+function cardHTML(c,compact=false){
+ return '<section class="'+(compact?'flow-inline-card':'flow-jcard')+'">'
+  +'<div class="flow-jcard-head"><b>'+esc(c.k)+' · '+esc(c.val)+'</b><span>'+esc(c.review)+'</span></div>'
+  +'<div class="flow-jquestion">'+esc(c.label)+(c.total>1?' · '+c.part+'/'+c.total:'')+'</div>'
+  +'<div class="flow-jcontent"><b>Justificativa:</b> '+(c.why?esc(c.why):'<i>Não registrada</i>')+'</div>'
+  +'<div class="flow-jcontent"><b>Evidência necessária:</b> '+(c.evidence?esc(c.evidence):'<i>Não informada</i>')+'</div>'
+  +'</section>';
+}
+function inlineJustifications(cards){
  if(!cards.length)return '';
+ const count=cards.length;
+ return '<section class="flow-inline-notes" aria-label="Justificativas das perguntas APPCC">'
+  +'<div class="flow-section-title">JUSTIFICATIVAS A–I / Q1–Q4'
+  +'<small>'+count+' registro(s) · conteúdo integral · conferência do revisor</small></div>'
+  +'<div class="flow-inline-grid">'+cards.map(c=>cardHTML(c,true)).join('')+'</div>'
+  +'</section>';
+}
+function printJustificationPages(ctx,cards){
+ if(!cards.length)return '';
+ const f=ctx.frase||{};
  let html='';
- for(let p=0;p<cards.length;p+=4){
-  const group=cards.slice(p,p+4);
-  const number=1+Math.floor(p/4);
+ // Apenas conteúdo que excedeu os seis quadros da folha principal.
+ for(let p=0;p<cards.length;p+=6){
+  const group=cards.slice(p,p+6);
+  const number=1+Math.floor(p/6);
   html+='<article class="print-page flow-justifications-page" data-part="analysis-justifications">'
-   +'<header class="flow-jheader"><b>APPCC · JUSTIFICATIVAS DAS DECISÕES (A–I / Q1–Q4)</b>'
-   +'<span>'+esc(f.processo)+' · '+esc(f.item)+' · Frase '+esc(f.indice)+' · Página complementar '+number+'</span></header>'
+   +'<header class="flow-jheader"><b>APPCC · CONTINUAÇÃO DAS JUSTIFICATIVAS</b>'
+   +'<span>'+esc(f.processo)+' · '+esc(f.item)+' · Frase '+esc(f.indice)+' · Complemento '+number+'</span></header>'
    +'<div class="flow-jintro"><b>Frase analisada:</b> '+esc(f.frase||'')+'<br><b>Revisor:</b> '+esc(ctx.revisor||'Não informado')+' · '+esc(ctx.data||'Data não informada')+'</div>'
-   +'<div class="flow-jgrid">'+group.map(c=>'<section class="flow-jcard">'
-   +'<div class="flow-jcard-head"><b>'+esc(c.k)+' · '+esc(c.val)+'</b><span>'+esc(c.review)+'</span></div>'
-   +'<div class="flow-jquestion">'+esc(c.label)+(c.total>1?' · continuação '+c.part+'/'+c.total:'')+'</div>'
-   +'<div class="flow-jcontent"><b>Justificativa:</b> '+(c.why?esc(c.why):'<i>Sem texto nesta parte</i>')+'</div>'
-   +'<div class="flow-jcontent"><b>Evidência necessária / fundamentação:</b> '+(c.evidence?esc(c.evidence):'<i>Não informada nesta parte</i>')+'</div>'
-   +'</section>').join('')+'</div>'
-   +'<footer class="flow-jfoot">As justificativas do Gemini são sugestões. As respostas Sim/Não e a homologação dependem de verificação técnica do revisor. Os campos integrais ficam preservados na exportação JSON.</footer>'
+   +'<div class="flow-jgrid">'+group.map(c=>cardHTML(c)).join('')+'</div>'
+   +'<footer class="flow-jfoot">Justificativas de IA dependem de conferência técnica. Textos integrais preservados também no JSON.</footer>'
    +'</article>';
  }
  return html;

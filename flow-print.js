@@ -97,7 +97,7 @@ function build(ctx){
  const notesCards=collectNoteCards(ctx);
  const inside=notesCards.slice(0,6);
  const extra=notesCards.slice(6);
- const graphic='<article class="print-page flow-print-page'+(inside.length?' flow-with-justifications':'')+'" data-part="analysis">'
+ const graphic='<article class="print-page flow-print-page flow-with-justifications'+(inside.length?' flow-has-notes':' flow-no-notes')+'" data-part="analysis">'
   +'<header class="flow-header"><b>GUIA ESTADUAL · REVISÃO APPCC — FLUXO DA FRASE</b><span class="flow-revisor">Item '+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'<br>Revisor: '+review+' · '+date+'</span></header>'
   +'<div class="flow-body">'
   +'<div class="flow-identity">'

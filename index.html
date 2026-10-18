@@ -4164,12 +4164,12 @@
   }
   function updateHeader(){
     const f=getPhrase(index),d=diagnostic(index);
-    el('counter').textContent=`Frase ${f.n} de ${DATA.length}`;
+    el('counter').textContent=`Frase ${index+1} de ${DATA.length}`;
     el('phraseTitle').textContent=`Item ${f.item} · Frase ${f.indice}`;
     el('processTag').textContent=`${processCode(f)} · ${f.processo}`;
     el('phraseDesc').textContent=f.frase||'Texto da frase pendente de conferência.';
     el('initialClass').textContent=`${f.appcc_inicial||'—'} (${WEIGHTS[f.appcc_inicial]??'?'})`;
-    el('severityMetric').textContent=Number.isFinite(+f.severidade)?`${f.severidade}/5 (preliminar)`:'A validar';
+    el('severityMetric').textContent=f.severidade!=null&&Number.isFinite(+f.severidade)&&+f.severidade>=1?`${f.severidade}/5 (preliminar)`:'A validar';
     renderClassMetrics(index);
     el('decisionPill').textContent=statusString(d);
     el('decisionPill').classList.toggle('success',d.estado==='confirmado');

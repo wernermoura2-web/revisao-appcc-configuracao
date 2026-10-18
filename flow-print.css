@@ -176,9 +176,9 @@
   }
   .flow-with-justifications .flow-fact{padding:1mm 1.4mm;font-size:6.8pt}
   .flow-with-justifications .flow-decision-row{
-    flex:0 0 72mm;
-    min-height:72mm;
-    max-height:72mm;
+    flex:0 0 68mm;
+    min-height:68mm;
+    max-height:68mm;
     gap:1.5mm;
     grid-template-columns:1.08fr .98fr 1.05fr;
   }
@@ -204,9 +204,13 @@
     font-size:5.9pt;
   }
   .flow-with-justifications .flow-validation{
-    flex:0 0 42mm;
-    min-height:42mm;
-    max-height:42mm;
+    /* Altura suficiente para as duas linhas, sem invadir a seção seguinte. */
+    flex:0 0 55mm;
+    height:55mm;
+    min-height:55mm;
+    max-height:55mm;
+    min-width:0;
+    overflow:hidden;
   }
   .flow-with-justifications .flow-section-title{
     padding:.8mm 1.5mm;
@@ -217,20 +221,31 @@
   .flow-with-justifications .flow-validation-grid{
     gap:.8mm;
     padding:.8mm;
-    /* Segunda linha ligeiramente mais alta, para a fundamentação de correção/ação corretiva. */
-    grid-template-rows:minmax(0,1fr) minmax(0,1.12fr);
+    box-sizing:border-box;
+    flex:1 1 auto;
+    min-height:0;
+    overflow:hidden;
+    /* A linha de correções tem espaço adicional sem ultrapassar a Tabela 3. */
+    grid-template-rows:minmax(0,1fr) minmax(0,1.14fr);
   }
   .flow-with-justifications .flow-validation-grid .flow-criterion:nth-child(4){
     padding:1mm 1.2mm;
+  }
+  .flow-with-justifications .flow-validation-grid .flow-criterion{
+    box-sizing:border-box;
+    min-height:0;
+    overflow:hidden;
+    overflow-wrap:anywhere;
   }
   .flow-with-justifications .flow-criterion{
     font-size:5.9pt;
     padding:.75mm 1mm;
   }
   .flow-with-justifications .flow-observation{
-    flex:0 0 39mm;
-    min-height:39mm;
-    max-height:39mm;
+    flex:0 0 35mm;
+    min-height:35mm;
+    max-height:35mm;
+    overflow:hidden;
   }
   .flow-with-justifications .flow-observation-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -245,9 +260,9 @@
   .flow-with-justifications .flow-note strong{font-size:6.2pt}
   .flow-with-justifications .flow-inline-notes{
     display:flex;
-    flex:1 1 60mm;
+    flex:1 1 54mm;
     flex-direction:column;
-    min-height:60mm;
+    min-height:54mm;
     border:1px solid #acc9d8;
     border-radius:1mm;
     background:#f7fafc;

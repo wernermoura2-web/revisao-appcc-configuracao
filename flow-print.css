@@ -454,3 +454,34 @@
     overflow:hidden;
   }
 }
+
+/* REV.18 — Recuperar a última linha das evidências D/F/G em A4 vertical.
+   Aumenta a área útil interna do cartão e preserva o rodapé. */
+@media print{
+ .flow-with-justifications.flow-has-notes .flow-inline-grid{
+   grid-template-rows:minmax(0,.94fr) minmax(0,1.06fr)!important;
+   align-content:stretch;
+ }
+ .flow-with-justifications.flow-has-notes .flow-inline-card{
+   box-sizing:border-box;
+   padding:.55mm .9mm!important;
+   gap:.2mm!important;
+   min-height:0!important;
+   overflow:hidden;
+ }
+ .flow-with-justifications.flow-has-notes .flow-inline-card .flow-jcard-head{
+   min-height:3.5mm!important;
+   padding:.3mm .6mm!important;
+   gap:.35mm!important;
+ }
+ .flow-with-justifications.flow-has-notes .flow-inline-card .flow-jcard-head b{font-size:6.5pt!important}
+ .flow-with-justifications.flow-has-notes .flow-inline-card .flow-jcard-head span{font-size:4.95pt!important}
+ .flow-with-justifications.flow-has-notes .flow-inline-card .flow-jquestion{
+   font-size:5.95pt!important;
+   line-height:1.1!important;
+ }
+ .flow-with-justifications.flow-has-notes .flow-inline-card .flow-jcontent{
+   font-size:5.75pt!important;
+   line-height:1.10!important;
+ }
+}

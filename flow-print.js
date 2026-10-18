@@ -154,7 +154,7 @@ function collectNoteCards(ctx){
     :n.source==='gemini'?'Sugestão Gemini — conferir':'Conferência pendente';
   // Cards curtos permitem 3 colunas × 2 linhas na folha do fluxograma.
   // Conteúdo extenso continua em outra página; nunca é descartado.
-  const chunksWhy=safeParts(why,245),chunksEvidence=safeParts(evidence,145);
+  const chunksWhy=safeParts(why,195),chunksEvidence=safeParts(evidence,130);
   const total=Math.max(chunksWhy.length,chunksEvidence.length,1);
   for(let i=0;i<total;i++){
    cards.push({k,label,val,review,part:i+1,total,why:chunksWhy[i]||'',evidence:chunksEvidence[i]||''});

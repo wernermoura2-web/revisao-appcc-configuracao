@@ -16,6 +16,14 @@ Editor HTML/PWA independente para as **76 frases**, organizado por processo, ite
 
 Cada caixa editável de análise/configuração tem **Consultar IA Google**, **Restaurar texto anterior** e **Restaurar original** quando aplicável. A consulta abre um diálogo que prepara um pedido de redação curta e objetiva. O revisor **copia** a consulta e a leva manualmente ao Gemini; depois revê a sugestão e a aplica ao campo. **O aplicativo não faz chamada automática ao Gemini nem incorpora chave de API pública.** Evite enviar dados sigilosos a serviços externos. Resposta de IA não é evidência ou homologação técnica.
 
+## Apoio Gemini às perguntas Sim/Não
+
+- Botão **Consultar Gemini sobre A–I / Q1–Q4** junto de cada pergunta atualmente aplicável nas Tabelas 1, 2 e 3.
+- Consulta contextualizada com a frase, perigo, medida de controle, classificações e respostas já dadas.
+- Resposta externa no formato **SIM / NÃO / INDETERMINADO**, justificativa curta e evidência necessária. A consulta é copiada e a resposta colada manualmente; não há chamada automática à API do Google.
+- **Somente o revisor** escolhe e confirma Sim ou Não; não se alteram respostas automaticamente. Se faltarem evidências, ele pode deixar a pergunta sem nova marcação.
+- As regras vigentes de habilitação das perguntas e de invalidação/revisão das classificações seguem sendo aplicadas pelo próprio editor. O aplicativo oferece instrução de retorno ao Android/Gemini e procura recuperar a frase após o retorno.
+
 ## Proteção dos dados
 
 - Salvamento local e cópias de segurança configuráveis.

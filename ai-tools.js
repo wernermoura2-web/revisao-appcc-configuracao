@@ -3,7 +3,7 @@
    Toda aplicação requer confirmação consciente e admite restauração anterior/original. */
 (function(){
 'use strict';
-const fieldRoot='#analysisView textarea,#configView textarea,#approvalNote';
+const fieldRoot='#analysisView textarea,#configView textarea,#approvalNote,#table2Note';
 const criteriaKeys=['eficacia','limite','monitoramento','correcao','produto','registros'];
 const prepared=new WeakSet(), applying=new WeakSet();
 let modal=null,activeTarget=null,activeKey='',activeName='';
@@ -164,7 +164,7 @@ function enhance(control){
  prepared.add(control);
  const tools=document.createElement('div');tools.className='ai-field-tools';tools.setAttribute('role','group');tools.setAttribute('aria-label','Assistência e restauração do campo');
  const consult=document.createElement('button');consult.className='ai-open-google';consult.type='button';consult.textContent='✦ Consultar IA Google';consult.title='Preparar consulta curta ao Gemini';
- const prev=document.createElement('button');prev.type='button';prev.textContent='↶ Restaurar anterior';prev.title='Recuperar o texto anterior deste campo';
+ const prev=document.createElement('button');prev.type='button';prev.textContent='↶ Restaurar texto anterior';prev.title='Recuperar o texto anterior deste campo';
  const orig=document.createElement('button');orig.type='button';orig.textContent='↺ Restaurar original';orig.className='ai-original';orig.title='Recuperar o texto-base original do Guia';
  tools.append(consult,prev,orig);control.insertAdjacentElement('afterend',tools);
  consult.onclick=()=>openConsult(control);

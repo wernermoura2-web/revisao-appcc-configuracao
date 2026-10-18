@@ -1,0 +1,31 @@
+/* Guia duplo e transferência assistida de revisões. */
+.guide-choice-panel{border:1px solid #b7d5e3}
+.guide-select-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.guide-choice{display:flex;align-items:center;justify-content:center;min-height:50px;padding:9px 12px;text-align:center;text-decoration:none;border-radius:9px;border:1px solid #92bad1;background:#e9f3f9;color:#145879;font-weight:800;font-size:13px}
+.guide-choice.selected{border:2px solid #18775b;background:#e1f3eb;color:#11644b}
+.transfer-panel{border:1px solid #bfd7e2}
+.transfer-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.transfer-buttons button{flex:1 1 145px;padding:10px;border:1px solid #b2cbda;border-radius:8px;background:#e8f3fa;color:#154d6b;font-weight:750;font-size:12px}
+.transfer-dialog{box-sizing:border-box;width:min(96vw,920px);max-width:920px;max-height:94dvh;overflow:auto;border:1px solid #accbdd;border-radius:12px;padding:20px;color:#1a425b;background:white;box-shadow:0 18px 45px #102d4570}
+.transfer-dialog::backdrop{background:#152d42bc}
+.transfer-dialog h2{margin:0 0 8px;font-size:21px;color:#164f72}
+.transfer-dialog .transfer-desc{font-size:13px;line-height:1.5;margin:0 0 12px}
+.transfer-dialog .transfer-warning{border-left:4px solid #d6a24c;background:#fff8e9;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0 12px}
+.transfer-rows{display:grid;gap:10px}
+.transfer-row{border:1px solid #b9d3e2;border-radius:8px;padding:11px 12px;background:#f8fbfd}
+.transfer-row>b{font-size:13px;color:#165776}
+.transfer-row p{font-size:12px;line-height:1.45;margin:7px 0}
+.transfer-row .transfer-source{font-weight:600;color:#253f4e}
+.transfer-row label{display:block;font-size:12px;font-weight:700;margin-top:7px;color:#26536c}
+.transfer-row select{width:100%;font-size:12px;padding:9px 10px;margin:5px 0;border:1px solid #a3c4d5;border-radius:7px;background:white;max-width:100%}
+.transfer-row .transfer-confidence{font-size:11px;color:#667987}
+.transfer-row .transfer-target{background:#eaf4f9;border-radius:6px;padding:8px;line-height:1.5}
+.transfer-check{display:flex!important;align-items:flex-start;gap:8px;font-size:12px!important;line-height:1.5;margin:11px 0;font-weight:600}
+.transfer-check input{margin-top:3px;accent-color:#23765d}
+.transfer-result{font-size:13px;line-height:1.6;color:#175678;font-weight:600}
+.transfer-result a{color:#0c7450;text-decoration:underline}
+.transfer-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+.transfer-actions button{padding:11px 15px;border:1px solid #a8c4d4;border-radius:8px;font-size:13px}
+.transfer-actions .transfer-commit{background:#19745d;color:white;border-color:#19745d;font-weight:800}
+@media(max-width:560px){.guide-select-pair{grid-template-columns:1fr 1fr}.guide-choice{font-size:11px;padding:7px;min-height:46px}.transfer-dialog{padding:12px}.transfer-actions button{flex:1 1 140px}}
+@media print{.guide-choice-panel,.transfer-panel,.transfer-dialog{display:none!important}}

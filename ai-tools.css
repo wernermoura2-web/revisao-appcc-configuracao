@@ -13,6 +13,8 @@
 .ai-dialog .ai-dialog-actions{display:flex;flex-wrap:wrap;gap:9px;margin:11px 0}
 .ai-dialog button{font-size:12px;padding:9px 11px}
 .ai-dialog .ai-hint{background:#f2f8fb;border-left:3px solid #4c9abf;padding:9px 12px}
+.ai-dialog .ai-return-hint{border:1px solid #c8dded;background:#eef7ff;padding:10px 12px;border-radius:7px;color:#184b69;font-size:12px;line-height:1.5}
+.ai-dialog #geminiOpenTab{background:#f1f5fa;border:1px solid #b9d1df;border-radius:6px;color:#24536a}
 .ai-dialog label{display:block;font-weight:bold;color:#184f72;font-size:12px;margin:9px 0 4px}
 @media(max-width:620px){.ai-dialog{padding:12px}.ai-field-tools button{font-size:10px;flex:0 1 auto}.ai-dialog textarea{font-size:14px}}
 @media print{.ai-field-tools,.ai-dialog{display:none!important}}

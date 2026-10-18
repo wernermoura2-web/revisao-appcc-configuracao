@@ -370,7 +370,7 @@
   .flow-with-justifications.flow-has-notes .flow-body {
     display:grid!important;
     grid-template-columns:minmax(0,1fr);
-    grid-template-rows:10mm 12mm 18mm 60mm 65mm 35mm minmax(53mm,1fr) 5mm;
+    grid-template-rows:10mm 12mm 16mm 54mm 65mm 31mm minmax(65mm,1fr) 5mm;
     gap:1mm;
     min-height:0;
     height:auto;

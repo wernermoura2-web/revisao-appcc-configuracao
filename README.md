@@ -85,3 +85,10 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - Cada pergunta A–I/Q1–Q4 tem um único quadro de justificativa e evidências, sem fracionamento artificial ou repetição de E/Q4.
 - Em **APPCC + configuração**, as continuações e a configuração da frase ficam reunidas na segunda folha A4 paisagem. A primeira folha mantém o fluxograma em retrato.
 - A segunda folha ajusta o tamanho do conteúdo na mídia de impressão, preservando os textos completos e a separação entre frases.
+
+
+## Campos completos da triagem (V27 · 24/10/2026)
+
+- A primeira folha mostra justificativa integral, evidência necessária e conferência dentro de cada pergunta ativa A–I/Q1–Q4, sem ocultar ou abreviar esses campos.
+- Na impressão conjunta, a segunda folha reúne configuração, seis critérios de validação e evidências/observações, preservando os textos e evitando sua repetição.
+- As duas folhas usam A4 vertical, evitando a redução da segunda folha paisagem em uma folha vertical no Android.

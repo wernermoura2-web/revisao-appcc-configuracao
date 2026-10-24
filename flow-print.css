@@ -520,3 +520,53 @@
   grid-template-rows:10mm 12mm 16mm 50mm 48mm 30mm minmax(80mm,1fr) 5mm;
  }
 }
+
+/* V27: duas folhas verticais; campos completos dentro das árvores. */
+@page appcc-second { size:A4 portrait; margin:8mm; }
+@media print {
+ .flow-expanded.flow-no-notes .flow-body{
+  grid-template-rows:10mm 12mm 16mm minmax(0,1fr) 6mm!important;
+ }
+ .flow-expanded .flow-decision-row{max-height:none!important;min-height:0!important;height:100%!important}
+ .flow-expanded .flow-decision-row.route-direct{grid-template-columns:1fr .38fr 1fr}
+ .flow-expanded .flow-panel-head{min-height:9mm}
+ .flow-expanded .flow-panel-head small{display:none}
+ .flow-expanded .flow-nodes{justify-content:space-evenly;gap:2mm;padding:1.5mm;overflow:visible}
+ .flow-expanded .flow-node{grid-template-columns:5mm minmax(0,1fr) 9mm;align-items:start;padding:1.2mm .8mm;min-height:0;flex:0 0 auto;font-size:7.1pt;line-height:1.2}
+ .flow-expanded .flow-node .ntxt{font-weight:bold}
+ .flow-expanded .flow-node .nkey{font-size:7pt}
+ .flow-expanded .flow-node .nanswer{font-size:6.5pt}
+ .flow-expanded .flow-node-just,.flow-expanded .flow-node-evidence{
+  display:block!important;font-weight:normal;font-size:6.8pt;line-height:1.2;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:1mm;color:#233b4b;
+ }
+ .flow-expanded .flow-node-review{display:block;font-size:5.8pt;line-height:1.15;font-weight:normal;color:#597181;margin-top:.8mm}
+ .flow-expanded .flow-conclusion{overflow:visible;font-size:6.4pt;line-height:1.2;padding:1.5mm}
+ .flow-expanded .flow-footer{font-size:5.7pt}
+ .print-page.print-joined-second,.print-page.flow-details-page{
+  page:appcc-second;width:194mm!important;min-width:194mm!important;max-width:194mm!important;
+  height:281mm!important;min-height:281mm!important;max-height:281mm!important;box-sizing:border-box;
+ }
+ .print-joined-second .print-config-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:3mm}
+ .print-joined-second .print-val{font-size:7.2pt;line-height:1.22}
+ .print-joined-second .print-col{padding:1.5mm}
+ .print-joined-second .print-col h3{font-size:7.3pt;line-height:1.2}
+ .print-joined-second .print-doc{font-size:6.8pt;line-height:1.22}
+ .print-joined-second .flow-validation,.print-joined-second .flow-observation,
+ .flow-details-content .flow-validation,.flow-details-content .flow-observation{
+  display:block;min-height:0;max-height:none;height:auto;margin:2mm 0;overflow:visible;
+ }
+ .print-joined-second .flow-validation-grid,.flow-details-content .flow-validation-grid{
+  display:grid;height:auto;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto;gap:1.5mm;padding:1.5mm;
+ }
+ .print-joined-second .flow-criterion,.flow-details-content .flow-criterion{
+  font-size:7pt;line-height:1.24;overflow:visible;min-height:0;padding:1.5mm;
+ }
+ .print-joined-second .flow-criterion .ctop,.flow-details-content .flow-criterion .ctop{font-size:7pt}
+ .print-joined-second .flow-observation-grid,.flow-details-content .flow-observation-grid{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1.5mm;padding:1.5mm;
+ }
+ .print-joined-second .flow-note,.flow-details-content .flow-note{font-size:7pt!important;line-height:1.24;overflow:visible;padding:1.5mm}
+ .print-joined-second .flow-note strong,.flow-details-content .flow-note strong{font-size:7.2pt}
+ .print-joined-second .flow-section-title{font-size:7.5pt;line-height:1.2}
+ .print-joined-second .flow-section-title small{font-size:5.8pt}
+}

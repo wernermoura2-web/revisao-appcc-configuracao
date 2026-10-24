@@ -3,23 +3,23 @@
 (function(){
 'use strict';
 const short1={
- A:'O perigo identificado é significativo?',
- B:'Existe uma medida preventiva ou de controle?',
- C:'A etapa foi concebida para controlar o perigo?',
- D:'O perigo pode chegar ao nível inaceitável?',
- E:'Há barreira posterior comprovadamente eficaz?'
+    A:'O perigo identificado é significativo? Considere gravidade e probabilidade de ocorrência.',
+    B:'Existe uma medida preventiva ou de controle nesta etapa ou em outra?',
+    C:'Esta etapa foi especialmente desenvolvida para eliminar ou reduzir o perigo a nível aceitável?',
+    D:'O perigo pode ocorrer ou aumentar nesta etapa até nível inaceitável?',
+    E:'Existe uma etapa posterior comprovadamente eficaz para eliminar ou reduzir o perigo?'
 };
 const short2={
- F:'Controle operacional de perigo significativo?',
- G:'Higienização ou desinfecção operacional?',
- H:'Condição básica, infraestrutura ou capacitação?',
- I:'Controle específico de apoio e verificação?'
+    F:'É uma medida operacional para controlar perigo significativo, com monitoramento e critérios definidos, a avaliar como PPRO candidato (ou PCC, conforme Q1–Q4 da Tabela 3)?',
+    G:'É uma rotina direta de limpeza ou desinfecção, sem enquadramento como PCC/PPRO?',
+    H:'É condição básica ou suporte (estrutura, materiais, capacitação, gestão)?',
+    I:'É um controle específico de apoio (recepção, inspeção, operação ou verificação)?'
 };
 const short3={
- Q1:'É necessária medida de controle neste passo?',
- Q2:'As medidas já estão implementadas?',
- Q3:'A falha coloca em risco a segurança do produto?',
- Q4:'Há limite crítico e monitoramento oportuno?'
+    Q1:'É necessário aplicar medidas de controle neste passo?',
+    Q2:'As medidas de controle já se encontram implementadas?',
+    Q3:'Se existir alguma falha na medida de controle, é colocada em risco a segurança do produto?',
+    Q4:'É viável estabelecer limites críticos mensuráveis e uma monitorização que permita detectar oportunamente e corrigir as falhas?'
 };
 const v=x=>String(x??'');
 const esc=x=>v(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -32,9 +32,11 @@ function response(q,k,active){
 function node(k,caption,q,active,notes){
  const answer=response(q,k,active);
  const n=notes?.[k]||{},just=v(n.justification).trim();
- const snippet=just?(just.length>94?just.slice(0,90).trimEnd()+'…':just):'';
- const source=n.reviewed?'Justificativa conferida':n.source==='gemini'?'Sugestão IA não conferida':'Justificativa registrada';
- const detail=snippet?'<span class="flow-node-just"><b>'+esc(source)+':</b> '+esc(snippet)+'</span>':'';
+ const evidence=v(n.evidence).trim();
+ const source=n.reviewed?'Conferida pelo revisor'+(n.reviewedBy?' · '+n.reviewedBy:''):n.source==='gemini'?'Sugestão IA — conferir':'Conferência pendente';
+ const detail='<span class="flow-node-just"><b>Justificativa:</b> '+(just?esc(just):'Não registrada')+'</span>'
+  +'<span class="flow-node-evidence"><b>Evidência necessária:</b> '+(evidence?esc(evidence):'Não informada')+'</span>'
+  +'<span class="flow-node-review">'+esc(source)+'</span>';
  return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+detail+'</span><span class="nanswer">'+answer.label+'</span></div>';
 }
 function pathNodes(items,q,active,notes){
@@ -95,9 +97,15 @@ function build(ctx){
  const review=esc(ctx.revisor||'Não informado'), date=esc(ctx.data||'Data não informada');
  const danger=esc(f.perigo||'Não registrado'), measure=esc(f.medida||'Não registrada');
  const notesCards=collectNoteCards(ctx);
- const inside=notesCards.slice(0,6);
- const extra=notesCards.slice(6);
- const graphic='<article class="print-page flow-print-page flow-with-justifications'+(inside.length?' flow-has-notes':' flow-no-notes')+'" data-part="analysis">'
+ const extra=notesCards.filter(c=>!c.active);
+ const details= '<div class="flow-validation"><div class="flow-section-title">TABELA 3 · SEIS REQUISITOS DE VALIDAÇÃO <small>Resultado obtido: '+esc(d.classe||'Pendente')+' · Respostas editadas pelo revisor</small></div><div class="flow-validation-grid">'+cards+'</div></div>'
+  +'<div class="flow-observation"><div class="flow-section-title">EVIDÊNCIAS, JUSTIFICATIVAS E OBSERVAÇÕES <small>Textos inseridos ou conservados no editor</small></div><div class="flow-observation-grid">'
+  +note('Evidências das inspeções',f.evidencias)
+  +note('Justificativa da classificação',ctx.justificativaRevisao||ctx.notaT2)
+  +note('Observação / exemplo da frase'+(isUneditedBase?' · texto-base':' · texto revisado'),exampleForPrint)
+  +note('Observações dos documentos avaliados',docs)
+  +'</div></div>';
+ const graphic='<article class="print-page flow-print-page flow-with-justifications flow-expanded flow-no-notes" data-part="analysis">'
   +'<header class="flow-header"><b>GUIA ESTADUAL · REVISÃO APPCC — FLUXO DA FRASE</b><span class="flow-revisor">Item '+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'<br>Revisor: '+review+' · '+date+'</span></header>'
   +'<div class="flow-body">'
   +'<div class="flow-identity">'
@@ -113,17 +121,11 @@ function build(ctx){
   +stage('2','TIPO DE CONTROLE (F–I)',t2,d.t2,d.t2?.estado==='nao_aplicavel')
   +stage('3','DECISÃO Q1–Q4',t3,t3Summary,d.route!=='3')
   +'</div>'
-  +'<div class="flow-validation"><div class="flow-section-title">TABELA 3 · SEIS REQUISITOS DE VALIDAÇÃO <small>Resultado obtido: '+esc(d.classe||'Pendente')+' · Respostas editadas pelo revisor</small></div><div class="flow-validation-grid">'+cards+'</div></div>'
-  +'<div class="flow-observation"><div class="flow-section-title">EVIDÊNCIAS, JUSTIFICATIVAS E OBSERVAÇÕES <small>Textos inseridos ou conservados no editor</small></div><div class="flow-observation-grid">'
-  +note('Evidências das inspeções',f.evidencias)
-  +note('Justificativa da classificação',ctx.justificativaRevisao||ctx.notaT2)
-  +note('Observação / exemplo da frase'+(isUneditedBase?' · texto-base':' · texto revisado'),exampleForPrint)
-  +note('Observações dos documentos avaliados',docs)
-  +'</div></div>'
-  +inlineJustifications(inside)
   +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: PPHO 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'
   +'</div></article>';
- return graphic+printJustificationPages(ctx,extra);
+ return graphic+'<article class="print-page flow-details-page" data-part="analysis-details">'
+  +'<header class="flow-jheader"><b>APPCC · VALIDAÇÃO E EVIDÊNCIAS</b><span>'+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'</span></header>'
+  +'<div class="flow-details-content">'+details+'</div></article>'+printJustificationPages(ctx,extra);
 }
 function safeParts(value,limit){
  const str=v(value).trim();
@@ -153,7 +155,7 @@ function collectNoteCards(ctx){
   const review=n.reviewed?'Conferida pelo revisor'+(n.reviewedBy?' · '+n.reviewedBy:'')
     :n.source==='gemini'?'Sugestão Gemini — conferir':'Conferência pendente';
   // Uma pergunta corresponde a um único quadro, sem títulos ou partes repetidos.
-  cards.push({k,label,val,review,part:1,total:1,why,evidence});
+  cards.push({k,label,val,review,part:1,total:1,why,evidence,active});
  }
  return cards;
 }

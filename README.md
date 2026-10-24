@@ -78,3 +78,10 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - Antes de salvar, o aplicativo gera um backup da versão atual do guia de destino. A consolidação é gravada no armazenamento local com rastreabilidade de arquivo, item, frase, revisor e data.
 - O JSON `APPCC-CONSOLIDADO-V1` reúne os estados dos dois guias e o histórico de importações. Quando foi importado o JSON original do guia legislativo, sua inspeção original fica anexada ao arquivo consolidado, e observações por frase ficam disponíveis nos dados importados sem serem convertidas em respostas técnicas APPCC.
 - O arquivo consolidado pode ser reimportado e revisado seletivamente. O processo não altera as fontes oficiais nem o Supabase.
+
+
+## Impressão consolidada (24/10/2026)
+
+- Cada pergunta A–I/Q1–Q4 tem um único quadro de justificativa e evidências, sem fracionamento artificial ou repetição de E/Q4.
+- Em **APPCC + configuração**, as continuações e a configuração da frase ficam reunidas na segunda folha A4 paisagem. A primeira folha mantém o fluxograma em retrato.
+- A segunda folha ajusta o tamanho do conteúdo na mídia de impressão, preservando os textos completos e a separação entre frases.

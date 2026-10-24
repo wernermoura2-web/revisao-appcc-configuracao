@@ -152,13 +152,8 @@ function collectNoteCards(ctx){
   const val=active?resp==='S'?'SIM':resp==='N'?'NÃO':'PENDENTE':'NÃO APLICÁVEL';
   const review=n.reviewed?'Conferida pelo revisor'+(n.reviewedBy?' · '+n.reviewedBy:'')
     :n.source==='gemini'?'Sugestão Gemini — conferir':'Conferência pendente';
-  // Cards curtos permitem 3 colunas × 2 linhas na folha do fluxograma.
-  // Conteúdo extenso continua em outra página; nunca é descartado.
-  const chunksWhy=safeParts(why,185),chunksEvidence=safeParts(evidence,125);
-  const total=Math.max(chunksWhy.length,chunksEvidence.length,1);
-  for(let i=0;i<total;i++){
-   cards.push({k,label,val,review,part:i+1,total,why:chunksWhy[i]||'',evidence:chunksEvidence[i]||''});
-  }
+  // Uma pergunta corresponde a um único quadro, sem títulos ou partes repetidos.
+  cards.push({k,label,val,review,part:1,total:1,why,evidence});
  }
  return cards;
 }

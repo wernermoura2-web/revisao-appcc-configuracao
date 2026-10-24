@@ -485,3 +485,38 @@
    line-height:1.10!important;
  }
 }
+
+/* Segunda folha: configuração e todas as continuações da mesma frase. */
+@page appcc-second { size:A4 landscape; margin:9mm; }
+@media print {
+ .print-page.print-joined-second{page:appcc-second;width:279mm;height:190mm;min-height:190mm;max-height:190mm;overflow:hidden}
+ .print-joined-second .print-head{min-height:10mm}
+ .print-joined-second .print-head strong{font-size:10pt}
+ .print-joined-content{padding-bottom:1mm}
+ .print-joined-second .print-config-grid{height:auto;overflow:visible;align-items:stretch;margin-top:1mm;gap:1.5mm}
+ .print-joined-second .print-col{overflow:visible;padding:1.5mm;gap:1mm}
+ .print-joined-second .print-col h3{font-size:8pt;padding:1.5mm;margin:-1.5mm -1.5mm 1mm}
+ .print-joined-second .print-val-wrap{flex:0 0 auto}
+ .print-joined-second .print-val{overflow:visible;min-height:0;font-size:7.5pt;line-height:1.18}
+ .print-joined-second .print-val.grow{flex:none}
+ .print-joined-second .print-doc-list{overflow:visible}
+ .print-joined-second .print-doc{font-size:7pt;line-height:1.18;padding:1mm}
+ .print-joined-second .print-col b{font-size:7pt}
+ .print-joined-second .continuation-col h3{min-height:0;max-height:none}
+ .print-joined-second .print-cont-content{max-height:none;overflow:visible}
+ .print-joined-title{font-size:8pt;color:#154865;background:#dcecf5;margin:2mm 0 1mm;padding:1mm 2mm}
+ .print-joined-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2mm;align-items:start}
+ .print-joined-notes .flow-jcard{padding:1mm;gap:.6mm;break-inside:avoid}
+ .print-joined-notes .flow-jcard-head{padding:.6mm;gap:.6mm}
+ .print-joined-notes .flow-jcard-head b{font-size:7.5pt}
+ .print-joined-notes .flow-jcard-head span{font-size:6pt}
+ .print-joined-notes .flow-jquestion{font-size:7pt;line-height:1.15}
+ .print-joined-notes .flow-jcontent{font-size:7pt;line-height:1.18}
+ .print-joined-second .print-foot{font-size:6.5pt}
+}
+
+@media print{
+ .flow-with-justifications.flow-has-notes .flow-body{
+  grid-template-rows:10mm 12mm 16mm 50mm 48mm 30mm minmax(80mm,1fr) 5mm;
+ }
+}

@@ -92,3 +92,11 @@ Cada caixa editável de análise/configuração tem **Consultar IA Google**, **R
 - A primeira folha mostra justificativa integral, evidência necessária e conferência dentro de cada pergunta ativa A–I/Q1–Q4, sem ocultar ou abreviar esses campos.
 - Na impressão conjunta, a segunda folha reúne configuração, seis critérios de validação e evidências/observações, preservando os textos e evitando sua repetição.
 - As duas folhas usam A4 vertical, evitando a redução da segunda folha paisagem em uma folha vertical no Android.
+
+
+## Impressão no notebook (V28 · 24/10/2026)
+
+- Relatório com uma única regra de página A4 vertical, margens de 8 mm e área útil de 194 × 280 mm; o Apêndice C mantém A4 paisagem.
+- Pergunta/resposta e os campos integrais de justificativa/evidência ocupam linhas independentes nos quadros das árvores. Ajuste durante a impressão usa a área efetiva do quadro.
+- Corrigido transbordamento dos quadros e padronizadas as quebras entre folhas.
+- Validação real em Chromium: telas de 1366 e 1920 pixels geraram duas páginas A4 (aproximadamente 595 × 842 pontos), com todos os finais das nove justificativas e evidências presentes no PDF. Conferência visual das duas páginas realizada.

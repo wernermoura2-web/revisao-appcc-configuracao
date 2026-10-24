@@ -37,7 +37,7 @@ function node(k,caption,q,active,notes){
  const detail='<span class="flow-node-just"><b>Justificativa:</b> '+(just?esc(just):'Não registrada')+'</span>'
   +'<span class="flow-node-evidence"><b>Evidência necessária:</b> '+(evidence?esc(evidence):'Não informada')+'</span>'
   +'<span class="flow-node-review">'+esc(source)+'</span>';
- return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+detail+'</span><span class="nanswer">'+answer.label+'</span></div>';
+ return '<div class="flow-node s-'+answer.css+'"><span class="nkey">'+esc(k)+'</span><span class="ntxt">'+esc(caption)+'</span><span class="nanswer">'+answer.label+'</span>'+detail+'</div>';
 }
 function pathNodes(items,q,active,notes){
  const all=Object.entries(items);

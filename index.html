@@ -4445,6 +4445,15 @@
   }
   function fitPrintLayout(){
     if(window.matchMedia('print').matches){
+      document.querySelectorAll('.flow-expanded .flow-panel').forEach(panel=>{
+        const nodes=panel.querySelector('.flow-nodes');
+        panel.style.setProperty('--tree-fit','1');
+        for(let attempt=0;attempt<6&&nodes.scrollHeight>nodes.clientHeight+1;attempt++){
+          const previous=Number(panel.style.getPropertyValue('--tree-fit'))||1;
+          panel.style.setProperty('--tree-fit',String(previous*Math.min(.95,nodes.clientHeight/nodes.scrollHeight)*.98));
+        }
+      });
+
       document.querySelectorAll('.print-joined-second').forEach(page=>{
         const content=page.querySelector('.print-joined-content');
         content.style.zoom='1';

@@ -570,3 +570,26 @@
  .print-joined-second .flow-section-title{font-size:7.5pt;line-height:1.2}
  .print-joined-second .flow-section-title small{font-size:5.8pt}
 }
+
+/* V28: geometria única A4 para impressão em computador e celular. */
+@page { size:A4 portrait; margin:8mm; }
+@page appcc-report { size:A4 portrait; margin:8mm; }
+@page appcc-appendix { size:A4 landscape; margin:9mm; }
+@media print {
+ html,body{margin:0!important;padding:0!important;min-width:0!important;width:auto!important;zoom:1!important;transform:none!important}
+ #printArea{width:194mm;margin:0!important;padding:0!important}
+ #printArea>.print-page:not([data-part="appendix"]){
+  page:appcc-report!important;box-sizing:border-box!important;
+  width:194mm!important;min-width:194mm!important;max-width:194mm!important;
+  height:280mm!important;min-height:280mm!important;max-height:280mm!important;
+  margin:0!important;break-inside:avoid-page;break-after:page;page-break-after:always;
+ }
+ #printArea>.print-page[data-part="appendix"]{page:appcc-appendix!important;width:279mm}
+ #printArea>.print-page:last-child{break-after:auto!important;page-break-after:auto!important}
+ .flow-expanded .flow-node{row-gap:.5mm;font-size:calc(7.1pt * var(--tree-fit,1))}
+ .flow-expanded .flow-node-just,.flow-expanded .flow-node-evidence{
+  grid-column:1/-1;margin-top:0;min-width:0;font-size:calc(6.8pt * var(--tree-fit,1));
+ }
+ .flow-expanded .flow-node-review{grid-column:1/-1;margin-top:0;font-size:calc(5.8pt * var(--tree-fit,1))}
+ .flow-expanded .flow-nodes{overflow:visible;min-height:0}
+}

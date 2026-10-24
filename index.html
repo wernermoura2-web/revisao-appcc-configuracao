@@ -4443,8 +4443,31 @@
     config.insertBefore(content,config.querySelector('.print-foot'));
     return fragment.innerHTML;
   }
+  function preparePrintLayout(){
+    if(!el('printArea').children.length)return;
+    if(!document.getElementById('appccPrintSizingStyle')){
+      // O desktop dispara beforeprint antes de ativar a mídia print.
+      // Usa as próprias regras de impressão para medir a folha antes do diálogo.
+      const rules=[];
+      for(const sheet of document.styleSheets){
+        try{for(const rule of sheet.cssRules){
+          if(rule.type===CSSRule.MEDIA_RULE&&rule.conditionText==='print'){
+            for(const child of rule.cssRules)rules.push(child.cssText);
+          }
+        }}catch(_){}
+      }
+      const style=document.createElement('style');style.id='appccPrintSizingStyle';
+      style.textContent=rules.join('\n');document.head.append(style);
+      document.documentElement.classList.add('appcc-print-preparing');
+    }
+    fitPrintLayout();
+  }
+  function finishPrintLayout(){
+    document.getElementById('appccPrintSizingStyle')?.remove();
+    document.documentElement.classList.remove('appcc-print-preparing');
+  }
   function fitPrintLayout(){
-    if(window.matchMedia('print').matches){
+    if(window.matchMedia('print').matches||document.documentElement.classList.contains('appcc-print-preparing')){
       document.querySelectorAll('.flow-expanded .flow-panel').forEach(panel=>{
         const nodes=panel.querySelector('.flow-nodes');
         panel.style.setProperty('--tree-fit','1');
@@ -4484,7 +4507,7 @@
       if(col.scrollHeight>col.clientHeight+5)col.classList.add('print-overflow');
     });
   }
-  function runPrint(){if(nameError()){toast('Informe o nome do revisor e a data antes de imprimir.');return}save(false);const selection=buildPrintSelection(),pref=el('printModule').value,chosen=pref==='current'?(mode==='analysis'?'appcc':'config'):pref;const area=el('printArea');area.replaceChildren();const html=[];for(const idx of selection){if(chosen==='both')html.push(joinedPhrasePrint(printAnalysis(idx),printConfig(idx)));else if(chosen==='appcc')html.push(printAnalysis(idx));else if(chosen==='config')html.push(printConfig(idx));}area.innerHTML=html.join('');el('printModule').dataset.resolved=chosen;requestAnimationFrame(()=>{fitPrintLayout();window.print();toast(`Preparadas ${area.querySelectorAll('.print-page').length} páginas para impressão.`)})}
+  function runPrint(){if(nameError()){toast('Informe o nome do revisor e a data antes de imprimir.');return}save(false);const selection=buildPrintSelection(),pref=el('printModule').value,chosen=pref==='current'?(mode==='analysis'?'appcc':'config'):pref;const area=el('printArea');area.replaceChildren();const html=[];for(const idx of selection){if(chosen==='both')html.push(joinedPhrasePrint(printAnalysis(idx),printConfig(idx)));else if(chosen==='appcc')html.push(printAnalysis(idx));else if(chosen==='config')html.push(printConfig(idx));}area.innerHTML=html.join('');el('printModule').dataset.resolved=chosen;requestAnimationFrame(()=>{preparePrintLayout();window.print();toast(`Preparadas ${area.querySelectorAll('.print-page').length} páginas para impressão.`)})}
   // Seleções e carregamento.
   function boot(){
     el('processSelect').innerHTML=processes.map(([id,name])=>`<option value="${esc(id)}">${esc(id)} — ${esc(name)}</option>`).join('');
@@ -4529,7 +4552,8 @@
     const requested=Number(new URLSearchParams(location.search).get('phrase'));
     const startAt=DATA.findIndex(f=>f.n===requested);
     render(startAt>=0?startAt:0);renderBackups();resetBackupClock();openMode('analysis');if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
-    window.addEventListener('beforeprint',fitPrintLayout);
+    window.addEventListener('beforeprint',preparePrintLayout);
+    window.addEventListener('afterprint',finishPrintLayout);
     window.addEventListener('beforeunload',()=>{if(dirty)save(false)});
   }
   boot();

@@ -98,7 +98,7 @@ function legacyRows(payload,filename){
   if(!key||!Number.isInteger(j))continue;
   const data={};
   const cls=s.phraseAPPCC?.[key]?.[j];
-  if(cls&&['PPHO','PPR','PC','PPRO','PCC'].includes(cls))data.appcc_proposto=cls;
+  if(cls&&['POP','PPR','PC','PPRO','PCC'].includes(cls))data.appcc_proposto=cls;
   const editedText=s.phraseText?.[key]?.[j];
   if(typeof editedText==='string'&&editedText.trim()&&editedText!==f.frase)data.frase=editedText;
   const updatedReference=s.phraseRefs?.[key]?.[j];
@@ -154,7 +154,7 @@ function diff(dest,source,opts){
  for(const [key,value] of Object.entries(source||{})){
   if(!filled(value))continue;
   if(key==='probabilidade_24'&&(!Number.isInteger(Number(value))||Number(value)<1||Number(value)>5))continue;
-  if(key==='appcc_proposto'&&!['PPHO','PPR','PC','PPRO','PCC'].includes(String(value)))continue;
+  if(key==='appcc_proposto'&&!['POP','PPR','PC','PPRO','PCC'].includes(String(value)))continue;
   if(key==='frase'&&(typeof value!=='string'||!value.trim()))continue;
   if(blocked.has(key)&&!(key==='probabilidade_24'&&overProb||key==='frase'&&overText))continue;
   if(!allowed.has(key)&&key!=='frase'&&key!=='probabilidade_24')continue;

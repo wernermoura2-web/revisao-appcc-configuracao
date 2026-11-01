@@ -23,7 +23,7 @@ const short3={
 };
 const v=x=>String(x??'');
 const esc=x=>v(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-const weight={PPHO:1,PPR:2,PC:3,PPRO:4,PCC:5};
+const weight={POP:1,PPR:2,PC:3,PPRO:4,PCC:5};
 const valid=x=>x==='S'||x==='N';
 function response(q,k,active){
  if(!active)return {label:'N/A',css:'skip'};
@@ -121,7 +121,7 @@ function build(ctx){
   +stage('2','TIPO DE CONTROLE (F–I)',t2,d.t2,d.t2?.estado==='nao_aplicavel')
   +stage('3','DECISÃO Q1–Q4',t3,t3Summary,d.route!=='3')
   +'</div>'
-  +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: PPHO 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'
+  +'<footer class="flow-footer"><span><b>'+esc(approval)+'</b>'+(end?' · '+esc(end):'')+'</span><em>Escala local APPCC: POP 1 · PPR 2 · PC 3 · PPRO 4 · PCC 5. Resultado da revisão; não altera o Guia oficial.</em></footer>'
   +'</div></article>';
  return graphic+'<article class="print-page flow-details-page" data-part="analysis-details">'
   +'<header class="flow-jheader"><b>APPCC · VALIDAÇÃO E EVIDÊNCIAS</b><span>'+esc(f.item)+' · Frase '+esc(f.indice)+' · '+esc(f.processo)+'</span></header>'

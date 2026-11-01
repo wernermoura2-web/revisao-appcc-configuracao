@@ -37,7 +37,7 @@ function promptFor(row,group,code){
  'Diferencie descrição normativa, exemplos e hipóteses da comprovação de implementação na unidade inspecionada. Não presuma que um controle foi implantado ou validado porque consta do guia.',
  'Para Q2, peça comprovação da implantação real; para Q4, avalie viabilidade de limite crítico mensurável e monitoramento oportuno. PCC ou PPRO não são homologados por IA.',
  'Não invente legislação, resultado de análise, evidência de inspeção, limite crítico ou validação. Nunca afirme conformidade sem documento/observação verificável.',
- 'Considere a matriz vigente: PPHO=1, PPR=2, PC=3, PPRO=4, PCC=5; probabilidade de 1 a 5. Use apenas se for realmente relevante à pergunta.',
+ 'Considere a matriz vigente: POP=1, PPR=2, PC=3, PPRO=4, PCC=5; probabilidade de 1 a 5. Use apenas se for realmente relevante à pergunta.',
  'Dados da frase do GUIA (não equivalem a evidência da unidade):',
  'Processo: '+(f.processo||'Não informado'),
  'Item: '+(f.item||'Não informado')+'; frase: '+(f.indice??'?'),

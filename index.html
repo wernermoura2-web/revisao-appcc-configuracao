@@ -3841,7 +3841,7 @@
 <link rel="stylesheet" href="./ai-questions.css">
 <link rel="stylesheet" href="./transfer-ui.css">
 <link rel="stylesheet" href="./consolidation-ui.css">
-</head>
+<style>@media(min-width:1001px){.app-layout>.sidebar{grid-column:1;grid-row:1}.app-layout>.workspace{grid-column:2;grid-row:1}}body>p.small-note{max-width:1668px;margin:14px auto 0;padding:0 16px}</style></head>
 <body>
 <header class="app-header"><div class="brand"><div class="brand-mark">APPCC</div><div><h1>Revisão APPCC · Configuração do Guia</h1><p>Guia Estadual de Avaliação do Risco Sanitário · Rev.6 / V82.55 · 24 envasadoras</p></div></div><div class="header-status"><span id="saveState" aria-live="polite">Aguardando identificação</span><span id="counter">Frase 1 de 76</span></div></header>
 <main class="app-layout">
@@ -4666,7 +4666,7 @@
     const note=document.createElement('p');note.className='small-note';note.textContent='Base sincronizada com o guia de 01/11/2026: 76 frases e cinco PCC. Revisões locais de frases com texto alterado foram preservadas na cópia anterior. ';
     const archived=localStorage.getItem(STORAGE_KEY+':before-base-20261101');
     if(archived&&Object.keys(JSON.parse(archived).edits||{}).length){const b=document.createElement('button');b.type='button';b.textContent='Baixar revisão anterior à atualização';b.onclick=()=>download(archived,'Revisao_APPCC_Base_Anterior.json','application/json');note.append(b);}
-    document.querySelector('main')?.prepend(note);
+    document.querySelector('main')?.before(note);
   }
 
   // API limitada ao transporte entre duas revisões locais, sem tocar na base oficial.

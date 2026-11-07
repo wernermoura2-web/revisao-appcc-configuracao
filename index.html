@@ -7107,7 +7107,7 @@
     el('welcomeForm').onsubmit=e=>{e.preventDefault();state.reviewer=el('modalReviewer').value.trim();state.date=el('modalDate').value;el('reviewer').value=state.reviewer;el('reviewDate').value=state.date;save(false);el('welcomeDialog').close();render();};
     const requested=Number(new URLSearchParams(location.search).get('phrase'));
     const startAt=DATA.findIndex(f=>f.n===requested);
-    render(startAt>=0?startAt:0);renderBackups();resetBackupClock();openMode('analysis');if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
+    render(startAt>=0?startAt:0);renderBackups();resetBackupClock();openMode(new URLSearchParams(location.search).get('mode')==='frases'?'config':'analysis');if(new URLSearchParams(location.search).get('mode')==='frases'){document.title='Revisão das frases · Guia BPF/APPCC';document.querySelector('.app-header h1').textContent='Revisão das frases · BPF/APPCC';}if(nameError()&&typeof el('welcomeDialog').showModal==='function')el('welcomeDialog').showModal();else el('saveState').textContent='Revisão recuperada neste navegador';
     window.addEventListener('beforeprint',preparePrintLayout);
     window.addEventListener('afterprint',finishPrintLayout);
     window.addEventListener('beforeunload',()=>{if(dirty)save(false)});
